@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#000000">
+	<!--
+	  manifest.json provides metadata used when your web app is added to the
+	  homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+	-->
+	<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+	<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/toolbar_desktop_2015.min.css">
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/inpage_desktop.min.css">
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/quiz-play.css">
+	<title>Quiz App</title>
+</head>
+<body>
+	<noscript>
+		You need to enable JavaScript to run this app.
+	</noscript>
+
+	<div id="toolbar-inject"></div>
+
+	<div class="main-wrapper">
+		<div class="main-container">
+			<div id="quiz-header"></div>
+			<div class="quiz-content-box">
+				<div id="quiz-play-app"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="%PUBLIC_URL%/vendor/jquery-1.11.3.min.js"></script>
+	<script>
+		// load toolbar
+      $.get('/html-components/toolbar.html', function (data) {
+        $('#toolbar-inject').replaceWith(data)
+      })
+		// load header
+      $.get('/html-components/header.html', function (data) {
+        $('#quiz-header').replaceWith(data)
+      })
+	</script>
+</body>
+</html>
