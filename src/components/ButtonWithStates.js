@@ -1,8 +1,8 @@
 import React from 'react'
 
 const defaultConfig = {
-  state  : 'ready',
-  tagName: 'button',
+  currentState: 'ready',
+  tagName     : 'button',
 
   stateConfig: {
     ready: {
@@ -12,22 +12,23 @@ const defaultConfig = {
   },
 }
 
-export default class ButtonWithStates extends React.Component {
-  render() {
-    const TagName    = this.props.tagName || defaultConfig.tagName
-    let currentState = defaultConfig.state
-    let stateConfig  = { ...defaultConfig.stateConfig, ...this.props.stateConfig }
+export function makeButtonWithState(config = { ...defaultConfig }) {
+  return (props) => {
+    let { currentState, tagName, stateConfig } = { ...defaultConfig, ...config }
+
+    let TagName = tagName
 
     // define currentState if passed with props
-    for (let prop of Object.keys(this.props)) {
-      if (this.props.hasOwnProperty(prop) && prop in stateConfig) {
+    for (let prop of Object.keys(props)) {
+      if (props.hasOwnProperty(prop) && prop in stateConfig) {
         currentState = prop
         break
       }
     }
 
+    // TODO: fix space issue between icon and text
     return (
-      <TagName className={`dekdbutton ${this.props.className}`} href={this.props.href} title={this.props.title}>
+      <TagName className={`dekdbutton ${props.className}`} href={props.href} title={props.title}>
         {/* if icon is null, do not show*/}
         {stateConfig[currentState].icon &&
         (<i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}/> )}
@@ -36,3 +37,5 @@ export default class ButtonWithStates extends React.Component {
     )
   }
 }
+
+export default makeButtonWithState()
