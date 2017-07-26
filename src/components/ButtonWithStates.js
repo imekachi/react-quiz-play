@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { isValueEmpty } from '../util/empty'
+import { WHITE_SPACE } from '../util/unicode'
+
 const defaultConfig = {
   currentState: 'ready',
   tagName     : 'button',
@@ -7,7 +10,7 @@ const defaultConfig = {
   stateConfig: {
     ready: {
       icon: null,
-      text: 'button',
+      text: '',
     },
   },
 }
@@ -16,9 +19,7 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
   return (props) => {
     let { currentState, tagName, stateConfig } = { ...defaultConfig, ...config }
 
-    let TagName = tagName
-
-    // define currentState if passed with props
+    // get currentState
     for (let prop of Object.keys(props)) {
       if (props.hasOwnProperty(prop) && prop in stateConfig) {
         currentState = prop
@@ -26,13 +27,28 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
       }
     }
 
-    // TODO: fix space issue between icon and text
+    // Prepare button content
+    let buttonIcon  = null,
+        buttonText  = null,
+        isTextNotEmpty = !isValueEmpty(stateConfig[currentState].text)
+
+    if (!isValueEmpty(stateConfig[currentState].icon)) {
+      buttonIcon = (
+        <i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}>
+          {isTextNotEmpty ? WHITE_SPACE : null}
+        </i>
+      )
+    }
+
+    if (isTextNotEmpty)
+      buttonText = (<span className="label">{stateConfig[currentState].text}</span>)
+
+    // tag name variable has to be capital, otherwise React will render it as <tagName>
+    let TagName = tagName
+
     return (
       <TagName className={`dekdbutton ${props.className}`} href={props.href} title={props.title}>
-        {/* if icon is null, do not show*/}
-        {stateConfig[currentState].icon &&
-        (<i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}/> )}
-        <span className="label">{stateConfig[currentState].text}</span>
+        {buttonIcon}{buttonText}
       </TagName>
     )
   }

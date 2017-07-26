@@ -1,0 +1,1 @@
+export const WHITE_SPACE = '\u00a0'
