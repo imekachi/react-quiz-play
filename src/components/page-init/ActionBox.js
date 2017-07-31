@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { makeButtonWithState } from '../ButtonWithStates'
+import AutoShareBox from '../AutoShareBox'
 
 const LoginFacebookBtn = makeButtonWithState({
   tagName    : 'a',
@@ -75,6 +76,7 @@ export default class ActionBox extends React.Component {
     const loginButtons = [
       (
         <LoginFacebookBtn
+          loading
           key="LoginFacebook"
           className="js-login-facebook loginbutton -lg -social-facebook"
           title="เล่นควิซด้วย Facebook"/>
@@ -89,13 +91,8 @@ export default class ActionBox extends React.Component {
 
     return (
       <div className={`action-button-box${this.state.isLogin ? ' -play' : ''}`}>
-
         {this.state.isLogin ? playButtons : loginButtons}
-
-        <div className="remark-box">
-          <input type="checkbox" className="formcheckbox sharecheckbox" id="autoshare"/>
-          <label htmlFor="autoshare" className="checkboxlabel">แชร์ผลลัพธ์ไปยัง Facebook</label>
-        </div>
+        <AutoShareBox id="autoshare-initpage"/>
       </div>
     )
   }
