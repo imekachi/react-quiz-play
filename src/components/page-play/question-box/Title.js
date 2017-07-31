@@ -1,7 +1,7 @@
 import React from 'react'
 
 // UI
-import ImgZoomable from './ImgZoomable'
+import ImgZoomable from '../ImgZoomable'
 import { isValueEmpty } from '../../../util/empty'
 
 const mockupData = {

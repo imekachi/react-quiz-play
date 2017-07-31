@@ -8,34 +8,46 @@
  * getNumber('1,234.445', false)    // 1234.445
  *
  * @param   { String | Number }   data                input string or number
- * @param   { Boolean }           [isRound = true]    option if you want the number rounded or raw float
+ * @param   { Boolean }           [isRound = false]   option if you want the number rounded or raw float
  *
  * @return  { Number }
  */
-export function getNumber(data, isRound = true) {
+export function getNumber(data, isRound = false) {
   let number = parseFloat(String(data).replace(/(?!^-)[^(\d|.)]/g, ''))
   number     = isNaN(number) ? 0 : number
   return isRound ? Math.round(number) : number
 }
 
 /**
- * Cap number, make sure it won't go below given minimun
- * @param   { Number }  inputNum
- * @param   { Number }  mininum
+ * Cap number, make sure it won't go below given minimum
+ * @param   { Number }  inputNumber
+ * @param   { Number }  min
  *
  * @returns { Number } cappedValue
  */
-export function capMin(inputNum, mininum) {
-  return Math.max(inputNum, mininum)
+export function capMin(inputNumber, min) {
+  return Math.max(inputNumber, min)
 }
 
 /**
  * Cap number, make sure it won't go above given maximum
- * @param   { Number }  inputNum
- * @param   { Number }  maximum
+ * @param   { Number }  inputNumber
+ * @param   { Number }  max
  *
  * @returns { Number } cappedValue
  */
-export function capMax(inputNum, maximum) {
-  return Math.min(inputNum, maximum)
+export function capMax(inputNumber, max) {
+  return Math.min(inputNumber, max)
+}
+
+/**
+ * Cap number, make sure it won't go above and below given cap
+ * @param   { Number }  inputNumber
+ * @param   { Number }  min
+ * @param   { Number }  max
+ *
+ * @returns { Number } cappedValue
+ */
+export function capBetween(min, inputNumber, max) {
+  return capMax(capMin(inputNumber, min), max)
 }

@@ -8,6 +8,8 @@ export default class QuestionBox extends React.Component {
     return (
       <div className="question-box">
         <Title/>
+        {/* show-answer-msg: <i class="fa fa-clock-o"></i> คุณไม่ได้ตอบคำถามในเวลาที่กำหนด */}
+
       </div>
     )
   }

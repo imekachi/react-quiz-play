@@ -27,7 +27,7 @@ class Body extends React.Component {
 
   render() {
     return (
-      <div className="quiz-body">
+      <div className="quiz-body -singlequestion">
         {this.getDisplayPage()}
       </div>
     )
