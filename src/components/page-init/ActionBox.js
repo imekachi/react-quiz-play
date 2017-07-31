@@ -52,7 +52,7 @@ export default class ActionBox extends React.Component {
   constructor() {
     super()
     this.state = {
-      isLogin: true,
+      isLogin: false,
     }
   }
 

@@ -28,15 +28,13 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
     }
 
     // Prepare button content
-    let buttonIcon  = null,
-        buttonText  = null,
+    let buttonIcon     = null,
+        buttonText     = null,
         isTextNotEmpty = !isValueEmpty(stateConfig[currentState].text)
 
     if (!isValueEmpty(stateConfig[currentState].icon)) {
       buttonIcon = (
-        <i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}>
-          {isTextNotEmpty ? WHITE_SPACE : null}
-        </i>
+        <i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}/>
       )
     }
 
@@ -48,7 +46,7 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
 
     return (
       <TagName className={`dekdbutton ${props.className}`} href={props.href} title={props.title}>
-        {buttonIcon}{buttonText}
+        {buttonIcon}{isTextNotEmpty && WHITE_SPACE}{buttonText}
       </TagName>
     )
   }
