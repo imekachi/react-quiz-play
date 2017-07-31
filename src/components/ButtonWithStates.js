@@ -8,9 +8,15 @@ const defaultConfig = {
   tagName     : 'button',
 
   stateConfig: {
-    ready: {
-      icon: null,
-      text: '',
+    ready  : {
+      icon       : null,
+      iconOnRight: false,
+      text       : '',
+    },
+    loading: {
+      icon       : 'fa-spinner fa-spin',
+      iconOnRight: false,
+      text       : 'กำลังโหลด',
     },
   },
 }
@@ -30,6 +36,7 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
     // Prepare button content
     let buttonIcon     = null,
         buttonText     = null,
+        iconOnRight    = stateConfig[currentState].iconOnRight,
         isTextNotEmpty = !isValueEmpty(stateConfig[currentState].text)
 
     if (!isValueEmpty(stateConfig[currentState].icon)) {
@@ -45,8 +52,12 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
     let TagName = tagName
 
     return (
-      <TagName className={`dekdbutton ${props.className}`} href={props.href} title={props.title}>
-        {buttonIcon}{isTextNotEmpty && WHITE_SPACE}{buttonText}
+      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title}>
+        {!iconOnRight && buttonIcon}
+        {isTextNotEmpty && !iconOnRight && WHITE_SPACE}
+        {buttonText}
+        {isTextNotEmpty && iconOnRight && WHITE_SPACE}
+        {iconOnRight && buttonIcon}
       </TagName>
     )
   }

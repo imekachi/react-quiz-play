@@ -4,11 +4,13 @@ import React from 'react'
 import AutoShareBox from '../components/AutoShareBox'
 import QuizProgress from '../components/page-play/QuizProgress'
 import QuestionStream from '../components/page-play/QuestionStream'
+import QuestionControl from '../components/page-play/QuestionControl'
 
 // mockupData
 const uiPageStore = {
-  current: 1,
-  all: 10,
+  current  : 1,
+  all      : 10,
+  canGoBack: true,
 }
 
 const PlayPage = () => (
@@ -16,7 +18,7 @@ const PlayPage = () => (
     {/* Timer */}
     <QuizProgress uiPageStore={uiPageStore}/>
     <QuestionStream/>
-    {/* QuestionControl */}
+    <QuestionControl uiPageStore={uiPageStore}/>
 
     <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
   </form>
