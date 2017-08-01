@@ -7,6 +7,9 @@ import { isValueEmpty } from '../../../util/empty'
 export default class ChoiceItem extends React.Component {
   render() {
 
+    if ( this.props.isFiller )
+      return <div className="choice-item -grid-filler"/>
+
     return (
       <div className="choice-item" title={this.props.titleAttr}>
         <ImgZoomable className="img-box" src={this.props.img} renderAsBg={true} />
