@@ -27,10 +27,7 @@ export default class QuestionStream extends React.Component {
 
   render() {
     const { questionData, currentPage } = this.props
-
-    const startQuestion = ( questionData.questionPerPage * ( currentPage - 1) ) + 1
-    console.log('>> this.props: ', this.props)
-    console.log('>> startQuestion: ', startQuestion)
+    const startQuestion                 = ( questionData.questionPerPage * ( currentPage - 1) ) + 1
 
     return (
       <div className="question-stream">
