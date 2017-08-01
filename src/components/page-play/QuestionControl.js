@@ -24,9 +24,9 @@ const NextButton = makeButtonWithState({
 const SubmitButton = makeButtonWithState({
   stateConfig: {
     ready: {
-      icon: 'fa-arrow-right _icon-size',
+      icon       : 'fa-check _icon-size',
       iconOnRight: true,
-      text: 'ข้อก่อนหน้า',
+      text       : 'ส่งคำตอบ',
     },
   },
 })
@@ -34,9 +34,9 @@ const SubmitButton = makeButtonWithState({
 const QuestionControlBox = (props) => {
   const uiStore = props.uiPageStore
 
-  const isVisiblePrev   = (uiStore.canGoBack) && (uiStore.all > 1) && (uiStore.current > 1)
-  const isVisibleNext   = (uiStore.all > 1) && (uiStore.current < uiStore.all)
-  const isVisibleSubmit = (uiStore.current === uiStore.all)
+  const isVisiblePrev   = (uiStore.canGoBack) && (uiStore.allPage > 1) && (uiStore.currentPage > 1)
+  const isVisibleNext   = (uiStore.allPage > 1) && (uiStore.currentPage < uiStore.allPage)
+  const isVisibleSubmit = (uiStore.currentPage === uiStore.allPage)
 
   return (
     <div className={`question-control ${ isVisibleSubmit ? '-submit' : ''}`}>

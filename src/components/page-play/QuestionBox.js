@@ -8,9 +8,9 @@ export default class QuestionBox extends React.Component {
   render() {
     return (
       <div className="question-box">
-        <Title/>
+        <Title {...this.props.questionData}/>
         {/* AnswerMsg : <i class="fa fa-clock-o"></i> คุณไม่ได้ตอบคำถามในเวลาที่กำหนด */}
-        <ChoiceBox/>
+        <ChoiceBox questionNumber={this.props.questionData.number} {...this.props.choiceData}/>
         {/* AnswerDetail */}
       </div>
     )
