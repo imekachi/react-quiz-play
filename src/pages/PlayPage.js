@@ -5,6 +5,7 @@ import AutoShareBox from '../components/AutoShareBox'
 import QuizProgress from '../components/page-play/QuizProgress'
 import QuestionStream from '../components/page-play/QuestionStream'
 import QuestionControl from '../components/page-play/QuestionControl'
+import TimerSticky from '../components/page-play/TimerSticky'
 
 const PlayPage = (props) => {
 
@@ -16,9 +17,14 @@ const PlayPage = (props) => {
 
   return (
     <form id="quiz-submit-form" className="play-state">
-      {/* Timer */}
-      {(props.questionData.questionPerPage <= 1) && <QuizProgress uiPageStore={uiPageStore}/>}
-      <QuestionStream currentPage={uiPageStore.currentPage} questionData={props.questionData} choiceData={props.choiceData}/>
+      {(props.timerData.isTimeLimited) && (
+        <TimerSticky isChallengeMode={props.isChallengeMode} timerData={props.timerData}/>
+      )}
+      {(props.questionData.questionPerPage <= 1) && (
+        <QuizProgress uiPageStore={uiPageStore}/>
+      )}
+      <QuestionStream currentPage={uiPageStore.currentPage} questionData={props.questionData}
+                      choiceData={props.choiceData}/>
       <QuestionControl uiPageStore={uiPageStore}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>

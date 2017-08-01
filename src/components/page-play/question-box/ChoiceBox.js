@@ -67,7 +67,7 @@ export default class ChoiceBox extends React.Component {
         const choiceId = `${strPadding(this.props.questionNumber, 3, '0')}-${choiceItem.value}`
 
         result.push(
-          <ChoiceItem key={choiceId} choiceId={choiceId} questionNumber={this.props.questionNumber} {...choiceItem}/>,
+          <ChoiceItem key={choiceId} choiceId={choiceId} {...choiceItem}/>,
         )
       }
 

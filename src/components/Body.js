@@ -3,20 +3,21 @@ import InitPage from '../pages/InitPage'
 import PlayPage from '../pages/PlayPage'
 
 const quizInfoStore = {
-  quizCover   : 'https://image.dek-d.com/27/0417/8523/124713378',
-  timeLimit   : true,
-  timer       : {
-    type     : 'each',
-    limitTime: 15,
+  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
+  isChallengeMode: false,
+  timerData          : {
+    isTimeLimited: true,
+    type         : 'each',
+    limitTime    : 15,
   },
-  questionData: {
+  questionData   : {
     questionCount  : 2,
     questionPerPage: 1,
     questionList   : [
       {
         number     : 1,
-        titleAttr  : 'เปาบุ้นจิ้นชอบกินไข่เต่า ส่วนจั่นเจาชอบกินลูกอมอะไร?',
-        titleHtml  : 'เปาบุ้นจิ้นชอบกินไข่เต่า ส่วนจั่นเจาชอบกินลูกอมอะไร?',
+        titleAttr  : 'เปาบุ้นจิ้นชอบกินไข่เต่า ส่วนจั่นเจาชอบกินอะไร?',
+        titleHtml  : 'เปาบุ้นจิ้นชอบกินไข่เต่า ส่วนจั่นเจาชอบกินอะไร?',
         questionImg: 'https://www0.dek-d.com/assets/quiz/images/default-quiz-cover.png',
       },
       {
@@ -26,8 +27,9 @@ const quizInfoStore = {
       },
     ],
   },
-  choiceData  : [
+  choiceData     : [
     {
+      questionNumber: 1,
       choiceLayout  : 'list',
       choiceListData: [
         {
@@ -47,8 +49,8 @@ const quizInfoStore = {
         {
           value    : 3,
           isCorrect: false,
-          titleHtml: 'เต้าเจี้ยว',
-          titleAttr: 'เต้าเจี้ยว',
+          titleHtml: 'โอเลี้ยง',
+          titleAttr: 'โอเลี้ยง',
         },
         {
           value    : 4,
@@ -65,6 +67,7 @@ const quizInfoStore = {
       ],
     },
     {
+      questionNumber: 2,
       choiceLayout  : 'grid',
       choiceListData: [
         {
@@ -101,7 +104,7 @@ class Body extends React.Component {
   getDisplayPage() {
     switch (this.props.quizUIStore.appState) {
       case 'play': {
-        return (<PlayPage questionData={quizInfoStore.questionData} choiceData={quizInfoStore.choiceData}/>)
+        return (<PlayPage {...quizInfoStore}/>)
       }
 
       default: {

@@ -10,7 +10,7 @@ export default class QuestionBox extends React.Component {
       <div className="question-box">
         <Title {...this.props.questionData}/>
         {/* AnswerMsg : <i class="fa fa-clock-o"></i> คุณไม่ได้ตอบคำถามในเวลาที่กำหนด */}
-        <ChoiceBox questionNumber={this.props.questionData.number} {...this.props.choiceData}/>
+        <ChoiceBox {...this.props.choiceData}/>
         {/* AnswerDetail */}
       </div>
     )
