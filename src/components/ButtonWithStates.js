@@ -23,7 +23,7 @@ const defaultConfig = {
 
 export function makeButtonWithState(config = { ...defaultConfig }) {
   return (props) => {
-    let { currentState, tagName, stateConfig } = { ...defaultConfig, ...config }
+    let { currentState, tagName, stateConfig } = { ...defaultConfig, ...config, props }
 
     // get currentState
     for (let prop of Object.keys(props)) {
@@ -52,7 +52,7 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
     let TagName = tagName
 
     return (
-      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title}>
+      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title} disabled={props.disabled}>
         {!iconOnRight && buttonIcon}
         {isTextNotEmpty && !iconOnRight && WHITE_SPACE}
         {buttonText}

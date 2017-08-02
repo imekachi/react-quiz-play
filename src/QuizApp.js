@@ -4,17 +4,13 @@ import React from 'react'
 import Body from './components/Body'
 import Footer from './components/Footer'
 
-const quizUIStore = {
-  appState: 'play',
-}
-
 export default class QuizApp extends React.Component {
 
   render() {
     return (
       <div className="quiz-wrapper">
-        <div className={`quiz-container ${ quizUIStore.appState === 'play' ? '-gameplay' : '-initial'}`}>
-          <Body quizUIStore={quizUIStore}/>
+        <div className={`quiz-container ${ this.props.appState === 'play' ? '-gameplay' : '-initial'}`}>
+          <Body appState={this.props.appState}/>
           <Footer/>
         </div>
       </div>

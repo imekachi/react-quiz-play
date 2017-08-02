@@ -9,8 +9,8 @@ export default class InitPage extends React.Component {
     return (
       <div className="start-quiz-box init-state">
         <CoverImg src={this.props.quizCover}/>
-        <TimerInfo {...this.props.timer} />
-        <ActionBox/>
+        <TimerInfo {...this.props.timerData} />
+        <ActionBox isLogin={this.props.isLogin}/>
       </div>
     )
   }

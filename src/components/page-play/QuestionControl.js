@@ -38,11 +38,13 @@ const QuestionControlBox = (props) => {
   const isVisibleNext   = (uiStore.allPage > 1) && (uiStore.currentPage < uiStore.allPage)
   const isVisibleSubmit = (uiStore.currentPage === uiStore.allPage)
 
+  const disabledBtn = props.disabled ? '-disabled' : ''
+
   return (
     <div className={`question-control ${ isVisibleSubmit ? '-submit' : ''}`}>
-      {isVisiblePrev && <PrevButton className="controlbutton -prev"/>}
-      {isVisibleNext && <NextButton className="controlbutton -next"/>}
-      {isVisibleSubmit && <SubmitButton className="controlbutton -submit"/>}
+      {isVisiblePrev && <PrevButton className={`controlbutton -prev ${disabledBtn}`}/>}
+      {isVisibleNext && <NextButton className={`controlbutton -next ${disabledBtn}`}/>}
+      {isVisibleSubmit && <SubmitButton className={`controlbutton -submit ${disabledBtn}`}/>}
     </div>
   )
 }

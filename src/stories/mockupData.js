@@ -1,11 +1,7 @@
-import React from 'react'
-import InitPage from '../pages/InitPage'
-import PlayPage from '../pages/PlayPage'
-
-const quizInfoStore = {
+export default {
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
   isChallengeMode: false,
-  timerData          : {
+  timerData      : {
     isTimeLimited: true,
     type         : 'each',
     limitTime    : 15,
@@ -98,28 +94,3 @@ const quizInfoStore = {
     },
   ],
 }
-
-class Body extends React.Component {
-
-  getDisplayPage() {
-    switch (this.props.appState) {
-      case 'play': {
-        return (<PlayPage {...quizInfoStore}/>)
-      }
-
-      default: {
-        return (<InitPage {...quizInfoStore}/>)
-      }
-    }
-  }
-
-  render() {
-    return (
-      <div className={`quiz-body ${ quizInfoStore.questionData.questionPerPage === 1 ? '-singlequestion' : ''}`}>
-        {this.getDisplayPage.call(this)}
-      </div>
-    )
-  }
-}
-
-export default Body

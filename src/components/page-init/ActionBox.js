@@ -49,13 +49,6 @@ const PlaySoloBtn = makeButtonWithState({
 })
 
 export default class ActionBox extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isLogin: false,
-    }
-  }
-
   render() {
     const playButtons = [
       (
@@ -90,8 +83,8 @@ export default class ActionBox extends React.Component {
     ]
 
     return (
-      <div className={`action-button-box${this.state.isLogin ? ' -play' : ''}`}>
-        {this.state.isLogin ? playButtons : loginButtons}
+      <div className={`action-button-box${this.props.isLogin ? ' -play' : ''}`}>
+        {this.props.isLogin ? playButtons : loginButtons}
         <AutoShareBox id="autoshare-initpage"/>
       </div>
     )

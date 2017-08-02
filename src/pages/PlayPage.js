@@ -9,11 +9,13 @@ import TimerSticky from '../components/page-play/TimerSticky'
 
 const PlayPage = (props) => {
 
-  const uiPageStore = {
+  const defaultUiPageStore = {
     currentPage: 1,
     allPage    : Math.ceil(props.questionData.questionCount / props.questionData.questionPerPage),
     canGoBack  : true,
   }
+
+  const uiPageStore = { ...defaultUiPageStore, ...props.uiPageStore }
 
   return (
     <form id="quiz-submit-form" className="play-state">
