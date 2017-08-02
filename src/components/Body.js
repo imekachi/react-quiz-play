@@ -4,11 +4,16 @@ import PlayPage from '../pages/PlayPage'
 
 const quizInfoStore = {
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
-  isChallengeMode: false,
-  timerData          : {
+  isChallengeMode: true,
+  timerData      : {
     isTimeLimited: true,
     type         : 'each',
     limitTime    : 15,
+  },
+  userInfo       : {
+    profileImage: 'https://graph.facebook.com/100001207968554/picture?type=large',
+    name        : 'Saran',
+    score       : 10000,
   },
   questionData   : {
     questionCount  : 2,
