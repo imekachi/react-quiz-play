@@ -1,4 +1,15 @@
 /**
+ * isNumber
+ * check if input data is a valid number
+ * @param { * }   data    input data
+ *
+ * @returns { Boolean }
+ */
+export function isNumber(data) {
+  return (!isNaN(parseFloat(data))) && isFinite(data)
+}
+
+/**
  * getNumber
  * stripping all non numeric character but reserve negativity number and decimal precisions
  * and returns a number ( Integer by default, but you can disable rounding, it will return float )
