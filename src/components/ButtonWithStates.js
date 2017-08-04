@@ -52,7 +52,7 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
     let TagName = tagName
 
     return (
-      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title} disabled={props.disabled}>
+      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title || buttonText} disabled={props.disabled}>
         {!iconOnRight && buttonIcon}
         {isTextNotEmpty && !iconOnRight && WHITE_SPACE}
         {buttonText}

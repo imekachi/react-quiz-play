@@ -9,7 +9,7 @@ export default class QuizApp extends React.Component {
   render() {
     return (
       <div className="quiz-wrapper">
-        <div className={`quiz-container ${ this.props.appState === 'play' ? '-gameplay' : '-initial'}`}>
+        <div className={`quiz-container ${ this.props.appState === 'init' ? '-initial' : '-gameplay' }`}>
           <Body appState={this.props.appState}/>
           <Footer/>
         </div>

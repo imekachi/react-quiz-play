@@ -26,46 +26,17 @@ const LoginDekdBtn = makeButtonWithState({
   },
 })
 
-const PlayChallengeBtn = makeButtonWithState({
-  stateConfig: {
-    ready  : {
-      icon: 'fa-group _icon-size',
-      text: 'เล่นควิซโหมดแข่งขัน',
-    },
-    loading: {
-      icon: 'fa-spinner fa-spin',
-      text: 'ตรวจสอบการเข้าสู่ระบบ',
-    },
-  },
-})
-
-const PlaySoloBtn = makeButtonWithState({
+const PlayBtn = makeButtonWithState({
   stateConfig: {
     ready: {
-      icon: 'fa-user _icon-size',
-      text: 'เล่นควิซโหมดปกติ',
+      icon: 'fa-play _icon-size',
+      text: 'เริ่มเล่นควิซ',
     },
   },
 })
 
 export default class ActionBox extends React.Component {
   render() {
-    const playButtons = [
-      (
-        <PlayChallengeBtn
-          key="PlayChallenge"
-          className="js-challenge-mode playbutton -lg -green"
-          title="เล่นควิซโหมดแข่งขัน (สามารถเลือกท้าเพื่อนได้หลังเล่นจบ)"/>
-      ),
-      (
-        <PlaySoloBtn
-          key="PlayNormal"
-          className="js-normal-mode js-btn-play playbutton -lg _margin-top-sm"
-          title="เล่นควิซโหมดปกติ"
-        />
-      ),
-    ]
-
     const loginButtons = [
       (
         <LoginFacebookBtn
@@ -84,7 +55,11 @@ export default class ActionBox extends React.Component {
 
     return (
       <div className={`action-button-box${this.props.isLogin ? ' -play' : ''}`}>
-        {this.props.isLogin ? playButtons : loginButtons}
+        {
+          this.props.isLogin
+            ? <PlayBtn className="js-normal-mode js-btn-play playbutton -lg _margin-top-sm"/>
+            : loginButtons
+        }
         <AutoShareBox id="autoshare-initpage"/>
       </div>
     )
