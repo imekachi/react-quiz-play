@@ -1,7 +1,6 @@
 import React from 'react'
-// import { storiesOf, action, linkTo } from '@storybook/react'
 import { storiesOf, addDecorator } from '@storybook/react'
-import { withKnobs, text, object, select } from '@storybook/addon-knobs'
+import { withKnobs, text } from '@storybook/addon-knobs'
 
 import mockupData from './mockupData'
 import MockupWrapper from './MockupWrapper'
@@ -9,7 +8,9 @@ import MockupWrapper from './MockupWrapper'
 // UI components
 import InitPage from '../pages/InitPage'
 import PlayPage from '../pages/PlayPage'
-import { makeButtonWithState } from '../components/ButtonWithStates'
+import Icon from '../components/Icon'
+// import { makeButtonWithStates } from './ButtonWithStates'
+import { makeButtonWithStates } from '../components/ButtonWithStates'
 
 // Util
 const makeStoriesOf   = (storyname) => storiesOf(storyname, module)
@@ -26,66 +27,47 @@ const generateWrapper = (config) => {
 // Global Wrapper
 addDecorator(withKnobs)
 
+/**
+ * Button With States
+ */
 makeStoriesOf('ButtonWithStates')
-  .addDecorator((story)=>(
+  .addDecorator((story) => (
       <div className="_margin-bottom-lg">
         {story()}
       </div>
-    )
+    ),
   )
   .addDecorator(generateWrapper())
-  .add('state: ready', () => {
-    const tagName      = text('tagName', 'button')
-    const stateConfig  = object('states', {
-      ready  : {
-        icon       : null,
-        iconOnRight: false,
-        text       : 'ปุ่มแบบปกติ',
-      },
-      loading: {
-        icon       : 'fa-spinner fa-spin',
-        iconOnRight: false,
-        text       : 'กำลังโหลด',
-      },
+  .add('state: ready(renderWithConfig)', () => {
+    const Button = makeButtonWithStates({
+      stateConfig: {
+        ready: {
+          icon: 'fa-arrow-left',
+          text: 'ปุ่มแบบปกติ',
+        }
+      }
     })
-    const currentState = select('currentState', {
-      ready  : 'ready',
-      loading: 'loading',
-    }, 'ready')
-
-    const config = {
-      currentState,
-      tagName,
-      stateConfig,
-    }
-    const Button = makeButtonWithState(config)
-    return <Button {...{ currentState, tagName, stateConfig, }}/>
+    return <Button/>
+  })
+  .add('state: ready(renderWithHtml)', () => {
+    const Button = makeButtonWithStates({
+      stateConfig: {
+        ready: {
+          title: 'ปุ่มแบบปกติ',
+          html: (<span>ปุ่มแบบ <Icon className="fa-user"/> ปกติ</span>)
+        }
+      }
+    })
+    return <Button/>
   })
   .add('state: loading', () => {
-    const Button = makeButtonWithState()
+    const Button = makeButtonWithStates()
     return <Button loading/>
   })
-  .add('with icon: onRight', () => {
-    const tagName      = text('tagName', 'button')
-    const stateConfig  = object('states', {
-      ready  : {
-        icon       : 'fa-arrow-right',
-        iconOnRight: true,
-        text       : 'ไอคอนทางขวา',
-      },
-    })
-    const currentState = 'ready'
 
-    const config = {
-      currentState,
-      tagName,
-      stateConfig,
-    }
-    const Button = makeButtonWithState(config)
-    return <Button {...{ currentState, tagName, stateConfig, }}/>
-  })
-
-
+/**
+ * Init Page
+ */
 makeStoriesOf('Init Page')
   .addDecorator(generateWrapper())
   .add('Login screen', () => (
@@ -95,6 +77,9 @@ makeStoriesOf('Init Page')
     <InitPage {...getMockupData({ isLogin: true })}/>
   ))
 
+/**
+ * Choice Box
+ */
 makeStoriesOf('ChoiceBox')
   .addDecorator(generateWrapper({ appState: 'play' }))
   .add('choiceLayout: list', () => (
@@ -114,8 +99,21 @@ makeStoriesOf('ChoiceBox')
       },
     })}/>
   ))
+
+/**
+ * Timer
+ */
 makeStoriesOf('Timer')
   .addDecorator(generateWrapper({ appState: 'play' }))
   .add('Timer - normal', () => (
     <PlayPage {...getMockupData()}/>
   ))
+  .add('Timer - challenge', () => (
+    <PlayPage {...getMockupData({ isChallengeMode: true })}/>
+  ))
+
+/**
+ * Result Page
+ */
+// makeStoriesOf('Result Page')
+//   .addDecorator(generateWrapper({ appState: 'play' }))

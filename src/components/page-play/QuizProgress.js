@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { unitPercentage } from '../../util/unit'
-import { capBetween } from '../../util/numbers'
+import { capBetween } from '../../util/number'
 
 export default class QuizProgress extends React.Component {
 

@@ -1,4 +1,4 @@
-import { getNumber } from './numbers'
+import { getNumber } from './number'
 import { strSuffix } from './format'
 
 /**

@@ -2,57 +2,83 @@ import React from 'react'
 
 import { isValueEmpty } from '../util/empty'
 import { WHITE_SPACE } from '../util/unicode'
+import { iF } from '../util/condition'
+import { combineClassNames } from '../util/string'
+import Icon from './Icon'
 
 const defaultConfig = {
   currentState: 'ready',
   tagName     : 'button',
 
+  injectDekDButtonClass: true,
+
   stateConfig: {
+    // Predefined states
     ready  : {
       icon       : null,
       iconOnRight: false,
-      text       : '',
+      text       : 'button',
+      html       : null, // this will override text
+      title      : null, // this will override title, using with html
     },
     loading: {
       icon       : 'fa-spinner fa-spin',
       iconOnRight: false,
       text       : 'กำลังโหลด',
+      title      : null,
+      html       : null,
     },
+
+    // Add your own states
+
   },
 }
 
-export function makeButtonWithState(config = { ...defaultConfig }) {
-  return (props) => {
-    let { currentState, tagName, stateConfig } = { ...defaultConfig, ...config, props }
+export function makeButtonWithStates(config = { ...defaultConfig }) {
 
-    // get currentState
+  function getCurrentStateFromProp(props) {
     for (let prop of Object.keys(props)) {
-      if (props.hasOwnProperty(prop) && prop in stateConfig) {
-        currentState = prop
-        break
+      if (props.hasOwnProperty(prop) && prop in props.stateConfig) {
+        return props.stateConfig[prop]
       }
     }
 
-    // Prepare button content
+    return props.stateConfig.ready
+  }
+
+  function injectBtnProps(props, currentStateConfig) {
+    const { href, disabled } = props
+    return {
+      className: combineClassNames(
+        iF(props.injectDekDButtonClass, 'dekdbutton'),
+        (props.className || ''),
+      ),
+      title    : (props.title || currentStateConfig.title) || currentStateConfig.text,
+      disabled,
+      href,
+    }
+  }
+
+  function renderFromConfig(props, currentStateConfig) {
     let buttonIcon     = null,
         buttonText     = null,
-        iconOnRight    = stateConfig[currentState].iconOnRight,
-        isTextNotEmpty = !isValueEmpty(stateConfig[currentState].text)
+        iconOnRight    = currentStateConfig.iconOnRight,
+        isTextNotEmpty = !isValueEmpty(currentStateConfig.text)
 
-    if (!isValueEmpty(stateConfig[currentState].icon)) {
+    if (!isValueEmpty(currentStateConfig.icon)) {
       buttonIcon = (
-        <i className={`buttonicon fa ${stateConfig[currentState].icon}`} aria-hidden={true}/>
+        <Icon className={currentStateConfig.icon}/>
       )
     }
 
     if (isTextNotEmpty)
-      buttonText = (<span className="label">{stateConfig[currentState].text}</span>)
+      buttonText = currentStateConfig.text
 
     // tag name variable has to be capital, otherwise React will render it as <tagName>
-    let TagName = tagName
+    const TagName = props.tagName
 
     return (
-      <TagName className={`dekdbutton ${props.className || ''}`} href={props.href} title={props.title || buttonText} disabled={props.disabled}>
+      <TagName {...injectBtnProps(props, currentStateConfig)}>
         {!iconOnRight && buttonIcon}
         {isTextNotEmpty && !iconOnRight && WHITE_SPACE}
         {buttonText}
@@ -61,6 +87,30 @@ export function makeButtonWithState(config = { ...defaultConfig }) {
       </TagName>
     )
   }
+
+  function renderFromHtml(props, currentStateConfig) {
+    // tag name variable has to be capital, otherwise React will render it as <tagName>
+    const TagName = props.tagName
+    return (
+      <TagName {...injectBtnProps(props, currentStateConfig)}>
+        {currentStateConfig.html}
+      </TagName>
+    )
+  }
+
+  return (props) => {
+    props = { ...defaultConfig, ...config, ...props }
+    props.stateConfig = {...defaultConfig.stateConfig, ...config.stateConfig, ...props.stateConfig}
+
+    const currentStateConfig = getCurrentStateFromProp(props, props.stateConfig)
+    const isHtmlMode         = !isValueEmpty(currentStateConfig.html)
+
+    if (isHtmlMode) {
+      return renderFromHtml(props, currentStateConfig)
+    }
+
+    return renderFromConfig(props, currentStateConfig)
+  }
 }
 
-export default makeButtonWithState()
+export default makeButtonWithStates()

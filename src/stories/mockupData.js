@@ -6,6 +6,11 @@ export default {
     type         : 'each',
     limitTime    : 15,
   },
+  userInfo       : {
+    profileImage: 'https://graph.facebook.com/100001207968554/picture?type=large',
+    name        : 'Saran',
+    score       : 10000,
+  },
   questionData   : {
     questionCount  : 2,
     questionPerPage: 1,

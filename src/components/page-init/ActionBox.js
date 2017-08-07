@@ -1,9 +1,11 @@
 import React from 'react'
 
-import { makeButtonWithState } from '../ButtonWithStates'
 import AutoShareBox from '../AutoShareBox'
+import { makeButtonWithStates } from '../ButtonWithStates'
+import { combineClassNames } from '../../util/string'
+import { iF } from '../../util/condition'
 
-const LoginFacebookBtn = makeButtonWithState({
+const LoginFacebookBtn = makeButtonWithStates({
   tagName    : 'a',
   stateConfig: {
     ready  : {
@@ -17,7 +19,7 @@ const LoginFacebookBtn = makeButtonWithState({
   },
 })
 
-const LoginDekdBtn = makeButtonWithState({
+const LoginDekdBtn = makeButtonWithStates({
   stateConfig: {
     ready: {
       icon: 'fa-group _icon-size',
@@ -26,7 +28,7 @@ const LoginDekdBtn = makeButtonWithState({
   },
 })
 
-const PlayBtn = makeButtonWithState({
+const PlayBtn = makeButtonWithStates({
   stateConfig: {
     ready: {
       icon: 'fa-play _icon-size',
@@ -54,7 +56,7 @@ export default class ActionBox extends React.Component {
     ]
 
     return (
-      <div className={`action-button-box${this.props.isLogin ? ' -play' : ''}`}>
+      <div className={combineClassNames('action-button-box', iF(this.props.isLogin, '-play'))}>
         {
           this.props.isLogin
             ? <PlayBtn className="js-normal-mode js-btn-play playbutton -lg _margin-top-sm"/>

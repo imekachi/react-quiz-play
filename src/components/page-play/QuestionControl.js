@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { makeButtonWithState } from '../ButtonWithStates'
+import { makeButtonWithStates } from '../ButtonWithStates'
+import { iF } from '../../util/condition'
+import { combineClassNames } from '../../util/string'
 
-const PrevButton = makeButtonWithState({
+const PrevButton = makeButtonWithStates({
   stateConfig: {
     ready: {
       icon: 'fa-arrow-left _icon-size',
@@ -11,7 +13,7 @@ const PrevButton = makeButtonWithState({
   },
 })
 
-const NextButton = makeButtonWithState({
+const NextButton = makeButtonWithStates({
   stateConfig: {
     ready: {
       icon       : 'fa-arrow-right _icon-size',
@@ -21,7 +23,7 @@ const NextButton = makeButtonWithState({
   },
 })
 
-const SubmitButton = makeButtonWithState({
+const SubmitButton = makeButtonWithStates({
   stateConfig: {
     ready: {
       icon       : 'fa-check _icon-size',
@@ -38,10 +40,10 @@ const QuestionControlBox = (props) => {
   const isVisibleNext   = (uiStore.allPage > 1) && (uiStore.currentPage < uiStore.allPage)
   const isVisibleSubmit = (uiStore.currentPage === uiStore.allPage)
 
-  const disabledBtn = props.disabled ? '-disabled' : ''
+  const disabledBtn = iF(props.disabled, '-disabled')
 
   return (
-    <div className={`question-control ${ isVisibleSubmit ? '-submit' : ''}`}>
+    <div className={combineClassNames('question-control', iF(isVisibleSubmit, '-submit'))}>
       {isVisiblePrev && <PrevButton className={`controlbutton -prev ${disabledBtn}`}/>}
       {isVisibleNext && <NextButton className={`controlbutton -next ${disabledBtn}`}/>}
       {isVisibleSubmit && <SubmitButton className={`controlbutton -submit ${disabledBtn}`}/>}

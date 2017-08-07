@@ -2,6 +2,8 @@ import React from 'react'
 import InitPage from '../pages/InitPage'
 import PlayPage from '../pages/PlayPage'
 import ResultPage from '../pages/ResultPage'
+import { iF } from '../util/condition'
+import { combineClassNames } from '../util/string'
 
 const quizInfoStore = {
   quizType       : 'supertest',
@@ -138,7 +140,10 @@ class Body extends React.Component {
 
   render() {
     return (
-      <div className={`quiz-body ${ quizInfoStore.questionData.questionPerPage === 1 ? '-singlequestion' : ''}`}>
+      <div className={combineClassNames(
+        'quiz-body',
+        iF(quizInfoStore.questionData.questionPerPage === 1, '-singlequestion'),
+      )}>
         {this.getDisplayPage.call(this)}
       </div>
     )

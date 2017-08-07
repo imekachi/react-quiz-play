@@ -1,7 +1,9 @@
 import React from 'react'
 
+import Icon from '../../Icon'
 import { extractTimeFragments } from '../../../util/time'
 import { strPadding } from '../../../util/format'
+import { iF } from '../../../util/condition'
 
 const TimerNormal = (props) => {
 
@@ -17,18 +19,18 @@ const TimerNormal = (props) => {
       {!props.noLabelBox && (
         <div className="label-box">
           <div className="text -label">เหลือเวลา</div>
-          <div className="text -time"><i className="fa fa-clock-o" aria-hidden={true}/></div>
+          <div className="text -time"><Icon className="fa-clock-o"/></div>
         </div>
       )}
-      <div className={`timer-box ${props.noLabelBox ? '-fullwidth' : ''}`}>
+      <div className={`timer-box ${iF(props.noLabelBox, '-fullwidth')}`}>
         <div className="label-row row-box">
           <span className="time -hour">ชั่วโมง</span>
           <span className="time -minute">นาที</span>
           <span className="time -second">วินาที</span>
         </div>
         <div className="timer-row row-box">
-          <span className={`time -hour ${ timeFragments > 0 ? '' : '-timeout'}`}>{timeFragmentsText.hour}</span>
-          <span className={`time -minute ${ timeFragments > 0 ? '' : '-timeout'}`}>{timeFragmentsText.minute}</span>
+          <span className={`time -hour ${iF(timeFragments <= 0, '-timeout')}`}>{timeFragmentsText.hour}</span>
+          <span className={`time -minute ${iF(timeFragments <= 0, '-timeout')}`}>{timeFragmentsText.minute}</span>
           <span className={`time -second`}>{timeFragmentsText.second}</span>
         </div>
       </div>

@@ -13,5 +13,5 @@ export function isObjEmpty(obj) {
 export function isValueEmpty(value) {
   return value === null
     || value === undefined
-    || value === ' '
+    || value === ''
 }
