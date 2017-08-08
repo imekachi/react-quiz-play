@@ -11,7 +11,5 @@ export function isObjEmpty(obj) {
 }
 
 export function isValueEmpty(value) {
-  return value === null
-    || value === undefined
-    || value === ''
+  return !value && value !== false // using falsy value ability expect false itself
 }
