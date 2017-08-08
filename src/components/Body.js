@@ -128,8 +128,13 @@ class Body extends React.Component {
         return (<PlayPage {...quizInfoStore}/>)
       }
 
-      case 'result': {
-        return (<ResultPage quizType={quizInfoStore.quizType} {...resultData}/>)
+      case 'end': {
+        return (
+          <ResultPage quizType={quizInfoStore.quizType}
+                      isChallengeMode={quizInfoStore.isChallengeMode}
+                      isMobile={false}
+                      {...resultData}/>
+        )
       }
 
       default: {
