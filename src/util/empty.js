@@ -1,15 +1,30 @@
 /**
- * Check if the obj is empty ( hasOwnProperty )
- * note that this is ES5+ feature
+ * Check if the obj is empty
+ * @param   {Object} obj  input object
  *
- * @param   { Object } obj     input object
- *
- * @return  { Boolean }
+ * @return  {Boolean}
  */
 export function isObjEmpty(obj) {
-  return Object.keys(obj).length === 0 && obj.constructor === Object
+  return obj.constructor === Object && Object.keys(obj).length === 0
 }
 
+/**
+ * Array empty check
+ * @param   {Array} arr   input array
+ *
+ * @returns {Boolean}
+ */
+export function isArrayEmpty(arr) {
+  return arr.constructor === Array && arr.length === 0
+}
+
+/**
+ * Value check if it is empty
+ * @param value
+ * @returns {boolean|Boolean}
+ */
 export function isValueEmpty(value) {
   return !value && value !== false // using falsy value ability expect false itself
+    || isObjEmpty(value)
+    || isArrayEmpty(value)
 }
