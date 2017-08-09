@@ -20,4 +20,13 @@ const MockupWrapper = (props) => (
   </div>
 )
 
+export const generateWrapper = (config) => {
+  config = {
+    appState      : 'init',
+    singleQuestion: true,
+    ...config
+  }
+  return (story) => <MockupWrapper {...config}>{story()}</MockupWrapper>
+}
+
 export default MockupWrapper

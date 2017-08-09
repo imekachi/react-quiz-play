@@ -1,4 +1,4 @@
-export default {
+const mockupData = {
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
   isChallengeMode: false,
   timerData      : {
@@ -99,3 +99,7 @@ export default {
     },
   ],
 }
+
+export const getMockupData = (override = {}) => ({ ...mockupData, ...override })
+
+export default mockupData
