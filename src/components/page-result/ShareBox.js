@@ -61,22 +61,22 @@ export default class ShareBox extends React.Component {
           <div className="button-wrapper">
             <button className="sharebutton dekdbutton -social-twitter quiz-share-twitter"
                     title="แชร์ผ่าน Twitter">
-              <Icon className="fa-twitter"/>
+              <Icon className="buttonicon fa-twitter"/>
             </button>
             <button className="sharebutton dekdbutton -social-googleplus quiz-share-google"
                     title="แชร์ผ่าน Google Plus">
-              <Icon className="fa-google-plus"/>
+              <Icon className="buttonicon fa-google-plus"/>
             </button>
 
             {this.props.isMobile ? (
               <button className="sharebutton dekdbutton -social-line quiz-share-line"
                       title="แชร์ผ่าน Line">
-                <Icon baseClass="dekdfont" className="-line-messenger"/>
+                <Icon baseClass="dekdfont" className="buttonicon -line-messenger"/>
               </button>
             ) : (
               <button className="sharebutton dekdbutton -social-email quiz-share-email"
                       title="แชร์ผ่าน Email">
-                <Icon className="fa-envelope"/>
+                <Icon className="buttonicon fa-envelope"/>
               </button>
             )}
           </div>
