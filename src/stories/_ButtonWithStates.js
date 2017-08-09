@@ -24,7 +24,7 @@ makeStoriesOf('ButtonWithStates')
   )
   .addDecorator(generateWrapper())
   .addDecorator(withKnobs)
-  .add('state: ready(renderWithConfig)', () => {
+  .add('ready(renderWithConfig)', () => {
     const Button = makeButtonWithStates({
       stateConfig: {
         ready: {
@@ -35,7 +35,7 @@ makeStoriesOf('ButtonWithStates')
     })
     return <Button/>
   })
-  .add('state: ready(renderWithHtml)', () => {
+  .add('ready(renderWithHtml)', () => {
     const Button = makeButtonWithStates({
       stateConfig: {
         ready: {
@@ -46,7 +46,7 @@ makeStoriesOf('ButtonWithStates')
     })
     return <Button/>
   })
-  .add('state: loading', () => {
+  .add('loading', () => {
     const Button = makeButtonWithStates()
     return <Button loading/>
   })

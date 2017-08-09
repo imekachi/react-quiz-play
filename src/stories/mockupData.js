@@ -100,6 +100,6 @@ const mockupData = {
   ],
 }
 
-export const getMockupData = (override = {}) => ({ ...mockupData, ...override })
+export const getMockupData = (override = {}, data = mockupData) => ({ ...data, ...override })
 
 export default mockupData

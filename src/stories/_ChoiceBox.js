@@ -16,14 +16,14 @@ import PlayPage from '../pages/PlayPage'
  */
 makeStoriesOf('ChoiceBox')
   .addDecorator(generateWrapper({ appState: 'play' }))
-  .add('choiceLayout: list', () => (
+  .add('layout: list', () => (
     <PlayPage {...getMockupData({
       timerData: {
         isTimeLimited: false,
       },
     })}/>
   ))
-  .add('choiceLayout: grid', () => (
+  .add('layout: grid', () => (
     <PlayPage {...getMockupData({
       timerData  : {
         isTimeLimited: false,

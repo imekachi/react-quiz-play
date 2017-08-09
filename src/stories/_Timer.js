@@ -15,9 +15,9 @@ import PlayPage from '../pages/PlayPage'
  */
 makeStoriesOf('Timer')
   .addDecorator(generateWrapper({ appState: 'play' }))
-  .add('Timer - normal', () => (
+  .add('normal', () => (
     <PlayPage {...getMockupData()}/>
   ))
-  .add('Timer - challenge', () => (
+  .add('challenge', () => (
     <PlayPage {...getMockupData({ isChallengeMode: true })}/>
   ))

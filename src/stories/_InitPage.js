@@ -15,9 +15,9 @@ import InitPage from '../pages/InitPage'
  */
 makeStoriesOf('Init Page')
   .addDecorator(generateWrapper())
-  .add('Login screen', () => (
+  .add('login', () => (
     <InitPage {...getMockupData()}/>
   ))
-  .add('Play screen', () => (
+  .add('play', () => (
     <InitPage {...getMockupData({ isLogin: true })}/>
   ))
