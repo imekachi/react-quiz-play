@@ -5,13 +5,19 @@ import { combineClassNames } from '../util/string'
  * FontAwesome Icon component
  */
 const Icon = (props) => {
-  let baseClass  = props.baseClass || 'fa'
-  let TagName    = props.tagName || 'i'
-  let classNames = props.className || ''
-  let ariaHidden = props['aria-hidden'] !== false
+  const baseClass  = props.baseClass || 'fa'
+  const TagName    = props.tagName || 'i'
+  const classNames = props.className || ''
+  const ariaHidden = props['aria-hidden'] !== false
+
+  const allowedProps = {
+    className    : combineClassNames(baseClass, classNames),
+    title        : props.title,
+    'aria-hidden': ariaHidden,
+  }
 
   return (
-    <TagName {...props} className={combineClassNames(baseClass, classNames)} aria-hidden={ariaHidden}>
+    <TagName {...allowedProps} >
       {props.children}
     </TagName>
   )

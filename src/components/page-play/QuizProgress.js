@@ -16,9 +16,8 @@ export default class QuizProgress extends React.Component {
     this.setState({
       bubbleWidth: this.getWidth(this.bubbleElement),
     })
-    console.log('>> this.bubbleWidth: ', this.bubbleElement)
-    console.log('>> this.getWidth: ', this.getWidth(this.bubbleElement))
-
+    // console.log('>> this.bubbleWidth: ', this.bubbleElement)
+    // console.log('>> this.getWidth: ', this.getWidth(this.bubbleElement))
   }
 
   getWidth(element) {

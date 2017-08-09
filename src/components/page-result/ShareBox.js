@@ -5,32 +5,35 @@ import Icon from '../Icon'
 import { makeButtonWithStates } from '../ButtonWithStates'
 
 export default class ShareBox extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      fbShare: {
-        status : 'FETCHING',
-        message: '',
-      },
+      fbStatus: this.props.fbStatus || 'ready',
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      fbStatus: nextProps.fbStatus,
+    })
   }
 
   render() {
     const FacebookBtn = makeButtonWithStates({
       stateConfig: {
-        ready            : {
+        ready           : {
           icon: 'fa-facebook-square _hidden-xs-down',
           text: 'แชร์ผลลัพธ์ผ่าน Facebook',
         },
-        loading          : {
+        loading         : {
           icon: 'fa-spinner fa-spin _hidden-xs-down',
           text: 'กำลังแชร์ผลลัพธ์',
         },
-        success          : {
+        success         : {
           icon: 'fa-check _hidden-xs-down',
           text: 'แชร์ผลลัพธ์สำเร็จ',
         },
-        permissionDenined: {
+        permissionDenied: {
           icon: 'fa-gear _hidden-xs-down',
           text: 'ตั้งค่าการโพสบน Facebook',
         },
@@ -45,7 +48,7 @@ export default class ShareBox extends React.Component {
           </button>
         )}
 
-        {this.state.fbShare.status === 'PERMISSION_DENIED' && (
+        {this.state.fbStatus === 'permissionDenied' && (
           <div className="permissionshare-msg-box">
             <MessageBox type="error">
               การแชร์ผลลัพธ์ผ่าน Facebook <br/>
@@ -54,7 +57,8 @@ export default class ShareBox extends React.Component {
           </div>
         )}
 
-        <FacebookBtn className="sharebutton -social-facebook -lg js-share-facebook"/>
+        <FacebookBtn {...{ [this.state.fbStatus]: true }}
+                     className="sharebutton -social-facebook -lg js-share-facebook"/>
 
         <div className="other-social-box">
           <div className="label">แชร์ผ่านช่องทางอื่น</div>
