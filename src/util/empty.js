@@ -24,7 +24,7 @@ export function isArrayEmpty(arr) {
  * @returns {boolean|Boolean}
  */
 export function isValueEmpty(value) {
-  return !value && value !== false // using falsy value ability expect false itself
+  return (!value && value !== false) // using falsy value ability expect false itself
     || isObjEmpty(value)
     || isArrayEmpty(value)
 }
