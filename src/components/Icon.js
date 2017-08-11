@@ -13,6 +13,7 @@ const Icon = (props) => {
   const allowedProps = {
     className    : combineClassNames(baseClass, classNames),
     title        : props.title,
+    style        : props.style,
     'aria-hidden': ariaHidden,
   }
 

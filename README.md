@@ -130,7 +130,6 @@ my-app/
   src/
     App.css
     QuizApp.js
-    QuizApp.test.js
     index.css
     index.js
     logo.svg

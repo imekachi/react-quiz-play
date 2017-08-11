@@ -1,11 +1,4 @@
-import React from 'react'
-import InitPage from '../pages/InitPage'
-import PlayPage from '../pages/PlayPage'
-import ResultPage from '../pages/ResultPage'
-import { iF } from '../util/condition'
-import { combineClassNames } from '../util/string'
-
-const quizInfoStore = {
+export const fakeQuizData = {
   quizType       : 'supertest',
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
   isChallengeMode: true,
@@ -108,57 +101,4 @@ const quizInfoStore = {
   ],
 }
 
-const resultData = {
-  labelHeader    : '',
-  image          : 'https://image.dek-d.com/27/0417/8523/124713378',
-  header         : 'เยี่ยมไปเลย! คุณตอบถูก 7/7 ข้อ ( 5,465 คะแนน )',
-  description    : 'ทุกคนต้องเคยร้องแน่นอน',
-  descriptionLink: {
-    url     : '#',
-    textHtml: 'link อิอิ',
-    textAttr: 'link อิอิ',
-  },
-}
-
-class Body extends React.Component {
-
-  getDisplayPage() {
-    switch (this.props.appState) {
-      case 'play': {
-        return (<PlayPage {...quizInfoStore}/>)
-      }
-
-      case 'end': {
-        return (
-          <ResultPage quizType={quizInfoStore.quizType}
-                      isChallengeMode={quizInfoStore.isChallengeMode}
-                      isMobile={false}
-                      {...resultData}/>
-        )
-      }
-
-      default: {
-        return (<InitPage {...quizInfoStore}/>)
-      }
-    }
-  }
-
-  render() {
-    // return (
-    //   <div className={combineClassNames(
-    //     'quiz-body',
-    //     iF(quizInfoStore.questionData.questionPerPage === 1, '-singlequestion'),
-    //   )}>
-    //     {this.getDisplayPage.call(this)}
-    //   </div>
-    // )
-
-    return (
-      <div className="quiz-body">
-        {this.props.children}
-      </div>
-    )
-  }
-}
-
-export default Body
+export default fakeQuizData
