@@ -38,7 +38,7 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
 
   function getCurrentStateFromProp(props) {
     for (let prop of Object.keys(props)) {
-      if (props.hasOwnProperty(prop) && prop in props.stateConfig) {
+      if (props.hasOwnProperty(prop) && prop in props.stateConfig && props[prop]) {
         return props.stateConfig[prop]
       }
     }
