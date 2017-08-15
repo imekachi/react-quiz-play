@@ -5,7 +5,7 @@ const AutoShareBox = (props) => (
   <div id={props.id} className={combineClassNames('remark-box', props.className || '')}>
 
     {props.forceUnchecked ? (
-      '*ยังไม่แชร์ผลลัพธ์'
+      '*ยังไม่แชร์ผลลัพธ์ไปยัง Facebook'
     ) : (
       <div className="autoshare-wrapper">
         <input type="checkbox" className="formcheckbox sharecheckbox" id={props.id}/>
