@@ -3,7 +3,7 @@ import { combineClassNames } from '../util/string'
 import { iF } from '../util/condition'
 
 const MessageBox = (props) => (
-  <div className={combineClassNames('message-box', iF(props.type, `-${props.type}`),)}
+  <div className={combineClassNames('message-box', props.className, iF(props.type, `-${props.type}`),)}
        title={props.title || props.value}
   >
     {props.children || props.value}

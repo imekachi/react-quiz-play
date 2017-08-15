@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import MainWrapper from './components/MainWrapper'
+import QuizApp from './containers/QuizApp'
 import store from './store'
 
 import registerServiceWorker from './registerServiceWorker'
@@ -14,7 +14,7 @@ const quizInfo = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <MainWrapper quizInfo={quizInfo}/>
+    <QuizApp quizInfo={quizInfo}/>
   </Provider>
 
   , document.getElementById('quiz-play-app'),

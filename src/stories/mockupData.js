@@ -1,6 +1,9 @@
 const mockupData = {
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
   isChallengeMode: false,
+  isAccessible   : true,
+  isNotFound     : false,
+  description    : 'ทุกคนต้องเคยร้อง',
   timerData      : {
     isTimeLimited: true,
     type         : 'each',

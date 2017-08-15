@@ -1,18 +1,19 @@
-export const fakeQuizData = {
+export const fakeQuizInfo = {
   quizType       : 'supertest',
   quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
+  description    : 'ทุกคนต้องเคยร้องแน่นอน',
+  isNotFound     : false,
+  isAccessible   : true,
   isChallengeMode: true,
   timerData      : {
     isTimeLimited: true,
     type         : 'each',
     limitTime    : 15,
   },
-  userInfo       : {
-    profileImage: 'https://graph.facebook.com/100001207968554/picture?type=large',
-    name        : 'Saran',
-    score       : 10000,
-  },
-  questionData   : {
+}
+
+export const fakeQuizData = {
+  questionData: {
     questionCount  : 2,
     questionPerPage: 1,
     questionList   : [
@@ -29,7 +30,7 @@ export const fakeQuizData = {
       },
     ],
   },
-  choiceData     : [
+  choiceData  : [
     {
       questionNumber: 1,
       choiceLayout  : 'list',
@@ -100,5 +101,3 @@ export const fakeQuizData = {
     },
   ],
 }
-
-export default fakeQuizData

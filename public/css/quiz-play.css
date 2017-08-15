@@ -5444,30 +5444,6 @@ img._img-stretch-height {
   width: 25px;
 }
 
-.start-quiz-box .action-button-box .playbutton {
-  display: none;
-}
-
-.start-quiz-box .action-button-box.-play > .playbutton {
-  display: inline-block;
-}
-
-.start-quiz-box .action-button-box.-play > .loginbutton {
-  display: none;
-}
-
-.start-quiz-box .action-button-box .submitbutton {
-  display: none;
-}
-
-.start-quiz-box .action-button-box.-submit > .submitbutton {
-  display: inline-block;
-}
-
-.start-quiz-box .action-button-box.-submit > .loginbutton {
-  display: none;
-}
-
 .rankbutton-wrapper > .rankbutton {
   color: #A8A8A8;
   cursor: pointer;

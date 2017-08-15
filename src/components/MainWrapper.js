@@ -1,13 +1,14 @@
 import React from 'react'
 
 // Components
-import QuizApp from '../containers/QuizApp'
 import Footer from './Footer'
 
 const MainWrapper = (props) => (
   <div className="quiz-wrapper">
     <div className='quiz-container'>
-      <QuizApp {...props.quizInfo}/>
+      <div className="quiz-body">
+        {props.pageToRender}
+      </div>
       <Footer/>
     </div>
   </div>

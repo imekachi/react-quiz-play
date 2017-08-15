@@ -1,8 +1,8 @@
-import { QUIZ_STATE } from '../constants'
+import { QUIZ_STATE } from '../constants/quizConst'
 import { actions as authActions } from './auth'
 
 // fake data
-import fakeQuizData from './_fakeQuizData'
+import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData'
 
 // Global Quiz States
 export const types = {
@@ -14,9 +14,10 @@ export const types = {
 }
 
 export const initialState = {
-  quizState: null,
+  quizState: QUIZ_STATE.LOADING,
   isLoading: true,
-  quizData : null,
+  quizInfo : {},
+  quizData : {},
   error    : null,
 }
 
@@ -38,7 +39,8 @@ export default function app(state = initialState, action) {
         ...state,
         quizState: QUIZ_STATE.INIT,
         isLoading: false,
-        quizData : action.payload,
+        quizInfo : action.payload.quizInfo,
+        quizData : action.payload.quizData,
         error    : null,
       }
     }
@@ -73,7 +75,10 @@ export const actions = {
       setTimeout(() => {
         dispatch({
           type   : types.FETCH_QUIZ_SUCCESS,
-          payload: fakeQuizData,
+          payload: {
+            quizInfo: fakeQuizInfo,
+            quizData: fakeQuizData,
+          },
         })
       }, 1000)
     }

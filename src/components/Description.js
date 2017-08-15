@@ -1,0 +1,20 @@
+import React from 'react'
+import { combineClassNames } from '../util/string'
+import { iF } from '../util/condition'
+
+import Icon from './Icon'
+
+const Description = (props) => (
+  <div className={combineClassNames('quiz-description', iF(props.centered, '_txt-center'))}>
+
+    <span className="detail" dangerouslySetInnerHTML={{ __html: props.value }}/>
+
+    {props.isReadmoreVisible && (
+      <span className="readmore">
+        ...อ่านเพิ่มเติม <Icon className="fa-chevron-down _icon-size"/>
+      </span>
+    )}
+  </div>
+)
+
+export default Description
