@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { isValueEmpty } from '../../util/empty'
+import ImageBg from '../ImageBg'
 
 const ImgZoomable = (props) => {
 
@@ -10,7 +11,7 @@ const ImgZoomable = (props) => {
   return (
     <div className={`img-zoomable ${props.className}`}>
       { props.renderAsBg ?
-        (<div className="image" style={{backgroundImage: `url(${props.src})`}}/>)
+        (<ImageBg src={props.src} />)
         :
         (<img className="image" src={props.src} alt={props.alt}/>)
       }

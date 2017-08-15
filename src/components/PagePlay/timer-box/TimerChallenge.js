@@ -3,6 +3,8 @@ import React from 'react'
 import { numberFormat } from '../../../util/format'
 import { unitPercentage } from '../../../util/unit'
 
+import ImageBg from '../../ImageBg'
+
 const TimerChallenge = (props) => {
   let { userInfo } = props
 
@@ -15,8 +17,7 @@ const TimerChallenge = (props) => {
       <section className="section-user-info table-cell">
         <div className="user-info table-cell-wrapper -vertical-middle">
           <div className="profile-img-wrapper table-cell" title="{{name}}">
-            <div className="image _ratio-scale-square _bg-size-cover js-user-image"
-                 style={{backgroundImage: `url(${userInfo.profileImage}`}}/>
+            <ImageBg className="_ratio-scale-square _bg-size-cover" src={userInfo.profileImage}/>
           </div>
           <div className="info-wrapper table-cell">
             <div className="name _txt-ellipsis js-user-name" title="{{name}}">{userInfo.name}</div>
