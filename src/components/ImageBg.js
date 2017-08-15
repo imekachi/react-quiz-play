@@ -1,7 +1,9 @@
-import styled from 'styled-components'
+import React from 'react'
+import { combineClassNames } from '../util/string'
 
-const ImageBg = styled.div`
-  background-image: url(${props => props.src});
-`
+const ImageBg = (props) => (
+  <div className={combineClassNames('image', props.className || '')} title={props.title}
+       style={{ ...props.style, backgroundImage: `url(${props.src})` }}/>
+)
 
 export default ImageBg

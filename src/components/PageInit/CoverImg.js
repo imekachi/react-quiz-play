@@ -3,7 +3,7 @@ import ImageBg from '../ImageBg'
 
 const CoverImg = (props) => (
   <div className="thumb-img">
-    <ImageBg className="image" src={props.src}/>
+    <ImageBg src={props.src}/>
   </div>
 )
 
