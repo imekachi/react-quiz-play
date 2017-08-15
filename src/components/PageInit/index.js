@@ -55,7 +55,7 @@ const PageInitComponent = (props) => {
       )}
 
       {props.auth.isLogin ? (
-        <ActionBoxPlay loggedInType={props.auth.loggedInType}/>
+        <ActionBoxPlay loggedInType={props.auth.loggedInType} playClickHandler={props.playClickHandler}/>
       ) : (
         <ActionBoxLogin isLoading={props.auth.isLoading}/>
       )}

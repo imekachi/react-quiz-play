@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TimerNormal from '../page-play/timer-box/TimerNormal'
+import TimerNormal from '../PagePlay/timer-box/TimerNormal'
 
 const timerConfig = {
   type: {
