@@ -8,7 +8,7 @@ import { generateWrapper } from './MockupWrapper'
 import { makeStoriesOf } from './util'
 
 // UI Components
-import PlayPage from '../pages/PlayPage'
+import PlayPage from '../components/PagePlay/index'
 
 
 /**

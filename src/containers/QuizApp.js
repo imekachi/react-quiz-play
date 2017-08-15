@@ -8,13 +8,12 @@ import { QUIZ_STATE } from '../constants/quizConst'
 // UI
 import MainWrapper from '../components/MainWrapper'
 import Loader from '../components/Loader'
-import PageInit from './PageInit'
-import PlayPage from '../pages/PlayPage'
 import ResultPage from '../pages/ResultPage'
+import PageInit from './PageInit'
+import PagePlay from './PagePlay'
 
 @connect(store => {
   return {
-    quizData : store.quiz.quizData,
     quizState: store.quiz.quizState,
   }
 })
@@ -30,7 +29,7 @@ export default class QuizApp extends React.Component {
       }
 
       case QUIZ_STATE.PLAY: {
-        return <PlayPage {...this.props.quizData}/>
+        return <PagePlay/>
       }
 
       case QUIZ_STATE.END: {

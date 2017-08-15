@@ -48,9 +48,9 @@ makeStoriesOf('Init Page/Login')
     })}/>
   ))
 
-makeStoriesOf('Init Page/Play')
+makeStoriesOf('Init Page/Ready')
   .addDecorator(generateWrapper())
-  .add('Timer - login facebook', () => (
+  .add('LoggedIn with Facebook', () => (
     <InitPage {...getMockupData({
       auth: {
         isLogin     : true,
@@ -58,7 +58,7 @@ makeStoriesOf('Init Page/Play')
       },
     })}/>
   ))
-  .add('Timer - login dekd', () => (
+  .add('LoggedIn with DekD', () => (
     <InitPage {...getMockupData({
       auth: {
         isLogin     : true,

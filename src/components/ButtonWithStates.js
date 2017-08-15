@@ -47,7 +47,9 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
   }
 
   function injectBtnProps(props, currentStateConfig) {
-    const { href, disabled } = props
+    const { href, disabled, onClick } = props
+
+    // return only allowed props
     return {
       className: combineClassNames(
         iF(props.injectDekDButtonClass, 'dekdbutton'),
@@ -56,6 +58,7 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
       title    : (props.title || currentStateConfig.title) || currentStateConfig.text,
       disabled,
       href,
+      onClick,
     }
   }
 

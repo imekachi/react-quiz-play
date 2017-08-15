@@ -1,13 +1,13 @@
 import React from 'react'
 
 // UI
-import AutoShareBox from '../components/AutoShareBox'
-import QuizProgress from '../components/page-play/QuizProgress'
-import QuestionStream from '../components/page-play/QuestionStream'
-import QuestionControl from '../components/page-play/QuestionControl'
-import TimerSticky from '../components/page-play/TimerSticky'
+import AutoShareBox from '../AutoShareBox'
+import QuizProgress from './QuizProgress'
+import QuestionStream from './QuestionStream'
+import QuestionControl from './QuestionControl'
+import TimerSticky from './TimerSticky'
 
-const PlayPage = (props) => {
+const PagePlayComponent = (props) => {
 
   const defaultUiPageStore = {
     currentPage: 1,
@@ -34,4 +34,4 @@ const PlayPage = (props) => {
   )
 }
 
-export default PlayPage
+export default PagePlayComponent
