@@ -14,14 +14,11 @@ const PlayBtn = makeButtonWithStates({
   },
 })
 
-const ActionBoxPlay = (props) => {
-  console.log('>> props.playClickHandler: ', props.playClickHandler)
-  return (
-    <div className="action-button-box">
-      <PlayBtn className="playbutton -lg _margin-top-sm" onClick={props.playClickHandler}/>
-      <AutoShareBox forceUnchecked={props.loggedInType === LOGIN_DEKD} id="autoshare-initpage"/>
-    </div>
-  )
-}
+const ActionBoxPlay = (props) => (
+  <div className="action-button-box">
+    <PlayBtn className="playbutton -lg _margin-top-sm" onClick={props.playClickHandler}/>
+    <AutoShareBox forceUnchecked={props.loggedInType === LOGIN_DEKD} id="autoshare-initpage"/>
+  </div>
+)
 
 export default ActionBoxPlay

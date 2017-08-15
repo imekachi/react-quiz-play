@@ -19,7 +19,7 @@ import PagePlay from './PagePlay'
 })
 export default class QuizApp extends React.Component {
   componentDidMount() {
-    this.props.dispatch(QuizActions.fetchQuiz())
+    this.props.dispatch(QuizActions.init())
   }
 
   getComponentToRender() {

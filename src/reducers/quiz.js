@@ -1,14 +1,13 @@
 import { QUIZ_STATE } from '../constants/quizConst'
-import { actions as authActions } from './auth'
 
 // fake data
 import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData'
 
 // Global Quiz States
 export const types = {
-  FETCH_QUIZ        : 'QUIZ/FETCH_QUIZ',
-  FETCH_QUIZ_SUCCESS: 'QUIZ/FETCH_QUIZ_SUCCESS',
-  FETCH_QUIZ_FAILURE: 'QUIZ/FETCH_QUIZ_FAILURE',
+  FETCH_QUIZ        : 'QUIZ/FETCH',
+  FETCH_QUIZ_SUCCESS: 'QUIZ/FETCH_SUCCESS',
+  FETCH_QUIZ_FAILURE: 'QUIZ/FETCH_FAILURE',
   QUIZ_INIT         : 'QUIZ/INIT',
   QUIZ_START        : 'QUIZ/START',
 }
@@ -21,7 +20,7 @@ export const initialState = {
   error    : null,
 }
 
-export default function app(state = initialState, action) {
+export default function quiz(state = initialState, action) {
 
   switch (action.type) {
 
@@ -83,10 +82,10 @@ export const actions = {
       }, 1000)
     }
   },
-  init     : () => {
+  init     : function () {
     return (dispatch) => {
       dispatch({ type: types.QUIZ_INIT })
-      dispatch(authActions.loginFB())
+      dispatch(this.fetchQuiz())
     }
   },
   start    : () => {
