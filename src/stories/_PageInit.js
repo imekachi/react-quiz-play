@@ -66,3 +66,6 @@ makeStoriesOf('Init Page/Ready')
       },
     })}/>
   ))
+
+// TODO: implement PageInit to handle funnyquiz-random
+// TODO: and submit when session expired and user re-login
