@@ -1,15 +1,10 @@
 export const fakeQuizInfo = {
-  quizType       : 'supertest',
-  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
-  description    : 'ทุกคนต้องเคยร้องแน่นอน',
-  isNotFound     : false,
-  isAccessible   : true,
-  isChallengeMode: true,
-  timerData      : {
-    isTimeLimited: true,
-    type         : 'each',
-    limitTime    : 15,
-  },
+  id          : 58518,
+  quizType    : 'funnyquiz',
+  quizCover   : 'https://image.dek-d.com/27/0417/8523/124713378',
+  description : 'ทุกคนต้องเคยร้องแน่นอน',
+  isNotFound  : false,
+  isAccessible: true,
 }
 
 export const fakeQuizData = {

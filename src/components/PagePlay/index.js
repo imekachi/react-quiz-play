@@ -19,7 +19,7 @@ const PagePlayComponent = (props) => {
 
   return (
     <form id="quiz-submit-form" className="play-state">
-      {(props.timerData.isTimeLimited) && (
+      {(props.timerData && props.timerData.isTimeLimited) && (
         <TimerSticky isChallengeMode={props.isChallengeMode} timerData={props.timerData} userInfo={props.userInfo}/>
       )}
       {(props.questionData.questionPerPage <= 1) && (

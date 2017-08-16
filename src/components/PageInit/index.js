@@ -11,11 +11,11 @@ import ActionBoxPlay from './ActionBoxPlay'
 import ActionBoxLogin from './ActionBoxLogin'
 
 
-const MessageBoxWrapper = (props) => (
+const MessageBoxWrapper = ({ children }) => (
   <div className="message-box-wrapper">
     <MessageBox className="_padding-y-lg">
       <div className="messagetxt _txt-bold _txt-size-lg">
-        {props.children}
+        {children}
       </div>
       <a className="dekdbutton _margin-top-sm" href={QUIZ_CENTER} target="_blank">
         <Icon className="fa-home"/> กลับไปที่หน้ารวมควิซ
@@ -46,7 +46,7 @@ const PageInitComponent = (props) => {
     <div className="start-quiz-box">
       <CoverImg src={props.quizCover || DEFAULT_QUIZ_COVER}/>
 
-      {!props.timerData.isTimeLimited && (
+      {(!props.timerData || !props.timerData.isTimeLimited) && (
         <Description centered value={props.description}/>
       )}
 
@@ -57,7 +57,7 @@ const PageInitComponent = (props) => {
       {props.auth.isLogin ? (
         <ActionBoxPlay loggedInType={props.auth.loggedInType} playClickHandler={props.playClickHandler}/>
       ) : (
-        <ActionBoxLogin isLoading={props.auth.isLoading}/>
+        <ActionBoxLogin isFBLoading={props.auth.isFBLoading}/>
       )}
     </div>
   )

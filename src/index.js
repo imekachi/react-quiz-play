@@ -7,14 +7,9 @@ import store from './store'
 
 import registerServiceWorker from './registerServiceWorker'
 
-const quizInfo = {
-  id      : 58518,
-  quizType: 'supertest',
-}
-
 ReactDOM.render(
   <Provider store={store}>
-    <QuizApp quizInfo={quizInfo}/>
+    <QuizApp/>
   </Provider>
 
   , document.getElementById('quiz-play-app'),

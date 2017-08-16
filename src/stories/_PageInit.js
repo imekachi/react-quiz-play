@@ -3,7 +3,7 @@ import React from 'react'
 // Data
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
-import { LOGIN_DEKD, LOGIN_FACEBOOK } from '../constants/authConst'
+import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
 
 // Util
 import { makeStoriesOf } from './util'
@@ -54,7 +54,7 @@ makeStoriesOf('Init Page/Ready')
     <InitPage {...getMockupData({
       auth: {
         isLogin     : true,
-        loggedInType: LOGIN_FACEBOOK,
+        loggedInType: AUTH_FACEBOOK,
       },
     })}/>
   ))
@@ -62,7 +62,7 @@ makeStoriesOf('Init Page/Ready')
     <InitPage {...getMockupData({
       auth: {
         isLogin     : true,
-        loggedInType: LOGIN_DEKD,
+        loggedInType: AUTH_DEKD,
       },
     })}/>
   ))

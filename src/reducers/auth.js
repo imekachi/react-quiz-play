@@ -1,6 +1,7 @@
 // AUTH REDUCER
 
-import { LOGIN_FACEBOOK } from '../constants/authConst'
+import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
+import { immutateSetAdd, immutateSetDelete } from '../util/set'
 
 export const types = {
   LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
@@ -10,12 +11,12 @@ export const types = {
 }
 
 export const initialState = {
-  user               : null,
-  isLoading          : false,
-  isLogin            : false,
-  loginRequestingType: null,
-  loggedInType       : new Set([]),
-  error              : null,
+  user         : null,
+  isLoading    : false,
+  isLogin      : false,
+  loggingInType: new Set([]),
+  loggedInType : new Set([]),
+  error        : null,
 }
 
 export default function authReducer(state = initialState, action) {
@@ -23,26 +24,31 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
 
     case types.LOGIN_REQUEST: {
-      return { ...state, isLoading: true, loginRequestingType: action.payload, error: null }
+      return {
+        ...state,
+        isLoading    : true,
+        loggingInType: immutateSetAdd(state.loggingInType, action.payload),
+        error        : null,
+      }
     }
 
     case types.LOGIN_SUCCESS: {
       return {
         ...state,
-        isLoading          : false,
-        user               : { ...state.user, ...action.payload },
-        loggedInType       : new Set([...state.loggedInType, state.loginRequestingType]),
-        loginRequestingType: null,
-        isLogin            : true,
+        isLoading    : false,
+        user         : { ...state.user, ...action.payload.user },
+        loggingInType: immutateSetDelete(state.loggingInType, action.payload.loggingInType),
+        loggedInType : immutateSetAdd(state.loggedInType, action.payload.loggingInType),
+        isLogin      : true,
       }
     }
 
     case types.LOGIN_FAILURE: {
       return {
         ...state,
-        isLoading          : false,
-        loginRequestingType: null,
-        error: action.payload,
+        isLoading    : false,
+        loggingInType: immutateSetDelete(state.loggingInType, action.payload.loggingInType),
+        error        : action.payload.error,
       }
     }
 
@@ -56,27 +62,69 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
+const fakeLoginFb = () => {
+  return new Promise(resolve => {
+    const response = {
+      data: {
+        id       : 100001207968554,
+        name     : 'Saran Weerakun',
+        firstName: 'Saran',
+      },
+    }
+    setTimeout(() => {
+      resolve(response)
+    }, 4000)
+  })
+}
+
 // ACTIONS
 export const actions = {
-  loginFB: () => {
-    return (dispatch) => {
-      dispatch({ type: types.LOGIN_REQUEST, payload: LOGIN_FACEBOOK })
+  loginFB: (callback = () => null) => {
+    return async (dispatch) => {
+      dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
 
-      // FAKE LOGIN
-      setTimeout(() => {
+      try {
+        const response = await fakeLoginFb()
         dispatch({
           type   : types.LOGIN_SUCCESS,
           payload: {
-            facebook: {
-              id       : 100001207968554,
-              name     : 'Saran Weerakun',
-              firstName: 'Saran',
+            loggingInType: AUTH_FACEBOOK,
+            user         : {
+              [AUTH_FACEBOOK]: response.data,
             },
           },
         })
-      }, 3000)
+
+        callback()
+        return response.data
+
+      } catch (error) {
+        dispatch({
+          type   : types.LOGIN_FAILURE,
+          payload: {
+            loggingInType: AUTH_FACEBOOK,
+            error,
+          },
+        })
+      }
     }
   },
 
-  logout: () => ({ type: types.LOGOUT }),
+  loginDekD: (user) => {
+    return (dispatch) => {
+      dispatch({
+        type   : types.LOGIN_SUCCESS,
+        payload: {
+          loggingInType: AUTH_DEKD,
+          user         : {
+            [AUTH_DEKD]: user,
+          },
+        },
+      })
+    }
+  },
+
+  logout: (logoutType) => ({
+    type: types.LOGOUT,
+  }),
 }

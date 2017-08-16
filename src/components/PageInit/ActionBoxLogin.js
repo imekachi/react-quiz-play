@@ -27,11 +27,11 @@ const LoginDekdBtn = makeButtonWithStates({
 })
 
 
-const ActionBoxLogin = (props) => (
+const ActionBoxLogin = ({ isFBLoading }) => (
   <div className="action-button-box">
-    <LoginFacebookBtn loading={props.isLoading} className="js-login-facebook loginbutton -lg -social-facebook"
+    <LoginFacebookBtn loading={isFBLoading} className="loginbutton -lg -social-facebook"
                       title="เล่นควิซด้วย Facebook"/>
-    <LoginDekdBtn className="js-login-dekd loginbutton -lg -dekd _margin-top-sm" title="เล่นควิซด้วย Facebook"/>
+    <LoginDekdBtn className="loginbutton -lg -dekd _margin-top-sm" title="เล่นควิซด้วย Facebook"/>
     <AutoShareBox id="autoshare-initpage"/>
   </div>
 )
