@@ -7,8 +7,8 @@ export const QUIZ_STATE = {
 }
 
 export const QUIZ_TYPE = {
-  SUPERTEST: 'QUIZ_TYPE_SUPERTEST',
-  MAZE     : 'QUIZ_TYPE_MAZE',
-  FUNNY    : 'QUIZ_TYPE_FUNNY',
-  SOCIAL   : 'QUIZ_TYPE_SOCIAL',
+  SUPERTEST: 'supertest',   //'QUIZ_TYPE_SUPERTEST',
+  MAZE     : 'quizmaze',    //'QUIZ_TYPE_MAZE',
+  FUNNY    : 'funnyquiz',   //'QUIZ_TYPE_FUNNY',
+  SOCIAL   : 'socialquiz',  //'QUIZ_TYPE_SOCIAL',
 }
