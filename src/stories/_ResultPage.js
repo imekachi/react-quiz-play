@@ -9,9 +9,9 @@ import { generateWrapper } from './MockupWrapper'
 import { makeStoriesOf } from './util'
 
 // UI Components
-import ResultPage from '../pages/ResultPage'
-import ResultBox from '../components/page-result/ResultBox'
-import ShareBox from '../components/page-result/ShareBox'
+import ResultPage from '../components/PageResult/index'
+import ResultBox from '../components/PageResult/ResultBox'
+import ShareBox from '../components/PageResult/ShareBox'
 
 const resultData = {
   labelHeader    : '',
