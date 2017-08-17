@@ -46,12 +46,10 @@ const PageInitComponent = (props) => {
     <div className="start-quiz-box">
       <CoverImg src={props.quizCover || DEFAULT_QUIZ_COVER}/>
 
-      {(!props.timerData || !props.timerData.isTimeLimited) && (
-        <Description centered value={props.description}/>
-      )}
-
-      {props.timerData && props.timerData.isTimeLimited && (
+      {props.timerData ? (
         <TimerInfo {...props.timerData}/>
+      ) : (
+        <Description centered value={props.description}/>
       )}
 
       {props.auth.isLogin ? (

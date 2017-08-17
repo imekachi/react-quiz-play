@@ -8,7 +8,7 @@ const AutoShareBox = (props) => (
       '*ยังไม่แชร์ผลลัพธ์ไปยัง Facebook'
     ) : (
       <div className="autoshare-wrapper">
-        <input type="checkbox" className="formcheckbox sharecheckbox" id={props.id}/>
+        <input type="checkbox" className="formcheckbox sharecheckbox" id={props.id} onChange={props.onChange}/>
         <label htmlFor={props.id} className="checkboxlabel">แชร์ผลลัพธ์ไปยัง Facebook</label>
       </div>
     )}

@@ -1,33 +1,27 @@
 import React from 'react'
 
+// Data
+import QuestionStream from '../../containers/QuestionStream'
+
 // UI
 import AutoShareBox from '../AutoShareBox'
 import QuizProgress from './QuizProgress'
-import QuestionStream from './QuestionStream'
 import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
-const PagePlayComponent = (props) => {
-
-  const defaultUiPageStore = {
-    currentPage: 1,
-    allPage    : Math.ceil(props.questionData.questionCount / props.questionData.questionPerPage),
-    canGoBack  : true,
-  }
-
-  const uiPageStore = { ...defaultUiPageStore, ...props.uiPageStore }
-
+const PagePlayComponent = ({ pagingData, enableTimer, questionControlHandlers }) => {
   return (
     <form id="quiz-submit-form" className="play-state">
-      {(props.timerData && props.timerData.isTimeLimited) && (
-        <TimerSticky isChallengeMode={props.isChallengeMode} timerData={props.timerData} userInfo={props.userInfo}/>
+      {false && (enableTimer) && (
+        <TimerSticky/>
       )}
-      {(props.questionData.questionPerPage <= 1) && (
-        <QuizProgress uiPageStore={uiPageStore}/>
+      {false && (pagingData.questionPerPage <= 1) && (
+        <QuizProgress/>
       )}
-      <QuestionStream currentPage={uiPageStore.currentPage} questionData={props.questionData}
-                      choiceData={props.choiceData}/>
-      <QuestionControl uiPageStore={uiPageStore}/>
+
+      <QuestionStream/>
+
+      <QuestionControl pagingData={pagingData} enableNext={false} {...questionControlHandlers}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
     </form>

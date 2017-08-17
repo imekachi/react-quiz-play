@@ -33,20 +33,20 @@ const SubmitButton = makeButtonWithStates({
   },
 })
 
-const QuestionControlBox = (props) => {
-  const uiStore = props.uiPageStore
+const QuestionControlBox = ({ pagingData, disableNext, onClickNext, onClickSubmit, onClickPrev }) => {
+  const { currentPage, allPage, canGoBack } = pagingData
 
-  const isVisiblePrev   = (uiStore.canGoBack) && (uiStore.allPage > 1) && (uiStore.currentPage > 1)
-  const isVisibleNext   = (uiStore.allPage > 1) && (uiStore.currentPage < uiStore.allPage)
-  const isVisibleSubmit = (uiStore.currentPage === uiStore.allPage)
+  const isVisiblePrev   = (canGoBack) && (allPage > 1) && (currentPage > 1)
+  const isVisibleNext   = (allPage > 1) && (currentPage < allPage)
+  const isVisibleSubmit = (currentPage === allPage)
 
-  const disabledBtn = iF(props.disabled, '-disabled')
+  const disableNextClass = iF(disableNext, '-disabled')
 
   return (
     <div className={combineClassNames('question-control', iF(isVisibleSubmit, '-submit'))}>
-      {isVisiblePrev && <PrevButton className={`controlbutton -prev ${disabledBtn}`}/>}
-      {isVisibleNext && <NextButton className={`controlbutton -next ${disabledBtn}`}/>}
-      {isVisibleSubmit && <SubmitButton className={`controlbutton -submit ${disabledBtn}`}/>}
+      {isVisiblePrev && <PrevButton className={`controlbutton -prev`} onclick={onClickPrev}/>}
+      {isVisibleNext && <NextButton className={`controlbutton -next ${disableNextClass}`} onClick={onClickNext}/>}
+      {isVisibleSubmit && <SubmitButton className={`controlbutton -submit ${disableNextClass}`} onClick={onClickSubmit}/>}
     </div>
   )
 }
