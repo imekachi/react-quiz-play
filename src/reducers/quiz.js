@@ -22,8 +22,8 @@ export const initialState = {
   error    : null,
 }
 
+// REDUCERS
 export default function quiz(state = initialState, action) {
-
   switch (action.type) {
 
     case types.FETCH_QUIZ: {
@@ -74,52 +74,80 @@ const fakeFetch = () => {
   }, 3000)
 }
 
+// ACTIONS
+
+/**
+ * Fetch Quiz, AutoLogin, then route
+ *
+ * @returns {function(dispatch)}
+ */
+const init = () => {
+  return async (dispatch) => {
+    // concurrent requests
+    const quizPromise  = dispatch(fetchQuiz())
+    const loginPromise = dispatch(AuthActions.loginFB())
+
+    const [responseQuiz] = await Promise.all([quizPromise, loginPromise])
+
+    return dispatch(initRoute(responseQuiz.quizInfo))
+  }
+}
+
+const fetchQuiz = () => {
+  return async (dispatch) => {
+    dispatch({ type: types.FETCH_QUIZ })
+
+    try {
+      const response = await fakeFetch()
+      dispatch({
+        type   : types.FETCH_QUIZ_SUCCESS,
+        payload: response.data,
+      })
+
+      return response.data
+    } catch (error) {
+      dispatch({
+        type   : types.FETCH_QUIZ_FAILURE,
+        payload: error,
+      })
+    }
+  }
+}
+
+/**
+ * Routing after quiz initialized
+ * @param   {Object} quizInfo
+ *
+ * @returns {function(dispatch)}
+ */
+const initRoute = (quizInfo) => {
+  return (dispatch) => {
+    // Check if it should go straight into the quiz ( auto-start ) or not
+    switch (quizInfo.quizType) {
+      case QUIZ_TYPE.FUNNY:
+      case QUIZ_TYPE.MAZE: {
+        return dispatch(start())
+      }
+
+      default:
+        return
+    }
+  }
+}
+/**
+ * Start Quiz, entering runtime
+ *
+ * @returns {function(dispatch)}
+ */
+const start = () => {
+  return (dispatch) => {
+    dispatch({ type: types.QUIZ_START })
+  }
+}
+
 export const actions = {
-  fetchQuiz: () => {
-    return async (dispatch) => {
-      dispatch({ type: types.FETCH_QUIZ })
-
-      try {
-        const response = await fakeFetch()
-        dispatch({
-          type   : types.FETCH_QUIZ_SUCCESS,
-          payload: response.data,
-        })
-
-        return response.data
-      } catch (error) {
-        dispatch({
-          type   : types.FETCH_QUIZ_FAILURE,
-          payload: error,
-        })
-      }
-    }
-  },
-  init     : function () {
-    return async (dispatch) => {
-      const responseQuiz = await dispatch(this.fetchQuiz())
-      await dispatch(AuthActions.loginFB())
-
-      return dispatch(this.initRoute(responseQuiz.quizInfo))
-    }
-  },
-  initRoute: function (quizInfo) {
-    return (dispatch) => {
-      // Check if it should go straight into the quiz ( auto-start ) or not
-      switch (quizInfo.quizType) {
-        case QUIZ_TYPE.FUNNY:
-        case QUIZ_TYPE.MAZE: {
-          return dispatch(this.start())
-        }
-
-        default:
-          return
-      }
-    }
-  },
-  start    : () => {
-    return (dispatch) => {
-      dispatch({ type: types.QUIZ_START })
-    }
-  },
+  init,
+  fetchQuiz,
+  initRoute,
+  start,
 }

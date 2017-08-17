@@ -20,6 +20,7 @@ export const initialState = {
   error        : null,
 }
 
+// REDUCERS
 export default function authReducer(state = initialState, action) {
 
   switch (action.type) {
@@ -74,55 +75,60 @@ const fakeLoginFb = () => {
 }
 
 // ACTIONS
-export const actions = {
-  loginFB: () => {
-    return async (dispatch) => {
-      dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
 
-      try {
-        const response = await fakeLoginFb()
+const loginFB = () => {
+  return async (dispatch) => {
+    dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
 
-        dispatch({
-          type   : types.LOGIN_SUCCESS,
-          payload: {
-            loggingInType: AUTH_FACEBOOK,
-            user         : {
-              [AUTH_FACEBOOK]: response.data,
-            },
-          },
-        })
+    try {
+      const response = await fakeLoginFb()
 
-        return response.data
-
-      } catch (error) {
-        dispatch({
-          type   : types.LOGIN_FAILURE,
-          payload: {
-            loggingInType: AUTH_FACEBOOK,
-            error,
-          },
-        })
-
-        return error
-      }
-    }
-  },
-
-  loginDekD: (user) => {
-    return (dispatch) => {
       dispatch({
         type   : types.LOGIN_SUCCESS,
         payload: {
-          loggingInType: AUTH_DEKD,
+          loggingInType: AUTH_FACEBOOK,
           user         : {
-            [AUTH_DEKD]: user,
+            [AUTH_FACEBOOK]: response.data,
           },
         },
       })
-    }
-  },
 
-  logout: (logoutType) => ({
-    type: types.LOGOUT,
-  }),
+      return response.data
+
+    } catch (error) {
+      dispatch({
+        type   : types.LOGIN_FAILURE,
+        payload: {
+          loggingInType: AUTH_FACEBOOK,
+          error,
+        },
+      })
+
+      return error
+    }
+  }
+}
+
+const loginDekD = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type   : types.LOGIN_SUCCESS,
+      payload: {
+        loggingInType: AUTH_DEKD,
+        user         : {
+          [AUTH_DEKD]: user,
+        },
+      },
+    })
+  }
+}
+
+const logout = (logoutType) => ({
+  type: types.LOGOUT,
+})
+
+export const actions = {
+  loginFB,
+  loginDekD,
+  logout,
 }
