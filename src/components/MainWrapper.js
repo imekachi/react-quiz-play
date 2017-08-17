@@ -3,11 +3,11 @@ import React from 'react'
 // Components
 import Footer from './Footer'
 
-const MainWrapper = ({ pageToRender }) => (
+const MainWrapper = ({ children }) => (
   <div className="quiz-wrapper">
     <div className='quiz-container'>
       <div className="quiz-body">
-        {pageToRender}
+        {children}
       </div>
       <Footer/>
     </div>

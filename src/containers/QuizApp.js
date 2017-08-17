@@ -8,7 +8,7 @@ import { QUIZ_STATE } from '../constants/quizConst'
 // UI
 import MainWrapper from '../components/MainWrapper'
 import Loader from '../components/Loader'
-import ResultPage from '../pages/ResultPage'
+import ResultPage from './PageResult'
 import PageInit from './PageInit'
 import PagePlay from './PagePlay'
 
@@ -44,7 +44,9 @@ export default class QuizApp extends React.Component {
 
   render() {
     return (
-      <MainWrapper pageToRender={this.getComponentToRender()}/>
+      <MainWrapper>
+        {this.getComponentToRender()}
+      </MainWrapper>
     )
   }
 }
