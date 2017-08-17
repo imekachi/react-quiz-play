@@ -2,6 +2,7 @@
 
 import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
 import { immutateSetAdd, immutateSetDelete } from '../util/set'
+import _fakeAsync from './_fakeAsync'
 
 export const types = {
   LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
@@ -63,28 +64,24 @@ export default function authReducer(state = initialState, action) {
 }
 
 const fakeLoginFb = () => {
-  return new Promise(resolve => {
-    const response = {
-      data: {
-        id       : 100001207968554,
-        name     : 'Saran Weerakun',
-        firstName: 'Saran',
-      },
-    }
-    setTimeout(() => {
-      resolve(response)
-    }, 4000)
-  })
+  return _fakeAsync({
+    data: {
+      id       : 100001207968554,
+      name     : 'Saran Weerakun',
+      firstName: 'Saran',
+    },
+  }, 4000)
 }
 
 // ACTIONS
 export const actions = {
-  loginFB: (callback = () => null) => {
+  loginFB: () => {
     return async (dispatch) => {
       dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
 
       try {
         const response = await fakeLoginFb()
+
         dispatch({
           type   : types.LOGIN_SUCCESS,
           payload: {
@@ -95,7 +92,6 @@ export const actions = {
           },
         })
 
-        callback()
         return response.data
 
       } catch (error) {
@@ -106,6 +102,8 @@ export const actions = {
             error,
           },
         })
+
+        return error
       }
     }
   },

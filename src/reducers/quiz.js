@@ -4,6 +4,7 @@ import { actions as AuthActions } from './auth'
 // fake data
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
 import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-funny'
+import _fakeAsync from './_fakeAsync'
 
 // Global Quiz States
 export const types = {
@@ -65,17 +66,12 @@ export default function quiz(state = initialState, action) {
 
 
 const fakeFetch = () => {
-  return new Promise(resolve => {
-    const response = {
-      data: {
-        quizInfo: fakeQuizInfo,
-        quizData: fakeQuizData,
-      },
-    }
-    setTimeout(() => {
-      resolve(response)
-    }, 3000)
-  })
+  return _fakeAsync({
+    data: {
+      quizInfo: fakeQuizInfo,
+      quizData: fakeQuizData,
+    },
+  }, 3000)
 }
 
 export const actions = {
@@ -101,22 +97,24 @@ export const actions = {
   },
   init     : function () {
     return async (dispatch) => {
-      const responseQuiz     = await dispatch(this.fetchQuiz())
-      const responseQuizType = responseQuiz.quizInfo.quizType
+      const responseQuiz = await dispatch(this.fetchQuiz())
+      await dispatch(AuthActions.loginFB())
 
+      return dispatch(this.initRoute(responseQuiz.quizInfo))
+    }
+  },
+  initRoute: function (quizInfo) {
+    return (dispatch) => {
       // Check if it should go straight into the quiz ( auto-start ) or not
-      dispatch(AuthActions.loginFB(() => {
-        console.log('>> responseQuizType: ', responseQuizType)
-        switch (responseQuizType) {
-          case QUIZ_TYPE.FUNNY:
-          case QUIZ_TYPE.MAZE: {
-            return dispatch(this.start())
-          }
-
-          default:
-            return
+      switch (quizInfo.quizType) {
+        case QUIZ_TYPE.FUNNY:
+        case QUIZ_TYPE.MAZE: {
+          return dispatch(this.start())
         }
-      }))
+
+        default:
+          return
+      }
     }
   },
   start    : () => {
