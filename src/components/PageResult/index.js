@@ -1,10 +1,10 @@
 import React from 'react'
 
-import ResultBox from '../components/page-result/ResultBox'
-import ShareBox from '../components/page-result/ShareBox'
-import VoteBox from '../components/VoteBox'
+import ResultBox from './ResultBox'
+import ShareBox from './ShareBox'
+import VoteBox from '../VoteBox'
 
-const ResultPage = (props) => {
+const ResultPageComponent = (props) => {
   const defaultResultProps = {
     isDescriptionCentered: true,
     isResultShared       : false,
@@ -19,4 +19,4 @@ const ResultPage = (props) => {
   )
 }
 
-export default ResultPage
+export default ResultPageComponent

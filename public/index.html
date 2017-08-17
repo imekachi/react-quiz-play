@@ -20,11 +20,11 @@
 		You need to enable JavaScript to run this app.
 	</noscript>
 
-	<div id="toolbar-inject"></div>
+	<div id="inject-toolbar"></div>
 
 	<div class="main-wrapper">
 		<div class="main-container">
-			<div id="quiz-header"></div>
+			<div id="inject-quiz-header"></div>
 			<div class="quiz-content-box">
 				<div id="banner-zone-top"></div>
 				<div id="quiz-play-app"></div>
@@ -36,11 +36,11 @@
 	<script>
 		// load toolbar
       $.get('/html-components/toolbar.html', function (data) {
-        $('#toolbar-inject').replaceWith(data)
+        $('#inject-toolbar').replaceWith(data)
       })
 		// load header
       $.get('/html-components/header.html', function (data) {
-        $('#quiz-header').replaceWith(data)
+        $('#inject-quiz-header').replaceWith(data)
       })
 	</script>
 </body>
