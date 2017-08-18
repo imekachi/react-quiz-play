@@ -1,55 +1,35 @@
-import React from 'react'
 import { connect } from 'react-redux'
 
 // DATA
-import { actions as runtimeActions, selectAllPage, selectStartQuesiton } from '../reducers/runtime'
+import { actions as runtimeActions, getAllPage, getStartQuesiton } from '../reducers/runtime'
 
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 
-@connect(state => {
+const mapStateToProps    = (state) => {
   return {
-    pagingData     : {
+    enableTimer: !!state.quiz.quizInfo.timerData,
+    pagingData : {
       ...state.runtime,
-      allPage      : selectAllPage(state),
-      startQuestion: selectStartQuesiton(state),
+      allPage      : getAllPage(state),
+      startQuestion: getStartQuesiton(state),
     },
-    timerData      : state.quiz.quizInfo.timerData,
-  }
-})
-export default class PagePlay extends React.Component {
-  constructor() {
-    super()
-    this.onClickPrev   = this.onClickPrev.bind(this)
-    this.onClickNext   = this.onClickNext.bind(this)
-    this.onClickSubmit = this.onClickSubmit.bind(this)
-  }
-
-  onClickNext(event) {
-    event.preventDefault()
-    this.props.dispatch(runtimeActions.nextPage())
-  }
-
-  onClickSubmit(event) {
-    event.preventDefault()
-
-  }
-
-  onClickPrev(event) {
-    event.preventDefault()
-  }
-
-  render() {
-    return (
-      <PagePlayComponent
-        pagingData={this.props.pagingData}
-        enableTimer={!!this.props.timerData}
-        questionControlHandlers={{
-          onClickPrev  : this.onClickPrev,
-          onClickNext  : this.onClickNext,
-          onClickSubmit: this.onClickSubmit,
-        }}
-      />
-    )
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClickPrev  : (event) => {
+      event.preventDefault()
+    },
+    onClickNext  : (event) => {
+      event.preventDefault()
+      dispatch(runtimeActions.nextPage())
+    },
+    onClickSubmit: (event) => {
+      event.preventDefault()
+    },
+  }
+}
+
+const PagePlay = connect(mapStateToProps, mapDispatchToProps)(PagePlayComponent)
+export default PagePlay

@@ -134,6 +134,7 @@ const initRoute = (quizInfo) => {
     }
   }
 }
+
 /**
  * Start Quiz, entering runtime
  *
@@ -151,3 +152,4 @@ export const actions = {
 // SELECTORS
 export const getQuestionCount   = (state) => state.quiz.quizData.questionCount
 export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
+export const getQuestionList    = (state) => state.quiz.quizData.questionList

@@ -1,44 +1,35 @@
-import React from 'react'
 import { connect } from 'react-redux'
 
+// DATA
 import { actions as QuizActions } from '../reducers/quiz'
-import { selectIsLogin, selectIsFBLoading, selectLoggedInType } from '../reducers/auth'
+import { getIsLogin, getIsFBLoading, getLoggedInType } from '../reducers/auth'
 
+// UI
 import PageInitComponent from '../components/PageInit'
 
-@connect(state => {
+const mapStateToProps = (state) => {
+  const { quizCover, timerData, isNotFound, isAccessible, description } = state.quiz.quizInfo
+
   return {
-    quizInfo: state.quiz.quizInfo,
-    auth    : {
-      isLogin      : selectIsLogin(state),
-      isFBLoading  : selectIsFBLoading(state),
-      loggedInType : selectLoggedInType(state),
+    quizCover,
+    timerData,
+    isNotFound,
+    isAccessible,
+    description,
+    auth: {
+      isLogin     : getIsLogin(state),
+      isFBLoading : getIsFBLoading(state),
+      loggedInType: getLoggedInType(state),
     },
   }
-})
-export default class InitPage extends React.Component {
-  constructor() {
-    super()
-    this.playClickHandler = this.playClickHandler.bind(this)
-  }
+}
 
-  playClickHandler() {
-    this.props.dispatch(QuizActions.start())
-  }
-
-  render() {
-    const { quizCover, timerData, isNotFound, isAccessible, description } = this.props.quizInfo
-
-    return (
-      <PageInitComponent {...{
-        quizCover,
-        timerData,
-        isNotFound,
-        isAccessible,
-        description,
-        auth            : this.props.auth,
-        playClickHandler: this.playClickHandler,
-      }}/>
-    )
+const mapDispatchToProps = (dispatch) => {
+  return {
+    playClickHandler: () => dispatch(QuizActions.start()),
   }
 }
+
+const InitPage = connect(mapStateToProps, mapDispatchToProps)(PageInitComponent)
+
+export default InitPage

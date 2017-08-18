@@ -9,7 +9,7 @@ import QuizProgress from './QuizProgress'
 import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
-const PagePlayComponent = ({ pagingData, enableTimer, questionControlHandlers }) => {
+const PagePlayComponent = ({ pagingData, enableTimer, onClickPrev, onClickNext, onClickSubmit }) => {
   return (
     <form id="quiz-submit-form" className="play-state">
       {false && (enableTimer) && (
@@ -21,7 +21,7 @@ const PagePlayComponent = ({ pagingData, enableTimer, questionControlHandlers })
 
       <QuestionStream/>
 
-      <QuestionControl pagingData={pagingData} enableNext={false} {...questionControlHandlers}/>
+      <QuestionControl pagingData={pagingData} enableNext={false} {...{onClickPrev, onClickNext, onClickSubmit}}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
     </form>

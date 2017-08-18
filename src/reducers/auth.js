@@ -140,15 +140,15 @@ export const getUser          = (state) => state.auth.user
 export const getIsLoading     = (state) => state.auth.isLoading
 export const getLoggingInType = (state) => state.auth.loggingInType
 
-export const selectLoggedInType = createSelector(
+export const getLoggedInType = createSelector(
   getUser,
   (user) => new Set(Object.keys(user)),
 )
-export const selectIsLogin      = createSelector(
-  selectLoggedInType,
+export const getIsLogin      = createSelector(
+  getLoggedInType,
   (loggedInType) => loggedInType.size > 0,
 )
-export const selectIsFBLoading  = createSelector(
+export const getIsFBLoading  = createSelector(
   getIsLoading, getLoggingInType,
   (isLoading, loggingInType) => isLoading && loggingInType.has(AUTH_FACEBOOK),
 )

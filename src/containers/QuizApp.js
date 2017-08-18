@@ -12,14 +12,9 @@ import ResultPage from './PageResult'
 import PageInit from './PageInit'
 import PagePlay from './PagePlay'
 
-@connect(state => {
-  return {
-    quizState: state.quiz.quizState,
-  }
-})
-export default class QuizApp extends React.Component {
+class QuizApp extends React.Component {
   componentDidMount() {
-    this.props.dispatch(QuizActions.init())
+    this.props.quizInit()
   }
 
   getComponentToRender() {
@@ -50,3 +45,17 @@ export default class QuizApp extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    quizState: state.quiz.quizState,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    quizInit: () => dispatch(QuizActions.init())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizApp)
