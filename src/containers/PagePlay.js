@@ -7,12 +7,12 @@ import { actions as runtimeActions } from '../reducers/runtime'
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 
-@connect(store => {
+@connect(state => {
   return {
-    questionCount  : store.quiz.quizData.questionCount,
-    questionPerPage: store.quiz.quizData.questionPerPage,
-    pagingData     : store.runtime,
-    timerData      : store.quiz.quizInfo.timerData,
+    questionCount  : state.quiz.quizData.questionCount,
+    questionPerPage: state.quiz.quizData.questionPerPage,
+    pagingData     : state.runtime,
+    timerData      : state.quiz.quizInfo.timerData,
   }
 })
 export default class PagePlay extends React.Component {

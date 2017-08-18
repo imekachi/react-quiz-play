@@ -139,11 +139,7 @@ const initRoute = (quizInfo) => {
  *
  * @returns {function(dispatch)}
  */
-const start = () => {
-  return (dispatch) => {
-    dispatch({ type: types.QUIZ_START })
-  }
-}
+const start = () => ({ type: types.QUIZ_START })
 
 export const actions = {
   init,

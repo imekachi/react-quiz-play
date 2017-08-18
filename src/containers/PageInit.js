@@ -2,17 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { actions as QuizActions } from '../reducers/quiz'
+import { selectIsLogin, selectIsFBLoading, selectLoggedInType } from '../reducers/auth'
 
 import PageInitComponent from '../components/PageInit'
-import { AUTH_FACEBOOK } from '../constants/authConst'
 
-@connect(store => {
+@connect(state => {
   return {
-    quizInfo: store.quiz.quizInfo,
+    quizInfo: state.quiz.quizInfo,
     auth    : {
-      isLogin      : store.auth.isLogin,
-      isFBLoading  : store.auth.isLoading && store.auth.loggingInType.has(AUTH_FACEBOOK),
-      loggedInType : store.auth.loggedInType,
+      isLogin      : selectIsLogin(state),
+      isFBLoading  : selectIsFBLoading(state),
+      loggedInType : selectLoggedInType(state),
     },
   }
 })

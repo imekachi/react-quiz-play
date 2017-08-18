@@ -17,7 +17,7 @@ const PlayBtn = makeButtonWithStates({
 const ActionBoxPlay = (props) => (
   <div className="action-button-box">
     <PlayBtn className="playbutton -lg _margin-top-sm" onClick={props.playClickHandler}/>
-    <AutoShareBox forceUnchecked={props.loggedInType === AUTH_DEKD} id="autoshare-initpage"/>
+    <AutoShareBox forceUnchecked={props.loggedInType.has(AUTH_DEKD)} id="autoshare-initpage"/>
   </div>
 )
 

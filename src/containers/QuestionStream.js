@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 
 import QuesitonStreamComponent from '../components/PagePlay/QuestionStream'
 
-@connect(store => {
+@connect(state => {
   return {
-    questionList: store.quiz.quizData.questionList,
-    pagingData  : store.runtime,
+    questionList: state.quiz.quizData.questionList,
+    pagingData  : state.runtime,
   }
 })
 export default class QuestionStream extends React.Component {

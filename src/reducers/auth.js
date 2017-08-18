@@ -1,5 +1,5 @@
 // AUTH REDUCER
-
+import { createSelector } from 'reselect'
 import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
 import { immutateSetAdd, immutateSetDelete } from '../util/set'
 import _fakeAsync from './_fakeAsync'
@@ -12,11 +12,9 @@ export const types = {
 }
 
 export const initialState = {
-  user         : null,
+  user         : {},
   isLoading    : false,
-  isLogin      : false,
   loggingInType: new Set([]),
-  loggedInType : new Set([]),
   error        : null,
 }
 
@@ -40,8 +38,6 @@ export default function authReducer(state = initialState, action) {
         isLoading    : false,
         user         : { ...state.user, ...action.payload.user },
         loggingInType: immutateSetDelete(state.loggingInType, action.payload.loggingInType),
-        loggedInType : immutateSetAdd(state.loggedInType, action.payload.loggingInType),
-        isLogin      : true,
       }
     }
 
@@ -55,7 +51,12 @@ export default function authReducer(state = initialState, action) {
     }
 
     case types.LOGOUT: {
-      return { ...initialState }
+      // remove logoutType data from user data
+      const { [action.payload.logoutType]: omit, ...user } = state.user
+      return {
+        ...state,
+        user,
+      }
     }
 
     default: {
@@ -124,7 +125,8 @@ const loginDekD = (user) => {
 }
 
 const logout = (logoutType) => ({
-  type: types.LOGOUT,
+  type   : types.LOGOUT,
+  payload: { logoutType },
 })
 
 export const actions = {
@@ -132,3 +134,14 @@ export const actions = {
   loginDekD,
   logout,
 }
+
+// SELECTORS
+export const getUser      = (state) => state.auth.user
+export const getIsLoading = (state) => state.auth.isLoading
+
+export const selectLoggedInType = createSelector(getUser, (user) => new Set(Object.keys(user)))
+export const selectIsLogin      = createSelector(selectLoggedInType, (loggedInType) => loggedInType.length > 0)
+export const selectIsFBLoading  = createSelector(
+  getIsLoading, selectLoggedInType,
+  (isLoading, loggedInType) => isLoading && loggedInType.has(AUTH_FACEBOOK),
+)

@@ -12,9 +12,9 @@ import ResultPage from './PageResult'
 import PageInit from './PageInit'
 import PagePlay from './PagePlay'
 
-@connect(store => {
+@connect(state => {
   return {
-    quizState: store.quiz.quizState,
+    quizState: state.quiz.quizState,
   }
 })
 export default class QuizApp extends React.Component {
