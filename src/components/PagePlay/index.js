@@ -21,7 +21,7 @@ const PagePlayComponent = ({ pagingData, enableTimer, onClickPrev, onClickNext, 
 
       <QuestionStream/>
 
-      <QuestionControl pagingData={pagingData} enableNext={false} {...{onClickPrev, onClickNext, onClickSubmit}}/>
+      <QuestionControl pagingData={pagingData} disableNext={true} {...{onClickPrev, onClickNext, onClickSubmit}}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
     </form>

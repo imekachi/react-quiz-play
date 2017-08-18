@@ -71,7 +71,7 @@ const fakeFetch = () => {
       quizInfo: fakeQuizInfo,
       quizData: fakeQuizData,
     },
-  }, 3000)
+  }, 1500)
 }
 
 // ACTIONS

@@ -30,6 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const InitPage = connect(mapStateToProps, mapDispatchToProps)(PageInitComponent)
-
-export default InitPage
+export default connect(mapStateToProps, mapDispatchToProps)(PageInitComponent)

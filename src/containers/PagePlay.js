@@ -6,7 +6,7 @@ import { actions as runtimeActions, getAllPage, getStartQuesiton } from '../redu
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 
-const mapStateToProps    = (state) => {
+const mapStateToProps = (state) => {
   return {
     enableTimer: !!state.quiz.quizInfo.timerData,
     pagingData : {
@@ -16,6 +16,7 @@ const mapStateToProps    = (state) => {
     },
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickPrev  : (event) => {
@@ -27,9 +28,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onClickSubmit: (event) => {
       event.preventDefault()
+      dispatch(runtimeActions.submit())
     },
   }
 }
 
-const PagePlay = connect(mapStateToProps, mapDispatchToProps)(PagePlayComponent)
-export default PagePlay
+export default connect(mapStateToProps, mapDispatchToProps)(PagePlayComponent)

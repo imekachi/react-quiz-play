@@ -12,6 +12,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const QuestionStream = connect(mapStateToProps)(QuestionStreamComponent)
-
-export default QuestionStream
+export default connect(mapStateToProps)(QuestionStreamComponent)

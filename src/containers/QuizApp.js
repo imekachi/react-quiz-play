@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    quizInit: () => dispatch(QuizActions.init())
+    quizInit: () => dispatch(QuizActions.init()),
   }
 }
 

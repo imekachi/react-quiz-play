@@ -9,7 +9,7 @@ export const fakeQuizInfo = {
 
 export const fakeQuizData = {
   questionCount  : 3,
-  questionPerPage: 1,
+  questionPerPage: 3,
   questionList   : [
     {
       questionData: {

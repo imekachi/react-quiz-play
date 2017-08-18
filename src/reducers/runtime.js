@@ -8,6 +8,7 @@ export const types = {
 
 export const initialState = {
   currentPage: 1,
+  chosenChoices: [],
   canGoBack  : false,
 }
 
