@@ -147,3 +147,7 @@ export const actions = {
   initRoute,
   start,
 }
+
+// SELECTORS
+export const getQuestionCount   = (state) => state.quiz.quizData.questionCount
+export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage

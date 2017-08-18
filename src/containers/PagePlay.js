@@ -2,16 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // DATA
-import { actions as runtimeActions } from '../reducers/runtime'
+import { actions as runtimeActions, selectAllPage, selectStartQuesiton } from '../reducers/runtime'
 
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 
 @connect(state => {
   return {
-    questionCount  : state.quiz.quizData.questionCount,
-    questionPerPage: state.quiz.quizData.questionPerPage,
-    pagingData     : state.runtime,
+    pagingData     : {
+      ...state.runtime,
+      allPage      : selectAllPage(state),
+      startQuestion: selectStartQuesiton(state),
+    },
     timerData      : state.quiz.quizInfo.timerData,
   }
 })
@@ -21,10 +23,6 @@ export default class PagePlay extends React.Component {
     this.onClickPrev   = this.onClickPrev.bind(this)
     this.onClickNext   = this.onClickNext.bind(this)
     this.onClickSubmit = this.onClickSubmit.bind(this)
-  }
-
-  componentDidMount() {
-    this.props.dispatch(runtimeActions.init(this.props.questionCount, this.props.questionPerPage))
   }
 
   onClickNext(event) {
@@ -47,8 +45,8 @@ export default class PagePlay extends React.Component {
         pagingData={this.props.pagingData}
         enableTimer={!!this.props.timerData}
         questionControlHandlers={{
-          onClickPrev: this.onClickPrev,
-          onClickNext: this.onClickNext,
+          onClickPrev  : this.onClickPrev,
+          onClickNext  : this.onClickNext,
           onClickSubmit: this.onClickSubmit,
         }}
       />

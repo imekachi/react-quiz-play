@@ -3,7 +3,7 @@ import React from 'react'
 // UI
 import QuestionBox from './QuestionBox'
 
-const QuestionStream = ({ stream }) => {
+const QuestionStreamComponent = ({ stream }) => {
 
   const listOfQuestions = stream.map((questionObj, index) => {
     return <QuestionBox key={index} questionData={questionObj.questionData} choiceData={questionObj.choiceData}/>
@@ -16,4 +16,4 @@ const QuestionStream = ({ stream }) => {
   )
 }
 
-export default QuestionStream
+export default QuestionStreamComponent
