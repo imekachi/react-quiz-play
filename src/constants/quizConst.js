@@ -12,3 +12,9 @@ export const QUIZ_TYPE = {
   FUNNY    : 'funnyquiz',   //'QUIZ_TYPE_FUNNY',
   SOCIAL   : 'socialquiz',  //'QUIZ_TYPE_SOCIAL',
 }
+
+export const CHOICE_TYPE = {
+  GRID       : 'grid',
+  LIST       : 'list',
+  TYPE_ANSWER: 'typeanswer',
+}

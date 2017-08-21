@@ -8,7 +8,6 @@ export const fakeQuizInfo = {
 }
 
 export const fakeQuizData = {
-  questionCount  : 3,
   questionPerPage: 3,
   questionList   : [
     {
@@ -63,7 +62,6 @@ export const fakeQuizData = {
         titleHtml: 'ลูกอมโบตัน ยาสีฟัน...',
       },
       choiceData  : {
-        questionNumber: 2,
         choiceLayout  : 'list',
         choiceListData: [
           {
@@ -100,7 +98,6 @@ export const fakeQuizData = {
         titleHtml: 'อะไรไม่รู้ว',
       },
       choiceData  : {
-        questionNumber: 3,
         choiceLayout  : 'list',
         choiceListData: [
           {

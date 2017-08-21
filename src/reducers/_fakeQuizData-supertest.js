@@ -13,8 +13,7 @@ export const fakeQuizInfo = {
 }
 
 export const fakeQuizData = {
-  questionCount  : 3,
-  questionPerPage: 3,
+  questionPerPage: 5,
   questionList   : [
     {
       questionData: {
@@ -105,7 +104,6 @@ export const fakeQuizData = {
         titleHtml: 'อะไรไม่รู้ว',
       },
       choiceData  : {
-        questionNumber: 3,
         choiceLayout  : 'list',
         choiceListData: [
           {
@@ -131,6 +129,24 @@ export const fakeQuizData = {
             isCorrect: false,
             titleHtml: 'ไข่ตุ่น',
             titleAttr: 'ไข่ตุ่น',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 4,
+        titleAttr: 'อะไรไม่รู้ว',
+        titleHtml: 'อะไรไม่รู้ว',
+      },
+      choiceData  : {
+        choiceLayout  : 'typeanswer',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleHtml: 'เฉลยของพิมพ์ตอบ',
+            titleAttr: 'เฉลยของพิมพ์ตอบ',
           },
         ],
       },

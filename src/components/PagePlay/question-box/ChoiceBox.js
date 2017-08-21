@@ -1,9 +1,11 @@
 import React from 'react'
+import { strPadding } from '../../../util/format'
+import { isValueEmpty } from '../../../util/empty'
+import { CHOICE_TYPE } from '../../../constants/quizConst'
 
 // UI
 import ChoiceItem from './ChoiceItem'
-import { strPadding } from '../../../util/format'
-import { isValueEmpty } from '../../../util/empty'
+import TypeAnswerBox from './TypeAnswerBox'
 
 const config = {
   grid: {
@@ -11,6 +13,9 @@ const config = {
     choicePerRowMobile : 2,
   },
 }
+
+const getInputName = (questionNumber) => `answer[${questionNumber}]`
+const getChoiceId  = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
 
 /**
  * Prepare data for rendering as how it is going to be rendered
@@ -33,7 +38,7 @@ const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
       const choiceItem = choicesInThisRow[choiceIndex]
 
       if (!isValueEmpty(choiceItem))
-        choiceItem.choiceId = `${strPadding(questionNumber, 3, '0')}-${choiceItem.value}`
+        choiceItem.choiceId = getChoiceId(questionNumber, choiceItem.value)
 
       return choiceItem
     })
@@ -41,32 +46,44 @@ const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
 }
 
 const ChoiceBox = (props) => {
-  const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
-  const choicesPerRow     = (props.choiceLayout === 'list') ? props.choiceListData.length : gridChoicesPerRow
-  const choiceListUIData  = getChoiceListUIData(props.choiceListData, choicesPerRow, props.questionNumber)
+  let choiceBoxContent
+  const inputName = getInputName(props.questionNumber)
 
-  const listOfChoices = choiceListUIData.map((rowData, rowIndex) => {
-      // Get choices for this row
-      const choicesInThisRow = rowData.map((choiceItemData, choiceItemIndex) => {
-        // If there is no data, so this is just the filler for grid layout
-        if (isValueEmpty(choiceItemData))
-          return <ChoiceItem renderAsFiller key={choiceItemIndex}/>
+  if (props.choiceLayout === CHOICE_TYPE.TYPE_ANSWER) {
+    const choiceId = getChoiceId(props.questionNumber, 1)
 
-        return <ChoiceItem {...choiceItemData} questionNumber={props.questionNumber} key={choiceItemData.choiceId}/>
-      })
+    choiceBoxContent = <TypeAnswerBox inputName={inputName} choiceId={choiceId}/>
+  }
+  else {
+    const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
+    const choicesPerRow     = (props.choiceLayout === CHOICE_TYPE.LIST) ? props.choiceListData.length : gridChoicesPerRow
+    const choiceListUIData  = getChoiceListUIData(props.choiceListData, choicesPerRow, props.questionNumber)
 
-      // Wrap choices with row
-      return (
-        <div className="choice-row" key={rowIndex}>
-          {choicesInThisRow}
-        </div>
-      )
-    },
-  )
+    choiceBoxContent = choiceListUIData.map((rowData, rowIndex) => {
+        // Get choices for this row
+        const choicesInThisRow = rowData.map((choiceItemData, choiceItemIndex) => {
+          // If there is no data, so this is just the filler for grid layout
+          if (isValueEmpty(choiceItemData))
+            return <ChoiceItem renderAsFiller key={choiceItemIndex}/>
+
+          return <ChoiceItem {...choiceItemData} inputName={inputName} key={choiceItemData.choiceId}/>
+        })
+
+        // Wrap choices with row
+        return (
+          <div className="choice-row" key={rowIndex}>
+            {choicesInThisRow}
+          </div>
+        )
+      },
+    )
+
+  }
+
 
   return (
     <div className={`choice-box -${props.choiceLayout}`}>
-      {listOfChoices}
+      {choiceBoxContent}
     </div>
   )
 }

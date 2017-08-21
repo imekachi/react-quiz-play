@@ -16,7 +16,7 @@ const ChoiceItem = (props) => {
 
       <div className={iF(!isValueEmpty(props.img), 'txt-box')}>
         <input id={props.choiceId} className="formradio" type="radio"
-               name={`answer[${props.questionNumber}]`}
+               name={props.inputName}
                value={props.value}
         />
         <label htmlFor={props.choiceId} className="radiolabel">{props.titleHtml}</label>

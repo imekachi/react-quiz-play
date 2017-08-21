@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect'
 import { QUIZ_STATE, QUIZ_TYPE } from '../constants/quizConst'
 import { actions as AuthActions } from './auth'
 
@@ -156,6 +157,10 @@ export const actions = {
 }
 
 // SELECTORS
-export const getQuestionCount   = (state) => state.quiz.quizData.questionCount
 export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
 export const getQuestionList    = (state) => state.quiz.quizData.questionList
+
+export const getQuestionCount = createSelector(
+  getQuestionList,
+  (questionList) => questionList.length,
+)
