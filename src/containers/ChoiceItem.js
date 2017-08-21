@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { getNumber } from '../util/number'
 import { actions as runtimeActions } from '../reducers/runtime'
 import { extractChoiceId } from '../components/PagePlay/question-box/ChoiceBox'
 import ChoiceItemComponent from '../components/PagePlay/question-box/ChoiceItem'
