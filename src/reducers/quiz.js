@@ -68,6 +68,14 @@ export default function quiz(state = initialState, action) {
   }
 }
 
+// SELECTORS
+export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
+export const getQuestionList    = (state) => state.quiz.quizData.questionList
+
+export const getQuestionCount = createSelector(
+  getQuestionList,
+  (questionList) => questionList.length,
+)
 
 const fakeFetch = () => {
   return _fakeAsync({
@@ -82,7 +90,6 @@ const fakeFetch = () => {
 }
 
 // ACTIONS
-
 /**
  * Fetch Quiz, AutoLogin, then route
  *
@@ -156,11 +163,3 @@ export const actions = {
   start,
 }
 
-// SELECTORS
-export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
-export const getQuestionList    = (state) => state.quiz.quizData.questionList
-
-export const getQuestionCount = createSelector(
-  getQuestionList,
-  (questionList) => questionList.length,
-)

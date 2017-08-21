@@ -1,15 +1,16 @@
 import { createSelector } from 'reselect'
 import { getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
+import { capMin } from '../util/number'
 
 export const types = {
-  PAGE_NEXT: 'RUNTIME/PAGE_NEXT',
-  PAGE_PREV: 'RUNTIME/PAGE_PREV',
+  PAGE_CHANGE: 'RUNTIME/PAGE_CHANGE',
+  ADD_ANSWER : 'RUNTIME/ADD_ANSWER',
 }
 
 export const initialState = {
-  currentPage: 1,
+  currentPage  : 1,
   chosenChoices: [],
-  canGoBack  : false,
+  canGoBack    : false,
 }
 
 // REDUCERS
@@ -17,21 +18,24 @@ export default function runtime(state = initialState, action) {
 
   switch (action.type) {
 
-    case types.PAGE_NEXT: {
-      return { ...state, currentPage: state.currentPage + 1 }
+    case types.PAGE_CHANGE: {
+      return { ...state, currentPage: action.payload }
+    }
+
+    case types.ADD_ANSWER: {
+      let newChosenChoices = []
+
+      newChosenChoices[action.payload.questionNumber - 1] = action.payload.answerValue
+      return {
+        ...state,
+        chosenChoices: Object.assign([], state.chosenChoices, newChosenChoices),
+      }
     }
 
     default: {
       return state
     }
   }
-}
-
-// ACTIONS
-const nextPage = () => ({ type: types.PAGE_NEXT })
-
-export const actions = {
-  nextPage,
 }
 
 // SELECTORS
@@ -56,3 +60,49 @@ export const getCurrentQuestionStream = createSelector(
     })
   },
 )
+
+// ACTIONS
+const submit = () => {
+  return (dispatch) => {
+
+  }
+}
+
+const nextPage = () => {
+  return (dispatch, getState) => {
+    const state   = getState()
+    const allPage = getAllPage(state)
+
+    if (state.currentPage >= allPage)
+      dispatch(submit())
+    else
+      dispatch({
+        type   : types.PAGE_CHANGE,
+        payload: state.currentPage + 1,
+      })
+  }
+}
+
+const prevPage = () => {
+  return (dispatch, getState) => {
+    const { currentPage } = getState()
+    dispatch({
+      type   : types.PAGE_CHANGE,
+      payload: capMin(currentPage - 1, 1),
+    })
+  }
+}
+
+const addAnswer = (questionNumber, answerValue) => ({
+  type   : types.ADD_ANSWER,
+  payload: {
+    questionNumber,
+    answerValue,
+  },
+})
+
+export const actions = {
+  nextPage,
+  prevPage,
+  addAnswer,
+}

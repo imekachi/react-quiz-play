@@ -65,6 +65,24 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
+// SELECTORS
+export const getUser          = (state) => state.auth.user
+export const getIsLoading     = (state) => state.auth.isLoading
+export const getLoggingInType = (state) => state.auth.loggingInType
+
+export const getLoggedInType = createSelector(
+  getUser,
+  (user) => new Set(Object.keys(user)),
+)
+export const getIsLogin      = createSelector(
+  getLoggedInType,
+  (loggedInType) => loggedInType.size > 0,
+)
+export const getIsFBLoading  = createSelector(
+  getIsLoading, getLoggingInType,
+  (isLoading, loggingInType) => isLoading && loggingInType.has(AUTH_FACEBOOK),
+)
+
 const fakeLoginFb = () => {
   return _fakeAsync({
     data: {
@@ -76,7 +94,6 @@ const fakeLoginFb = () => {
 }
 
 // ACTIONS
-
 const loginFB = () => {
   return async (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
@@ -134,21 +151,3 @@ export const actions = {
   loginDekD,
   logout,
 }
-
-// SELECTORS
-export const getUser          = (state) => state.auth.user
-export const getIsLoading     = (state) => state.auth.isLoading
-export const getLoggingInType = (state) => state.auth.loggingInType
-
-export const getLoggedInType = createSelector(
-  getUser,
-  (user) => new Set(Object.keys(user)),
-)
-export const getIsLogin      = createSelector(
-  getLoggedInType,
-  (loggedInType) => loggedInType.size > 0,
-)
-export const getIsFBLoading  = createSelector(
-  getIsLoading, getLoggingInType,
-  (isLoading, loggingInType) => isLoading && loggingInType.has(AUTH_FACEBOOK),
-)

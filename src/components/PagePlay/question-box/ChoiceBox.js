@@ -1,10 +1,11 @@
 import React from 'react'
 import { strPadding } from '../../../util/format'
 import { isValueEmpty } from '../../../util/empty'
+import { getNumber } from '../../../util/number'
 import { CHOICE_TYPE } from '../../../constants/quizConst'
 
 // UI
-import ChoiceItem from './ChoiceItem'
+import ChoiceItem from '../../../containers/ChoiceItem'
 import TypeAnswerBox from './TypeAnswerBox'
 
 const config = {
@@ -14,8 +15,15 @@ const config = {
   },
 }
 
-const getInputName = (questionNumber) => `answer[${questionNumber}]`
-const getChoiceId  = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
+export const getInputName    = (questionNumber) => `answer[${questionNumber}]`
+export const getChoiceId     = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
+export const extractChoiceId = (choiceId) => {
+  const fragments = choiceId.split('-')
+  return {
+    questionNumber: getNumber(fragments[0]),
+    value         : getNumber(fragments[1]),
+  }
+}
 
 /**
  * Prepare data for rendering as how it is going to be rendered
@@ -66,7 +74,8 @@ const ChoiceBox = (props) => {
           if (isValueEmpty(choiceItemData))
             return <ChoiceItem renderAsFiller key={choiceItemIndex}/>
 
-          return <ChoiceItem {...choiceItemData} inputName={inputName} key={choiceItemData.choiceId}/>
+          return <ChoiceItem {...choiceItemData} inputName={inputName} questionNumber={props.questionNumber}
+                             key={choiceItemData.choiceId}/>
         })
 
         // Wrap choices with row

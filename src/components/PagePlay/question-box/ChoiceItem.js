@@ -1,28 +1,30 @@
 import React from 'react'
 import { isValueEmpty } from '../../../util/empty'
+import { combineClassNames } from '../../../util/string'
 import { iF } from '../../../util/condition'
 
 // UI
 import ImgZoomable from '../ImgZoomable'
 
-const ChoiceItem = (props) => {
-  if (props.renderAsFiller)
+const ChoiceItemComponent = ({ titleAttr, titleHtml, img, value, inputName, choiceId, isActive, renderAsFiller, onChoiceClick }) => {
+  if (renderAsFiller)
     return <div className="choice-item -grid-filler"/>
 
   return (
-    <div className="choice-item" title={props.titleAttr}>
+    <div className={combineClassNames('choice-item', iF(isActive, '-active'))}
+         title={titleAttr} onClick={onChoiceClick} data-choice-id={choiceId}>
 
-      <ImgZoomable renderAsBg className="img-box" src={props.img}/>
+      <ImgZoomable renderAsBg className="img-box" src={img}/>
 
-      <div className={iF(!isValueEmpty(props.img), 'txt-box')}>
-        <input id={props.choiceId} className="formradio" type="radio"
-               name={props.inputName}
-               value={props.value}
-        />
-        <label htmlFor={props.choiceId} className="radiolabel">{props.titleHtml}</label>
+      <div className={iF(!isValueEmpty(img), 'txt-box')}>
+        <input id={choiceId} className="formradio" type="radio"
+               name={inputName}
+               value={value}
+               checked={isActive}/>
+        <label htmlFor={choiceId} className="radiolabel" dangerouslySetInnerHTML={{ __html: titleHtml }}/>
       </div>
     </div>
   )
 }
 
-export default ChoiceItem
+export default ChoiceItemComponent

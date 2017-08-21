@@ -21,10 +21,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onClickPrev  : (event) => {
       event.preventDefault()
+      dispatch(runtimeActions.prevPage())
     },
     onClickNext  : (event) => {
       event.preventDefault()
       dispatch(runtimeActions.nextPage())
+    },
+    onClickChoice: (event) => {
+      event.preventDefault()
+
     },
     onClickSubmit: (event) => {
       event.preventDefault()
