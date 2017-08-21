@@ -20,21 +20,16 @@
  * https://medium.com/@timarney/but-i-dont-wanna-eject-3e3da5826e39
  */
 
-const babelLoader = function (conf) {
-  if (!conf.loader) return false
-  return conf.loader.indexOf('babel-loader') > -1
-}
+const { injectBabelPlugin } = require('react-app-rewired')
 
-const injectBabelPlugin = function (pluginArray, config) {
-  const babelrc   = config.module.rules.find(babelLoader).options
-  babelrc.plugins = pluginArray.concat(babelrc.plugins || [])
-  return config
-}
 
 module.exports = function override(config) {
   // add your plugins or write your config here
   const myPlugins = ['transform-decorators-legacy']
 
-  config = injectBabelPlugin(myPlugins, config)
+  config = myPlugins.reduce((config, plugin) => {
+    return injectBabelPlugin(plugin, config)
+  }, config)
+
   return config
 }
