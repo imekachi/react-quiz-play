@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 // DATA
-import { actions as runtimeActions, getAllPage, getStartQuesiton } from '../reducers/runtime'
+import { actions as runtimeActions, getAllPage, getStartQuestion } from '../reducers/runtime'
 
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     pagingData : {
       ...state.runtime,
       allPage      : getAllPage(state),
-      startQuestion: getStartQuesiton(state),
+      startQuestion: getStartQuestion(state),
     },
   }
 }

@@ -42,13 +42,13 @@ export const getAllPage = createSelector(
   (questionCount, questionPerPage) => Math.ceil(questionCount / questionPerPage),
 )
 
-export const getStartQuesiton = createSelector(
+export const getStartQuestion = createSelector(
   getCurrentPage, getQuestionPerPage,
   (currentPage, questionPerPage) => (questionPerPage * ( currentPage - 1 )) + 1,
 )
 
 export const getCurrentQuestionStream = createSelector(
-  getQuestionList, getQuestionPerPage, getStartQuesiton,
+  getQuestionList, getQuestionPerPage, getStartQuestion,
   (questionList, questionPerPage, startQuestion) => {
     return questionList.filter((questionObj, index) => {
       const questionNumber = index + 1
