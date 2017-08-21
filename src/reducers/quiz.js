@@ -3,6 +3,7 @@ import { actions as AuthActions } from './auth'
 
 // fake data
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
+// import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
 import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-funny'
 import _fakeAsync from './_fakeAsync'
 
@@ -15,11 +16,12 @@ export const types = {
 }
 
 export const initialState = {
-  quizState: QUIZ_STATE.LOADING,
-  isLoading: true,
-  quizInfo : {},
-  quizData : {},
-  error    : null,
+  quizState : QUIZ_STATE.LOADING,
+  isLoading : true,
+  quizInfo  : {},
+  quizData  : {},
+  clientData: {},
+  error     : null,
 }
 
 // REDUCERS
@@ -38,11 +40,12 @@ export default function quiz(state = initialState, action) {
     case types.FETCH_QUIZ_SUCCESS: {
       return {
         ...state,
-        quizState: QUIZ_STATE.INIT,
-        isLoading: false,
-        quizInfo : action.payload.quizInfo,
-        quizData : action.payload.quizData,
-        error    : null,
+        quizState : QUIZ_STATE.INIT,
+        isLoading : false,
+        quizInfo  : action.payload.quizInfo,
+        quizData  : action.payload.quizData,
+        clientData: action.payload.clientData,
+        error     : null,
       }
     }
 
@@ -68,8 +71,11 @@ export default function quiz(state = initialState, action) {
 const fakeFetch = () => {
   return _fakeAsync({
     data: {
-      quizInfo: fakeQuizInfo,
-      quizData: fakeQuizData,
+      quizInfo  : fakeQuizInfo,
+      quizData  : fakeQuizData,
+      clientData: {
+        isMobile: false,
+      },
     },
   }, 1500)
 }

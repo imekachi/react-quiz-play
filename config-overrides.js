@@ -27,9 +27,5 @@ module.exports = function override(config) {
   // add your plugins or write your config here
   const myPlugins = ['transform-decorators-legacy']
 
-  config = myPlugins.reduce((config, plugin) => {
-    return injectBabelPlugin(plugin, config)
-  }, config)
-
-  return config
+  return injectBabelPlugin(myPlugins, config)
 }

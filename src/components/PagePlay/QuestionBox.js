@@ -4,12 +4,12 @@ import React from 'react'
 import Title from './question-box/Title'
 import ChoiceBox from './question-box/ChoiceBox'
 
-const QuestionBox = (props) => {
+const QuestionBox = ({questionData, choiceData, isMobile, hideQuestionNumber}) => {
   return (
     <div className="question-box">
-      <Title {...props.questionData}/>
+      <Title {...questionData} hideQuestionNumber={hideQuestionNumber}/>
       {/* AnswerMsg : <i class="fa fa-clock-o"></i> คุณไม่ได้ตอบคำถามในเวลาที่กำหนด */}
-      <ChoiceBox {...props.choiceData} questionNumber={props.questionData.number}/>
+      <ChoiceBox {...choiceData} questionNumber={questionData.number} isMobile={isMobile}/>
       {/* AnswerDetail */}
     </div>
   )

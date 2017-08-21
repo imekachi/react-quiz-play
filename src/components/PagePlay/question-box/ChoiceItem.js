@@ -6,19 +6,17 @@ import { iF } from '../../../util/condition'
 import ImgZoomable from '../ImgZoomable'
 
 const ChoiceItem = (props) => {
-  if (props.isFiller)
+  if (props.renderAsFiller)
     return <div className="choice-item -grid-filler"/>
 
   return (
     <div className="choice-item" title={props.titleAttr}>
 
-      <ImgZoomable className="img-box" src={props.img} renderAsBg={true}/>
+      <ImgZoomable renderAsBg className="img-box" src={props.img}/>
 
       <div className={iF(!isValueEmpty(props.img), 'txt-box')}>
-        <input id={props.choiceId}
-               className="formradio"
-               type="radio"
-               name={`answer[${props.questionIndex}]`}
+        <input id={props.choiceId} className="formradio" type="radio"
+               name={`answer[${props.questionNumber}]`}
                value={props.value}
         />
         <label htmlFor={props.choiceId} className="radiolabel">{props.titleHtml}</label>
