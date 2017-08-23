@@ -7,8 +7,8 @@ export const fakeQuizInfo = {
   isAccessible   : true,
   isChallengeMode: true,
   timerData      : {
-    type         : 'each',
-    limitTime    : 15,
+    type     : 'each',
+    limitTime: 15,
   },
 }
 
@@ -154,6 +154,250 @@ export const fakeQuizData = {
   ],
 }
 
-export const fakeQuizResult = {
-
+export const fakeQuizData2 = {
+  questionPerPage: 100,
+  questionList   : [
+    {
+      questionData: {
+        number   : 1,
+        titleAttr: 'ภาษาไทยเป็นภาษาประจำชาติอะไร',
+        titleHtml: 'ภาษาไทยเป็นภาษาประจำชาติอะไร',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: 'ลาว',
+            titleHtml: 'ลาว',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: 'พม่า',
+            titleHtml: 'พม่า',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: 'ไทย',
+            titleHtml: 'ไทย',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 2,
+        titleAttr: 'พยัญชนะภาษาไทยมีกี่ตัว',
+        titleHtml: 'พยัญชนะภาษาไทยมีกี่ตัว',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: '48',
+            titleHtml: '48',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: '40',
+            titleHtml: '40',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: '44',
+            titleHtml: '44',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 3,
+        titleAttr: 'ไตรยางค์ คือ อะไร',
+        titleHtml: 'ไตรยางค์ คือ อะไร',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: 'อักษร 3 หมู่',
+            titleHtml: 'อักษร 3 หมู่',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: 'พยัญชนะภาษาไทย',
+            titleHtml: 'พยัญชนะภาษาไทย',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: 'สระภาษาไทย',
+            titleHtml: 'สระภาษาไทย',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 4,
+        titleAttr: 'พยัญชนะควบกล้ำมีตัวอะไรบ้าง',
+        titleHtml: 'พยัญชนะควบกล้ำมีตัวอะไรบ้าง',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: 'ร ย อ',
+            titleHtml: 'ร ย อ',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: 'ร ว ล',
+            titleHtml: 'ร ว ล',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: 'ล ว อ',
+            titleHtml: 'ล ว อ',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 5,
+        titleAttr: 'คำว่า"จริง"เป็นคำควบกล้ำแท้หรือไม่',
+        titleHtml: 'คำว่า"จริง"เป็นคำควบกล้ำแท้หรือไม่',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: 'ควบกล้ำแท้',
+            titleHtml: 'ควบกล้ำแท้',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: 'ควบกล้ำไม่แท้',
+            titleHtml: 'ควบกล้ำไม่แท้',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: 'ไม่ใช่คำควบกล้ำ',
+            titleHtml: 'ไม่ใช่คำควบกล้ำ',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 6,
+        titleAttr: 'อักษรสูงมีกี่ตัวอักษร',
+        titleHtml: 'อักษรสูงมีกี่ตัวอักษร',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: '11',
+            titleHtml: '11',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: '9',
+            titleHtml: '9',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: '14',
+            titleHtml: '14',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 7,
+        titleAttr: 'อักษรกลางมีกี่ตัวอักษร',
+        titleHtml: 'อักษรกลางมีกี่ตัวอักษร',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: '11',
+            titleHtml: '11',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: '9',
+            titleHtml: '9',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: '14',
+            titleHtml: '14',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 8,
+        titleAttr: 'อักษรต่ำมีกี่ตัวอักษร',
+        titleHtml: 'อักษรต่ำมีกี่ตัวอักษร',
+      },
+      choiceData  : {
+        choiceLayout  : 'list',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleAttr: '11',
+            titleHtml: '11',
+          },
+          {
+            value    : 2,
+            isCorrect: false,
+            titleAttr: '9',
+            titleHtml: '9',
+          },
+          {
+            value    : 3,
+            isCorrect: false,
+            titleAttr: '14',
+            titleHtml: '14',
+          },
+        ],
+      },
+    },
+  ],
 }
+
+export const fakeQuizResult = {}

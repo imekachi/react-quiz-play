@@ -18,3 +18,7 @@ export const CHOICE_TYPE = {
   LIST       : 'list',
   TYPE_ANSWER: 'typeanswer',
 }
+
+export const FORM_NAME = {
+  QUIZ_PLAY: 'QUIZ_PLAY_FORM',
+}

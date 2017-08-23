@@ -1,7 +1,6 @@
 import React from 'react'
 import { strPadding } from '../../../util/format'
 import { isValueEmpty } from '../../../util/empty'
-import { getNumber } from '../../../util/number'
 import { CHOICE_TYPE } from '../../../constants/quizConst'
 
 // UI
@@ -15,15 +14,14 @@ const config = {
   },
 }
 
-export const getInputName    = (questionNumber) => `answer[${questionNumber}]`
 export const getChoiceId     = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
-export const extractChoiceId = (choiceId) => {
-  const fragments = choiceId.split('-')
-  return {
-    questionNumber: getNumber(fragments[0]),
-    value         : getNumber(fragments[1]),
-  }
-}
+// export const extractChoiceId = (choiceId) => {
+//   const fragments = choiceId.split('-')
+//   return {
+//     questionNumber: getNumber(fragments[0]),
+//     value         : getNumber(fragments[1]),
+//   }
+// }
 
 /**
  * Prepare data for rendering as how it is going to be rendered
@@ -55,12 +53,12 @@ const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
 
 const ChoiceBox = (props) => {
   let choiceBoxContent
-  const inputName = getInputName(props.questionNumber)
+  const { input } = props.fieldData
 
   if (props.choiceLayout === CHOICE_TYPE.TYPE_ANSWER) {
     const choiceId = getChoiceId(props.questionNumber, 1)
 
-    choiceBoxContent = <TypeAnswerBox inputName={inputName} choiceId={choiceId}/>
+    choiceBoxContent = <TypeAnswerBox choiceId={choiceId} input={input}/>
   }
   else {
     const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
@@ -74,7 +72,7 @@ const ChoiceBox = (props) => {
           if (isValueEmpty(choiceItemData))
             return <ChoiceItem renderAsFiller key={choiceItemIndex}/>
 
-          return <ChoiceItem {...choiceItemData} inputName={inputName} questionNumber={props.questionNumber}
+          return <ChoiceItem {...choiceItemData} input={input} questionNumber={props.questionNumber}
                              key={choiceItemData.choiceId}/>
         })
 
@@ -86,9 +84,7 @@ const ChoiceBox = (props) => {
         )
       },
     )
-
   }
-
 
   return (
     <div className={`choice-box -${props.choiceLayout}`}>

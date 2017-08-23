@@ -1,16 +1,21 @@
 import React from 'react'
+import { Field } from 'redux-form'
 
 // UI
 import QuestionBox from './QuestionBox'
 
-const QuestionStreamComponent = ({ stream, isMobile, hideQuestionNumber }) => {
+const QuestionStreamComponent = ({ stream, isMobile, hideQuestionNumber, getFieldName }) => {
 
   const listOfQuestions = stream.map((questionObj, index) => {
-    return <QuestionBox key={index}
-                        questionData={questionObj.questionData}
-                        choiceData={questionObj.choiceData}
-                        isMobile={isMobile}
-                        hideQuestionNumber={hideQuestionNumber}/>
+
+    return <Field key={index}
+                  name={getFieldName(questionObj.questionData.number)}
+                  component={QuestionBox}
+                  payload={{
+                    ...questionObj,
+                    isMobile,
+                    hideQuestionNumber,
+                  }}/>
   })
 
   return (

@@ -9,9 +9,10 @@ import QuizProgress from './QuizProgress'
 import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
-const PagePlayComponent = ({ pagingData, enableTimer, onClickPrev, onClickNext, onClickSubmit }) => {
+const PagePlayComponent = (props) => {
+  const { pagingData, enableTimer, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
   return (
-    <form id="quiz-submit-form" className="play-state">
+    <form className="play-state" onSubmit={onFormSubmit}>
       {false && (enableTimer) && (
         <TimerSticky/>
       )}

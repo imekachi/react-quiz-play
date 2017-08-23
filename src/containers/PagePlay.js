@@ -2,9 +2,7 @@ import { connect } from 'react-redux'
 
 // DATA
 import { actions as runtimeActions, getAllPage, getStartQuestion } from '../reducers/runtime'
-
-// UI
-import PagePlayComponent from '../components/PagePlay/index'
+import FormPlay from './FormPlay'
 
 const mapStateToProps = (state) => {
   return {
@@ -27,15 +25,14 @@ const mapDispatchToProps = (dispatch) => {
       event.preventDefault()
       dispatch(runtimeActions.nextPage())
     },
-    onClickChoice: (event) => {
-      event.preventDefault()
-
-    },
     onClickSubmit: (event) => {
       event.preventDefault()
       dispatch(runtimeActions.submit())
     },
+    onFormSubmit : (event) => {
+      event.preventDefault()
+    },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PagePlayComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(FormPlay)
