@@ -10,9 +10,14 @@ import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
 const PagePlayComponent = (props) => {
-  const { pagingData, enableTimer, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
+  console.log('>> PagePlayComponent props: ', props)
+  const reduxForm = {
+    handleSubmit: props.handleSubmit,
+  }
+
+  const { pagingData, enableTimer, disableNext, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
   return (
-    <form className="play-state" onSubmit={onFormSubmit}>
+    <form className="play-state" onSubmit={reduxForm.handleSubmit(onFormSubmit)}>
       {false && (enableTimer) && (
         <TimerSticky/>
       )}
@@ -22,7 +27,11 @@ const PagePlayComponent = (props) => {
 
       <QuestionStream/>
 
-      <QuestionControl pagingData={pagingData} disableNext={true} {...{onClickPrev, onClickNext, onClickSubmit}}/>
+      <QuestionControl pagingData={pagingData} disableNext={disableNext} {...{
+        onClickPrev,
+        onClickNext,
+        onClickSubmit,
+      }}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
     </form>

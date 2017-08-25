@@ -8,9 +8,8 @@ export const types = {
 }
 
 export const initialState = {
-  currentPage  : 1,
-  chosenChoices: [],
-  canGoBack    : false,
+  currentPage: 1,
+  canGoBack  : false,
 }
 
 // REDUCERS
@@ -20,16 +19,6 @@ export default function runtime(state = initialState, action) {
 
     case types.PAGE_CHANGE: {
       return { ...state, currentPage: action.payload }
-    }
-
-    case types.ADD_ANSWER: {
-      let newChosenChoices = []
-
-      newChosenChoices[action.payload.questionNumber - 1] = action.payload.answerValue
-      return {
-        ...state,
-        chosenChoices: Object.assign([], state.chosenChoices, newChosenChoices),
-      }
     }
 
     default: {
@@ -93,16 +82,8 @@ const prevPage = () => {
   }
 }
 
-const addAnswer = (questionNumber, answerValue) => ({
-  type   : types.ADD_ANSWER,
-  payload: {
-    questionNumber,
-    answerValue,
-  },
-})
-
 export const actions = {
   nextPage,
   prevPage,
-  addAnswer,
+  submit,
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { strPadding } from '../../../util/format'
 import { isValueEmpty } from '../../../util/empty'
+import { makeArrayOf } from '../../../util/array'
 import { CHOICE_TYPE } from '../../../constants/quizConst'
 
 // UI
@@ -35,12 +36,12 @@ const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
   const totalRow = Math.ceil(choiceListData.length / choicesPerRow)
 
   // Generate each row as an Array of choices
-  return Array.apply(null, new Array(totalRow)).map((rowItem, rowIndex) => {
+  return makeArrayOf(totalRow).map((rowItem, rowIndex) => {
     const startChoiceItemIndex = rowIndex * choicesPerRow
     const choicesInThisRow     = choiceListData.slice(startChoiceItemIndex, startChoiceItemIndex + choicesPerRow)
 
     // Generate each choice
-    return Array.apply(null, new Array(choicesPerRow)).map((_, choiceIndex) => {
+    return makeArrayOf(choicesPerRow).map((_, choiceIndex) => {
       const choiceItem = choicesInThisRow[choiceIndex]
 
       if (!isValueEmpty(choiceItem))

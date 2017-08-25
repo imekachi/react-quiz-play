@@ -2,11 +2,14 @@ import { connect } from 'react-redux'
 
 // DATA
 import { actions as runtimeActions, getAllPage, getStartQuestion } from '../reducers/runtime'
+import { getQuestionCount } from '../reducers/quiz'
 import FormPlay from './FormPlay'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     enableTimer: !!state.quiz.quizInfo.timerData,
+    questionCount: getQuestionCount(state),
+    disableNext: ownProps.pristine || ownProps.submitting,
     pagingData : {
       ...state.runtime,
       allPage      : getAllPage(state),
@@ -26,11 +29,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(runtimeActions.nextPage())
     },
     onClickSubmit: (event) => {
-      event.preventDefault()
       dispatch(runtimeActions.submit())
     },
-    onFormSubmit : (event) => {
-      event.preventDefault()
+    onFormSubmit : (data) => {
+      window.alert(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
     },
   }
 }
