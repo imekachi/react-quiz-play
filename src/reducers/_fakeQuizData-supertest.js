@@ -100,6 +100,24 @@ export const fakeQuizData = {
     {
       questionData: {
         number   : 3,
+        titleAttr: 'ทดสอบ input แบบเติมคำตอบ ไม่ใช่ข้อสุดท้าย',
+        titleHtml: 'ทดสอบ input แบบเติมคำตอบ ไม่ใช่ข้อสุดท้าย',
+      },
+      choiceData  : {
+        choiceLayout  : 'typeanswer',
+        choiceListData: [
+          {
+            value    : 1,
+            isCorrect: true,
+            titleHtml: 'เฉลยของพิมพ์ตอบ',
+            titleAttr: 'เฉลยของพิมพ์ตอบ',
+          },
+        ],
+      },
+    },
+    {
+      questionData: {
+        number   : 4,
         titleAttr: 'อะไรไม่รู้ว',
         titleHtml: 'อะไรไม่รู้ว',
       },
@@ -135,7 +153,7 @@ export const fakeQuizData = {
     },
     {
       questionData: {
-        number   : 4,
+        number   : 5,
         titleAttr: 'อะไรไม่รู้ว',
         titleHtml: 'อะไรไม่รู้ว',
       },
@@ -254,7 +272,7 @@ export const fakeQuizData2 = {
         titleHtml: 'พยัญชนะควบกล้ำมีตัวอะไรบ้าง',
       },
       choiceData  : {
-        choiceLayout  : 'list',
+        choiceLayout  : 'grid',
         choiceListData: [
           {
             value    : 1,
@@ -273,6 +291,12 @@ export const fakeQuizData2 = {
             isCorrect: false,
             titleAttr: 'ล ว อ',
             titleHtml: 'ล ว อ',
+          },
+          {
+            value    : 4,
+            isCorrect: false,
+            titleAttr: 'ก ข ค',
+            titleHtml: 'ก ข ค',
           },
         ],
       },

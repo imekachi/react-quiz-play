@@ -6,13 +6,15 @@ import { iF } from '../../../util/condition'
 // UI
 import ImgZoomable from '../ImgZoomable'
 
-const ChoiceItemComponent = ({ titleAttr, titleHtml, img, value, input, choiceId, isActive, renderAsFiller, onChoiceClick }) => {
+const ChoiceItemComponent = (props) => {
+  const { titleAttr, titleHtml, img, value, input, choiceId, isActive, renderAsFiller, onCommitAnswer } = props
+
   if (renderAsFiller)
     return <div className="choice-item -grid-filler"/>
 
   return (
     <div className={combineClassNames('choice-item', iF(isActive, '-active'))}
-         title={titleAttr} onClick={onChoiceClick} data-choice-id={choiceId}>
+         title={titleAttr} onClick={onCommitAnswer} data-choice-id={choiceId}>
 
       <ImgZoomable renderAsBg className="img-box" src={img}/>
 

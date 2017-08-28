@@ -7,6 +7,7 @@ import { CHOICE_TYPE } from '../../../constants/quiz'
 // UI
 import ChoiceItem from '../../../containers/ChoiceItem'
 import TypeAnswerBox from './TypeAnswerBox'
+import ChoiceItemComponent from './ChoiceItem'
 
 const config = {
   grid: {
@@ -15,7 +16,7 @@ const config = {
   },
 }
 
-export const getChoiceId     = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
+export const getChoiceId = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
 // export const extractChoiceId = (choiceId) => {
 //   const fragments = choiceId.split('-')
 //   return {
@@ -57,9 +58,8 @@ const ChoiceBox = (props) => {
   const { input } = props.fieldData
 
   if (props.choiceLayout === CHOICE_TYPE.TYPE_ANSWER) {
-    const choiceId = getChoiceId(props.questionNumber, 1)
-
-    choiceBoxContent = <TypeAnswerBox choiceId={choiceId} input={input}/>
+    const choiceId   = getChoiceId(props.questionNumber, 1)
+    choiceBoxContent = <ChoiceItem component={TypeAnswerBox} choiceId={choiceId} input={input}/>
   }
   else {
     const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
@@ -71,10 +71,14 @@ const ChoiceBox = (props) => {
         const choicesInThisRow = rowData.map((choiceItemData, choiceItemIndex) => {
           // If there is no data, so this is just the filler for grid layout
           if (isValueEmpty(choiceItemData))
-            return <ChoiceItem renderAsFiller key={choiceItemIndex}/>
+            return <ChoiceItem renderAsFiller key={choiceItemIndex} component={ChoiceItemComponent}/>
 
-          return <ChoiceItem {...choiceItemData} input={input} questionNumber={props.questionNumber}
-                             key={choiceItemData.choiceId}/>
+          return <ChoiceItem {...choiceItemData}
+                             isMultipleChoice={true}
+                             input={input}
+                             questionNumber={props.questionNumber}
+                             key={choiceItemData.choiceId}
+                             component={ChoiceItemComponent}/>
         })
 
         // Wrap choices with row
