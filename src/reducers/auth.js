@@ -1,6 +1,6 @@
 // AUTH REDUCER
 import { createSelector } from 'reselect'
-import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
+import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/auth'
 import { immutateSetAdd, immutateSetDelete } from '../util/set'
 import _fakeAsync from './_fakeAsync'
 

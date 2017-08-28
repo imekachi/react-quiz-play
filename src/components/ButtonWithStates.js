@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { isValueEmpty } from '../util/empty'
-import { WHITE_SPACE } from '../util/unicode'
+import { WHITE_SPACE } from '../constants/unicode'
 import { iF } from '../util/condition'
 import { combineClassNames } from '../util/string'
 import Icon from './Icon'

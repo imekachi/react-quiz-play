@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { change } from 'redux-form'
 
-import { FORM_NAME } from '../constants/quizConst'
+import { FORM_NAME } from '../constants/quiz'
 import { getFieldName } from './QuestionStream'
 import ChoiceItemComponent from '../components/PagePlay/question-box/ChoiceItem'
 

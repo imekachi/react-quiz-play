@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 // DATA
 import { actions as QuizActions } from '../reducers/quiz'
-import { QUIZ_STATE } from '../constants/quizConst'
+import { QUIZ_STATE } from '../constants/quiz'
 
 // UI
 import MainWrapper from '../components/MainWrapper'

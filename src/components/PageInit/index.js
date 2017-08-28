@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DEFAULT_QUIZ_COVER, QUIZ_CENTER } from '../../constants/urlConst'
+import { DEFAULT_QUIZ_COVER, QUIZ_CENTER } from '../../constants/url'
 
 import CoverImg from './CoverImg'
 import TimerInfo from './TimerInfo'

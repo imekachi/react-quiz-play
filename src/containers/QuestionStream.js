@@ -3,7 +3,7 @@ import { strPadding } from '../util/format'
 
 // DATA
 import { getCurrentQuestionStream } from '../reducers/runtime'
-import { QUIZ_TYPE } from '../constants/quizConst'
+import { QUIZ_TYPE } from '../constants/quiz'
 
 // UI
 import QuestionStreamComponent from '../components/PagePlay/QuestionStream'

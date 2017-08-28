@@ -2,7 +2,7 @@ import React from 'react'
 import { strPadding } from '../../../util/format'
 import { isValueEmpty } from '../../../util/empty'
 import { makeArrayOf } from '../../../util/array'
-import { CHOICE_TYPE } from '../../../constants/quizConst'
+import { CHOICE_TYPE } from '../../../constants/quiz'
 
 // UI
 import ChoiceItem from '../../../containers/ChoiceItem'

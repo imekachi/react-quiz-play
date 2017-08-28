@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { makeButtonWithStates } from '../ButtonWithStates'
-import { AUTH_DEKD } from '../../constants/authConst'
+import { AUTH_DEKD } from '../../constants/auth'
 
 import AutoShareBox from '../AutoShareBox'
 

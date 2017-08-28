@@ -4,7 +4,7 @@ import { makeArrayOf } from '../util/array'
 
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
-import { FORM_NAME } from '../constants/quizConst'
+import { FORM_NAME } from '../constants/quiz'
 import { getFieldName } from './QuestionStream'
 
 const validate = (formData, ownProps) => {
@@ -15,12 +15,12 @@ const validate = (formData, ownProps) => {
 
     return buffer
   }, { rules: {}, messages: {} })
-  console.log('>> validatingData: ', validatingData)
+  // console.log('>> validatingData: ', validatingData)
 
   const validation = new Validator(formData, validatingData.rules, validatingData.messages)
   validation.passes()
 
-  console.log('>> validation: ', validation)
+  // console.log('>> validation: ', validation)
   return validation.errors.all()
 }
 

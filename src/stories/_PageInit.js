@@ -3,7 +3,7 @@ import React from 'react'
 // Data
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
-import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/authConst'
+import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/auth'
 
 // Util
 import { makeStoriesOf } from './util'
