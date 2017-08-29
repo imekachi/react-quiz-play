@@ -50,6 +50,7 @@ export default function quiz(state = initialState, action) {
         quizInfo  : action.data.quizInfo,
         quizData  : action.data.quizData,
         clientData: action.data.clientData,
+        retryCount: 0,
         error     : null,
       }
     }
@@ -128,7 +129,7 @@ const fetchQuiz = () => {
       },
     }, 1500)
   }
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch({ type: types.FETCH_QUIZ })
 
     try {
