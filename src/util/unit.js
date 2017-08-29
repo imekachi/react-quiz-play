@@ -7,7 +7,7 @@ import { strSuffix } from './format'
  * @param   {Number} number                     input number
  * @param   {Boolean} [scaleToHundred = true]   scale 0.10 to 10%
  *
- * @returns {String}
+ * @return {String}
  */
 export function unitPercentage(number, scaleToHundred = true) {
   return strSuffix(getNumber(number, false) * ( scaleToHundred ? 100 : 1 ), '%')
@@ -18,7 +18,7 @@ export function unitPercentage(number, scaleToHundred = true) {
  *
  * @param   {Number} number
  *
- * @returns {String}
+ * @return {String}
  */
 export function unitPixelate(number) {
   return strSuffix(getNumber(number, false), 'px')

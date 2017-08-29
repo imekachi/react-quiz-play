@@ -3,7 +3,7 @@
  * @param   {Set} originalSet
  * @param   {*} addingValue
  *
- * @returns {Set}
+ * @return {Set}
  */
 export function immutateSetAdd(originalSet, addingValue) {
   return new Set([...originalSet, addingValue])

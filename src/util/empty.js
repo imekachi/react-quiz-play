@@ -12,7 +12,7 @@ export function isObjEmpty(obj) {
  * Array empty check
  * @param   {Array} arr   input array
  *
- * @returns {Boolean}
+ * @return {Boolean}
  */
 export function isArrayEmpty(arr) {
   return arr.constructor === Array && arr.length === 0
@@ -21,7 +21,7 @@ export function isArrayEmpty(arr) {
 /**
  * Value check if it is empty
  * @param value
- * @returns {boolean|Boolean}
+ * @return {boolean|Boolean}
  */
 export function isValueEmpty(value) {
   return (!value && value !== false) // using falsy value ability expect false itself

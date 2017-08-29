@@ -4,7 +4,7 @@
  *
  * @param   { Number } timeInSecond
  *
- * @returns {{hour: number, minute: number, second: number}}
+ * @return {{hour: number, minute: number, second: number}}
  */
 export function extractTimeFragments(timeInSecond) {
   const time = new Date(null)

@@ -3,7 +3,7 @@
  * check if input data is a valid number
  * @param { * }   data    input data
  *
- * @returns { Boolean }
+ * @return { Boolean }
  */
 export function isNumber(data) {
   return (!isNaN(parseFloat(data))) && isFinite(data)
@@ -34,7 +34,7 @@ export function getNumber(data, isRound = false) {
  * @param   { Number }  inputNumber
  * @param   { Number }  min
  *
- * @returns { Number } cappedValue
+ * @return { Number } cappedValue
  */
 export function capMin(inputNumber, min) {
   return Math.max(inputNumber, min)
@@ -45,7 +45,7 @@ export function capMin(inputNumber, min) {
  * @param   { Number }  inputNumber
  * @param   { Number }  max
  *
- * @returns { Number } cappedValue
+ * @return { Number } cappedValue
  */
 export function capMax(inputNumber, max) {
   return Math.min(inputNumber, max)
@@ -57,7 +57,7 @@ export function capMax(inputNumber, max) {
  * @param   { Number }  min
  * @param   { Number }  max
  *
- * @returns { Number } cappedValue
+ * @return { Number } cappedValue
  */
 export function capBetween(min, inputNumber, max) {
   return capMax(capMin(inputNumber, min), max)

@@ -3,7 +3,7 @@
  * check if input data is an object
  * @param {*}   data    input data
  *
- * @returns {Boolean}
+ * @return {Boolean}
  */
 export function isObject(data) {
   return (data && typeof data === 'object' && !Array.isArray(data))
@@ -15,7 +15,7 @@ export function isObject(data) {
  * @param   {Object} target
  * @param   {Object} [sources]
  *
- * @returns {Object}
+ * @return {Object}
  */
 export function mergeDeep(target, ...sources) {
   // check if there is still any source

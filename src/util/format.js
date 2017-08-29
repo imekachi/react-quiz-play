@@ -38,7 +38,7 @@ export function camelToSnake(string) {
  * @param   {Number} [maxPadding = 2]             maximum padding
  * @param   {String | Number} [paddingChar = '0'] the character you want to fill in
  *
- * @returns {String} paddedString
+ * @return {String} paddedString
  */
 export function strPadding(str, maxPadding = 2, paddingChar = '0') {
   // if ES2017 proposal get standardized you can use line below
@@ -54,7 +54,7 @@ export function strPadding(str, maxPadding = 2, paddingChar = '0') {
  * @param   {String|*} str
  * @param   {String|*} prefix
  *
- * @returns {String}
+ * @return {String}
  */
 export function strPrefix(str, prefix) {
   return `${prefix}${str}`
@@ -67,7 +67,7 @@ export function strPrefix(str, prefix) {
  * @param   {String|*} str
  * @param   {String|*} suffix
  *
- * @returns {String}
+ * @return {String}
  */
 export function strSuffix(str, suffix) {
   return `${str}${suffix}`
