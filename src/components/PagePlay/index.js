@@ -10,18 +10,18 @@ import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
 const PagePlayComponent = (props) => {
-  console.log('>> PagePlayComponent props: ', props)
+  // console.log('>> PagePlayComponent props: ', props)
   const reduxForm = {
     handleSubmit: props.handleSubmit,
   }
 
-  const { pagingData, enableTimer, disableNext, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
+  const { pagingData, enableTimer, isSingleQuestion, disableNext, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
   return (
     <form className="play-state" onSubmit={reduxForm.handleSubmit(onFormSubmit)}>
       {false && (enableTimer) && (
         <TimerSticky/>
       )}
-      {false && (pagingData.questionPerPage <= 1) && (
+      {false && isSingleQuestion && (
         <QuizProgress/>
       )}
 

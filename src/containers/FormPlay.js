@@ -1,11 +1,24 @@
 import { reduxForm } from 'redux-form'
 import Validator from 'validatorjs'
 import { makeArrayOf } from '../util/array'
+import { strPadding } from '../util/format'
 
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 import { FORM_NAME } from '../constants/quiz'
-import { getFieldName } from './QuestionStream'
+
+
+// export const getFieldName = (questionNumber) => `answer[${questionNumber - 1}]`
+export const getFieldName = (questionNumber) => `question-${strPadding(questionNumber, 3, '0')}`
+
+export const getChoiceId = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
+// export const extractChoiceId = (choiceId) => {
+//   const fragments = choiceId.split('-')
+//   return {
+//     questionNumber: getNumber(fragments[0]),
+//     value         : getNumber(fragments[1]),
+//   }
+// }
 
 const validate = (formData, ownProps) => {
   const validatingData = makeArrayOf(ownProps.questionCount).reduce((buffer, _, index) => {
@@ -15,12 +28,10 @@ const validate = (formData, ownProps) => {
 
     return buffer
   }, { rules: {}, messages: {} })
-  // console.log('>> validatingData: ', validatingData)
 
   const validation = new Validator(formData, validatingData.rules, validatingData.messages)
   validation.passes()
 
-  // console.log('>> validation: ', validation)
   return validation.errors.all()
 }
 

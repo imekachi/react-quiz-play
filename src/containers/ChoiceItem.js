@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { change } from 'redux-form'
+import { actions as runtimeActions } from '../reducers/runtime'
 
 import { FORM_NAME } from '../constants/quiz'
-import { getFieldName } from './QuestionStream'
+import { getFieldName } from './FormPlay'
 
 class ChoiceItem extends React.Component {
   render() {
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onCommitAnswer: (event) => {
       event.preventDefault()
       dispatch(change(FORM_NAME.QUIZ_PLAY, ownProps.input.name, ownProps.value))
+      dispatch(runtimeActions.questionAnswered())
     },
   }
 }

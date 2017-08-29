@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect'
-import { getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
-import { capMin } from '../util/number'
+import { getFormSyncErrors, isPristine, isSubmitting } from 'redux-form'
+import { capMax, capMin } from '../util/number'
+import { wait } from '../util/async'
+
+import { DELAY, FORM_NAME } from '../constants/quiz'
+import { getQuestionCount, getQuestionList, getQuestionPerPage, isSingleQuestion } from './quiz'
+import { getFieldName } from '../containers/FormPlay'
 
 export const types = {
   PAGE_CHANGE: 'RUNTIME/PAGE_CHANGE',
@@ -40,18 +45,37 @@ export const getStartQuestion = createSelector(
   (currentPage, questionPerPage) => (questionPerPage * ( currentPage - 1 )) + 1,
 )
 
+export const getEndQuestion = createSelector(
+  getCurrentPage, getQuestionPerPage,
+  (currentPage, questionPerPage) => questionPerPage * currentPage,
+)
+
 export const getCurrentQuestionStream = createSelector(
-  getQuestionList, getQuestionPerPage, getStartQuestion,
-  (questionList, questionPerPage, startQuestion) => {
-    return questionList.filter((questionObj, index) => {
-      const questionNumber = index + 1
-      return (questionNumber >= startQuestion) && (questionNumber < startQuestion + questionPerPage)
-    })
+  getQuestionList, getStartQuestion, getEndQuestion,
+  (questionList, startQuestion, endQuestion) => {
+    return questionList.slice(startQuestion - 1, endQuestion)
+  },
+)
+
+/**
+ * Disable next button when-
+ * - the form is untouched
+ * - the form is submitting
+ * - if it's singleQuestion and there is any error in that question
+ *
+ * if there are more than one questions in a page, better let user press 'Next'
+ * then auto-scroll to the error question for better experience
+ */
+export const isNextButtonDisabled = createSelector(
+  isSingleQuestion, getCurrentPage, isPristine(FORM_NAME.QUIZ_PLAY), isSubmitting(FORM_NAME.QUIZ_PLAY), getFormSyncErrors(FORM_NAME.QUIZ_PLAY),
+  (isSingleQuestion, currentPage, isPristine, isSubmitting, formSyncErrors = {}) => {
+    return isPristine || isSubmitting || !!(isSingleQuestion && Object.keys(formSyncErrors).includes(getFieldName(currentPage)))
   },
 )
 
 // ACTIONS
 const submit = () => {
+  console.log('>> action submit')
   return (dispatch) => {
 
   }
@@ -59,16 +83,13 @@ const submit = () => {
 
 const nextPage = () => {
   return (dispatch, getState) => {
-    const state   = getState()
-    const allPage = getAllPage(state)
-
-    if (state.currentPage >= allPage)
-      dispatch(submit())
-    else
-      dispatch({
-        type   : types.PAGE_CHANGE,
-        payload: state.currentPage + 1,
-      })
+    const state       = getState()
+    const allPage     = getAllPage(state)
+    const currentPage = getCurrentPage(state)
+    dispatch({
+      type   : types.PAGE_CHANGE,
+      payload: capMax(currentPage + 1, allPage),
+    })
   }
 }
 
@@ -82,8 +103,23 @@ const prevPage = () => {
   }
 }
 
+const questionAnswered = () => {
+  return (dispatch, getState) => {
+    const state = getState()
+
+    if (isSingleQuestion(state)) {
+      // Todo: conditional delay only when it's multiple answer
+      wait(DELAY.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
+    }
+    else {
+      // scroll
+    }
+  }
+}
+
 export const actions = {
   nextPage,
   prevPage,
   submit,
+  questionAnswered,
 }

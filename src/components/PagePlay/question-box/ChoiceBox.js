@@ -1,8 +1,8 @@
 import React from 'react'
-import { strPadding } from '../../../util/format'
 import { isValueEmpty } from '../../../util/empty'
 import { makeArrayOf } from '../../../util/array'
 import { CHOICE_TYPE } from '../../../constants/quiz'
+import { getChoiceId } from '../../../containers/FormPlay'
 
 // UI
 import ChoiceItem from '../../../containers/ChoiceItem'
@@ -15,15 +15,6 @@ const config = {
     choicePerRowMobile : 2,
   },
 }
-
-export const getChoiceId = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`
-// export const extractChoiceId = (choiceId) => {
-//   const fragments = choiceId.split('-')
-//   return {
-//     questionNumber: getNumber(fragments[0]),
-//     value         : getNumber(fragments[1]),
-//   }
-// }
 
 /**
  * Prepare data for rendering as how it is going to be rendered

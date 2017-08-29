@@ -22,3 +22,7 @@ export const CHOICE_TYPE = {
 export const FORM_NAME = {
   QUIZ_PLAY: 'QUIZ_PLAY_FORM',
 }
+
+export const DELAY = {
+  BEFORE_NEXT_PAGE: 300
+}

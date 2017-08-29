@@ -73,22 +73,14 @@ export default function quiz(state = initialState, action) {
 export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
 export const getQuestionList    = (state) => state.quiz.quizData.questionList
 
-export const getQuestionCount = createSelector(
+export const getQuestionCount     = createSelector(
   getQuestionList,
   (questionList) => questionList.length,
 )
-
-const fakeFetch = () => {
-  return _fakeAsync({
-    data: {
-      quizInfo  : fakeQuizInfo,
-      quizData  : fakeQuizData,
-      clientData: {
-        isMobile: false,
-      },
-    },
-  }, 1500)
-}
+export const isSingleQuestion     = createSelector(
+  getQuestionPerPage,
+  (questionPerPage) => (questionPerPage <= 1),
+)
 
 // ACTIONS
 /**
@@ -109,6 +101,17 @@ const init = () => {
 }
 
 const fetchQuiz = () => {
+  const fakeFetch = () => {
+    return _fakeAsync({
+      data: {
+        quizInfo  : fakeQuizInfo,
+        quizData  : fakeQuizData,
+        clientData: {
+          isMobile: false,
+        },
+      },
+    }, 1500)
+  }
   return async (dispatch) => {
     dispatch({ type: types.FETCH_QUIZ })
 
