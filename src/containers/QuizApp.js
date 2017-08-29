@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // DATA
-import { actions as QuizActions } from '../reducers/quiz'
+import { actions as quizActions } from '../reducers/quiz'
 import { QUIZ_STATE } from '../constants/quiz'
 // UI
 import MainWrapper from '../components/MainWrapper'
@@ -29,8 +29,12 @@ class QuizApp extends React.Component {
         return <ResultPage/>
       }
 
-      default: {
+      case QUIZ_STATE.LOADING: {
         return <Loader/>
+      }
+
+      default: {
+        return <Loader retry={{ onClick: this.props.quizRetry }}/>
       }
     }
   }
@@ -52,7 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    quizInit: () => dispatch(QuizActions.init()),
+    quizInit : () => dispatch(quizActions.init()),
+    quizRetry: () => dispatch(quizActions.retryFetch()),
   }
 }
 

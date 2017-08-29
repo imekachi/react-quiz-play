@@ -8,14 +8,13 @@ import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
 const PagePlayComponent = (props) => {
-  // console.log('>> PagePlayComponent props: ', props)
-  const reduxForm = {
-    handleSubmit: props.handleSubmit,
+  const onFormSubmit = (data) => {
+    window.alert(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
   }
 
-  const { pagingData, enableTimer, isSingleQuestion, disableNext, onClickPrev, onClickNext, onClickSubmit, onFormSubmit } = props
+  const { pagingData, enableTimer, isSingleQuestion, disableNext, onClickPrev, onClickNext, onClickSubmit, handleSubmit } = props
   return (
-    <form className="play-state" onSubmit={reduxForm.handleSubmit(onFormSubmit)}>
+    <form className="play-state" onSubmit={handleSubmit(onFormSubmit)}>
       {false && (enableTimer) && (
         <TimerSticky/>
       )}

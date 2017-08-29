@@ -1,9 +1,10 @@
 export const QUIZ_STATE = {
-  LOADING: 'QUIZ_LOADING',
-  LOGIN  : 'QUIZ_LOGIN',
-  INIT   : 'QUIZ_INIT',
-  PLAY   : 'QUIZ_PLAY',
-  END    : 'QUIZ_END',
+  LOADING     : 'QUIZ_LOADING',
+  LOGIN       : 'QUIZ_LOGIN',
+  INIT        : 'QUIZ_INIT',
+  PLAY        : 'QUIZ_PLAY',
+  END         : 'QUIZ_END',
+  FETCH_FAILED: 'QUIZ_FETCH_FAILED',
 }
 
 export const QUIZ_TYPE = {
@@ -24,5 +25,5 @@ export const FORM_NAME = {
 }
 
 export const DELAY = {
-  BEFORE_NEXT_PAGE: 300
+  BEFORE_NEXT_PAGE: 300,
 }

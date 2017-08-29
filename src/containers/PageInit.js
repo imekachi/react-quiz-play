@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 // DATA
-import { actions as QuizActions } from '../reducers/quiz'
+import { actions as quizActions } from '../reducers/quiz'
 import { getIsFBLoading, getIsLogin, getLoggedInType } from '../reducers/auth'
 // UI
 import PageInitComponent from '../components/PageInit'
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    playClickHandler: () => dispatch(QuizActions.start()),
+    playClickHandler: () => dispatch(quizActions.start()),
   }
 }
 

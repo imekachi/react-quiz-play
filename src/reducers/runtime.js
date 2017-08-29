@@ -73,14 +73,6 @@ export const isNextButtonDisabled = createSelector(
   },
 )
 
-// ACTIONS
-const submit = () => {
-  console.log('>> action submit')
-  return (dispatch) => {
-
-  }
-}
-
 const nextPage = () => {
   return (dispatch, getState) => {
     const state       = getState()
@@ -120,6 +112,5 @@ const questionAnswered = () => {
 export const actions = {
   nextPage,
   prevPage,
-  submit,
   questionAnswered,
 }

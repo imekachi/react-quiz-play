@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+
   return {
     onClickPrev : (event) => {
       event.preventDefault()
@@ -30,8 +31,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(runtimeActions.nextPage())
     },
     onFormSubmit: (data) => {
-      window.alert(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
-      dispatch(runtimeActions.submit())
+      dispatch(runtimeActions.submit(data))
     },
   }
 }
