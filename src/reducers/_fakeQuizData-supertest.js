@@ -5,15 +5,10 @@ export const fakeQuizInfo = {
   description    : 'ทุกคนต้องเคยร้องแน่นอน',
   isNotFound     : false,
   isAccessible   : true,
-  isChallengeMode: true,
-  timerData      : {
-    type     : 'each',
-    limitTime: 15,
-  },
 }
 
 export const fakeQuizData = {
-  questionPerPage: 5,
+  questionPerPage: 100,
   questionList   : [
     {
       questionData: {
@@ -173,7 +168,7 @@ export const fakeQuizData = {
 }
 
 export const fakeQuizData2 = {
-  questionPerPage: 100,
+  questionPerPage: 1,
   questionList   : [
     {
       questionData: {
@@ -422,6 +417,20 @@ export const fakeQuizData2 = {
       },
     },
   ],
+}
+
+export const fakeQuizInfo2 = {
+  id             : 58518,
+  quizType       : 'supertest',
+  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
+  description    : 'ทุกคนต้องเคยร้องแน่นอน',
+  isNotFound     : false,
+  isAccessible   : true,
+  isChallengeMode: true,
+  timerData      : {
+    type     : 'each',
+    limitTime: 15,
+  },
 }
 
 export const fakeQuizResult = {}

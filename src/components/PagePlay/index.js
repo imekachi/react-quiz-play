@@ -8,27 +8,27 @@ import QuestionControl from './QuestionControl'
 import TimerSticky from './TimerSticky'
 
 const PagePlayComponent = (props) => {
-  const onFormSubmit = (data) => {
-    window.alert(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
-  }
-
-  const { pagingData, enableTimer, isSingleQuestion, disableNext, onClickPrev, onClickNext, onClickSubmit, handleSubmit } = props
+  const { onClickPrev, onClickNext, onClickSubmit, handleSubmit, onFormSubmit } = props
   return (
     <form className="play-state" onSubmit={handleSubmit(onFormSubmit)}>
-      {false && (enableTimer) && (
+      {false && (props.enableTimer) && (
         <TimerSticky/>
       )}
-      {false && isSingleQuestion && (
+      {false && props.isSingleQuestion && (
         <QuizProgress/>
       )}
 
       <QuestionStream/>
 
-      <QuestionControl pagingData={pagingData} disableNext={disableNext} {...{
-        onClickPrev,
-        onClickNext,
-        onClickSubmit,
-      }}/>
+      <QuestionControl
+        pagingData={props.pagingData}
+        disableNext={props.disableNext}
+        submitting={props.submitting}
+        {...{
+          onClickPrev,
+          onClickNext,
+          onClickSubmit,
+        }}/>
 
       <AutoShareBox id="autoshare-playpage" className="-formremark _txt-right"/>
     </form>

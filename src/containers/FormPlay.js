@@ -6,7 +6,6 @@ import { strPadding } from '../util/format'
 import PagePlayComponent from '../components/PagePlay/index'
 import { FORM_NAME } from '../constants/quiz'
 
-
 export const getFieldName = (questionNumber) => `question-${strPadding(questionNumber, 3, '0')}`
 
 export const getChoiceId = (questionNumber, choiceValue) => `${strPadding(questionNumber, 3, '0')}-${choiceValue}`

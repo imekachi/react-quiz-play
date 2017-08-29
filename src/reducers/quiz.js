@@ -2,13 +2,13 @@ import { createSelector } from 'reselect'
 import { QUIZ_STATE, QUIZ_TYPE } from '../constants/quiz'
 import { actions as authActions } from './auth'
 import { actions as resultActions } from './result'
-// ----------------------- FAKE_DATA -----------------------------
+// ----------------------------------------------- FAKE_DATA
 import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
-// import { fakeQuizData2 as fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
+// import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './_fakeQuizData-supertest'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-funny'
 import _fakeAsync from './_fakeAsync'
-// ----------------------- FAKE_DATA -----------------------------
+// ----------------------------------------------- FAKE_DATA
 
 // Global Quiz States
 export const types = {
@@ -17,6 +17,7 @@ export const types = {
   FETCH_QUIZ_FAILURE: 'QUIZ/FETCH_FAILURE',
   RETRY_FETCH       : 'QUIZ/RETRY_FETCH',
   QUIZ_START        : 'QUIZ/START',
+  QUIZ_SHOW_RESULT  : 'QUIZ/SHOW_RESULT',
 }
 
 export const initialState = {
@@ -73,6 +74,10 @@ export default function quiz(state = initialState, action) {
 
     case types.QUIZ_START: {
       return { ...state, quizState: QUIZ_STATE.PLAY }
+    }
+
+    case types.QUIZ_SHOW_RESULT: {
+      return { ...state, quizState: QUIZ_STATE.END }
     }
 
     default: {
@@ -169,9 +174,10 @@ const retryFetch = () => {
 const initRoute = (quizInfo) => {
   return (dispatch) => {
     // Check if it should go straight into the quiz ( auto-start ) or not
-    switch (quizInfo.quizType) {
-      case QUIZ_TYPE.FUNNY:
-      case QUIZ_TYPE.MAZE: {
+    switch (true) {
+      case quizInfo.quizType === QUIZ_TYPE.FUNNY:
+      case quizInfo.quizType === QUIZ_TYPE.MAZE:
+      case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
         return dispatch(start())
       }
 
@@ -189,17 +195,21 @@ const initRoute = (quizInfo) => {
 const start = () => ({ type: types.QUIZ_START })
 
 
+// this will be called by reduxForm handleSubmit
+// it receive promise
 const submit = (data) => {
   return async (dispatch) => {
     const result = await dispatch(resultActions.fetchResult(data))
+    console.log('>> result: ', result)
 
     if (result.error) {
       // ใหเขากด submit ใหม่
+      alert(result.error)
+      throw result.error
     }
     else {
-
+      dispatch({ type: types.QUIZ_SHOW_RESULT })
     }
-    console.log('>> result: ', result)
   }
 }
 
