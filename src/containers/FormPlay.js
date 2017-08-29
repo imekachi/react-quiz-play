@@ -2,7 +2,6 @@ import { reduxForm } from 'redux-form'
 import Validator from 'validatorjs'
 import { makeArrayOf } from '../util/array'
 import { strPadding } from '../util/format'
-
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
 import { FORM_NAME } from '../constants/quiz'

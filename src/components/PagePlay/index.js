@@ -1,8 +1,6 @@
 import React from 'react'
-
 // Data
 import QuestionStream from '../../containers/QuestionStream'
-
 // UI
 import AutoShareBox from '../AutoShareBox'
 import QuizProgress from './QuizProgress'

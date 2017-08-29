@@ -1,5 +1,4 @@
-import { getNumber } from './number'
-import { capMin } from './number'
+import { capMin, getNumber } from './number'
 
 /**
  * numberFormat

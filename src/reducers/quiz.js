@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect'
 import { QUIZ_STATE, QUIZ_TYPE } from '../constants/quiz'
 import { actions as AuthActions } from './auth'
-
 // fake data
 import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
 // import { fakeQuizData2 as fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'

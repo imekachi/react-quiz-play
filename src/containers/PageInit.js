@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
-
 // DATA
 import { actions as QuizActions } from '../reducers/quiz'
-import { getIsLogin, getIsFBLoading, getLoggedInType } from '../reducers/auth'
-
+import { getIsFBLoading, getIsLogin, getLoggedInType } from '../reducers/auth'
 // UI
 import PageInitComponent from '../components/PageInit'
 

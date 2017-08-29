@@ -1,12 +1,9 @@
 import React from 'react'
-import { withKnobs, text } from '@storybook/addon-knobs'
-
+import { text, withKnobs } from '@storybook/addon-knobs'
 // Data
 import { generateWrapper } from './MockupWrapper'
-
 // Util
 import { makeStoriesOf } from './util'
-
 // UI Components
 import Icon from '../components/Icon'
 import { makeButtonWithStates } from '../components/ButtonWithStates'

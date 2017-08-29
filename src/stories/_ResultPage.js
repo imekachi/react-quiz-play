@@ -1,13 +1,10 @@
 import React from 'react'
-import { withKnobs, select } from '@storybook/addon-knobs'
-
+import { select, withKnobs } from '@storybook/addon-knobs'
 // Data
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
-
 // Util
 import { makeStoriesOf } from './util'
-
 // UI Components
 import ResultPage from '../components/PageResult/index'
 import ResultBox from '../components/PageResult/ResultBox'

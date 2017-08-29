@@ -3,7 +3,6 @@ import { isValueEmpty } from '../../../util/empty'
 import { makeArrayOf } from '../../../util/array'
 import { CHOICE_TYPE } from '../../../constants/quiz'
 import { getChoiceId } from '../../../containers/FormPlay'
-
 // UI
 import ChoiceItem from '../../../containers/ChoiceItem'
 import TypeAnswerBox from './TypeAnswerBox'

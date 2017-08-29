@@ -1,6 +1,5 @@
 import React from 'react'
 import { combineClassNames } from '../../util/string'
-
 // UI
 import Title from './question-box/Title'
 import ChoiceBox from './question-box/ChoiceBox'

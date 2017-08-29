@@ -1,10 +1,8 @@
 import { connect } from 'react-redux'
 import { getFieldName } from './FormPlay'
-
 // DATA
 import { getCurrentQuestionStream } from '../reducers/runtime'
 import { QUIZ_TYPE } from '../constants/quiz'
-
 // UI
 import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
 

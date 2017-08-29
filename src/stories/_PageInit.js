@@ -1,13 +1,10 @@
 import React from 'react'
-
 // Data
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
 import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/auth'
-
 // Util
 import { makeStoriesOf } from './util'
-
 // UI Components
 import InitPage from '../components/PageInit/index'
 

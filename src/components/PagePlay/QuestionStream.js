@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field } from 'redux-form'
-
 // UI
 import QuestionBox from './QuestionBox'
 

@@ -1,5 +1,4 @@
 import React from 'react'
-
 // Components
 import Footer from './Footer'
 

@@ -1,5 +1,4 @@
 import React from 'react'
-
 // UI
 import ImgZoomable from '../ImgZoomable'
 

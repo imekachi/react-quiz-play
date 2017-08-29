@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 // DATA
 import { actions as QuizActions } from '../reducers/quiz'
 import { QUIZ_STATE } from '../constants/quiz'
-
 // UI
 import MainWrapper from '../components/MainWrapper'
 import Loader from '../components/Loader'
