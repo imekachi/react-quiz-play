@@ -1,13 +1,21 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-// import { createLogger } from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
 import reducer from './reducers'
 
-const debug = true
+const debug   = true
+const logging = true
 
-// const middleware        = applyMiddleware(thunk, createLogger())
-const middleware        = applyMiddleware(thunk)
+const middlewareWithLog = applyMiddleware(
+  thunk,
+  createLogger({
+    predicate: (getState, action) => !((/^(@@redux-form)/g).test(action.type)), // log everything expect @@redux-form
+  }),
+)
+const middlewareNoLog   = applyMiddleware(thunk)
+const middleware        = logging ? middlewareWithLog : middlewareNoLog
+
 const composeEnhancers  = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const composeMiddleWare = composeEnhancers(middleware)
 

@@ -1,10 +1,10 @@
 export const fakeQuizInfo = {
-  id             : 58518,
-  quizType       : 'supertest',
-  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
-  description    : 'ทุกคนต้องเคยร้องแน่นอน',
-  isNotFound     : false,
-  isAccessible   : true,
+  id          : 58518,
+  quizType    : 'supertest',
+  quizCover   : 'https://image.dek-d.com/27/0417/8523/124713378',
+  description : 'ทุกคนต้องเคยร้องแน่นอน',
+  isNotFound  : false,
+  isAccessible: true,
 }
 
 export const fakeQuizData = {
@@ -25,14 +25,14 @@ export const fakeQuizData = {
             isCorrect: false,
             titleHtml: 'ฮอลล์',
             titleAttr: 'ฮอลล์',
-            img      : 'https://www0.dek-d.com/assets/quiz/images/default-quiz-cover.png',
+            img      : 'https://31.media.tumblr.com/bf9ce222e04be533787170858b2b7565/tumblr_mykmaqOlhy1rbka0co2_250.gif',
           },
           {
             value    : 2,
             isCorrect: true,
             titleHtml: 'โอเล่',
             titleAttr: 'โอเล่',
-            img      : 'https://lh5.googleusercontent.com/-NhXcZFMcn_I/UsIFGTZI1KI/AAAAAAAAASY/TiwNPATcpVU/s500-no/TaeyeonDookongLarge.gif',
+            img      : 'http://pa1.narvii.com/6394/c525a075254298ca4383940a6b93486422ac91ac_hq.gif',
           },
           {
             value    : 3,

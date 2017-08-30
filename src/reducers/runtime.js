@@ -4,7 +4,7 @@ import { capMax, capMin } from '../util/number'
 import { wait } from '../util/async'
 
 import { DELAY, FORM_NAME } from '../constants/quiz'
-import { getQuestionCount, getQuestionList, getQuestionPerPage, isSingleQuestion } from './quiz'
+import { getIsSingleQuestion, getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
 import { getFieldName } from '../containers/FormPlay'
 
 export const types = {
@@ -66,8 +66,8 @@ export const getCurrentQuestionStream = createSelector(
  * if there are more than one questions in a page, better let user press 'Next'
  * then auto-scroll to the error question for better experience
  */
-export const isNextButtonDisabled = createSelector(
-  isSingleQuestion, getCurrentPage, isPristine(FORM_NAME.QUIZ_PLAY), isSubmitting(FORM_NAME.QUIZ_PLAY), getFormSyncErrors(FORM_NAME.QUIZ_PLAY),
+export const getIsNextButtonDisabled = createSelector(
+  getIsSingleQuestion, getCurrentPage, isPristine(FORM_NAME.QUIZ_PLAY), isSubmitting(FORM_NAME.QUIZ_PLAY), getFormSyncErrors(FORM_NAME.QUIZ_PLAY),
   (isSingleQuestion, currentPage, isPristine, isSubmitting, formSyncErrors = {}) => {
     return isPristine || isSubmitting || !!(isSingleQuestion && Object.keys(formSyncErrors).includes(getFieldName(currentPage)))
   },
@@ -99,7 +99,7 @@ const questionAnswered = () => {
   return (dispatch, getState) => {
     const state = getState()
 
-    if (isSingleQuestion(state)) {
+    if (getIsSingleQuestion(state)) {
       // Todo: conditional delay only when it's multiple answer
       wait(DELAY.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
     }

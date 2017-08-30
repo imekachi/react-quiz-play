@@ -12,10 +12,10 @@ export const types = {
 }
 
 export const initialState = {
-  user         : {},
-  isLoading    : false,
-  loggingInType: new Set([]),
-  error        : null,
+  user          : {},
+  isLoginPending: false,
+  loggingInType : new Set([]),
+  error         : null,
 }
 
 // REDUCERS
@@ -26,27 +26,27 @@ export default function authReducer(state = initialState, action) {
     case types.LOGIN_REQUEST: {
       return {
         ...state,
-        isLoading    : true,
-        loggingInType: immutateSetAdd(state.loggingInType, action.payload),
-        error        : null,
+        isLoginPending: true,
+        loggingInType : immutateSetAdd(state.loggingInType, action.payload),
+        error         : null,
       }
     }
 
     case types.LOGIN_SUCCESS: {
       return {
         ...state,
-        isLoading    : false,
-        user         : { ...state.user, ...action.payload.user },
-        loggingInType: immutateSetDelete(state.loggingInType, action.payload.loggingInType),
+        isLoginPending: false,
+        user          : { ...state.user, ...action.payload.user },
+        loggingInType : immutateSetDelete(state.loggingInType, action.payload.loggingInType),
       }
     }
 
     case types.LOGIN_FAILURE: {
       return {
         ...state,
-        isLoading    : false,
-        loggingInType: immutateSetDelete(state.loggingInType, action.payload.loggingInType),
-        error        : action.payload.error,
+        isLoginPending: false,
+        loggingInType : immutateSetDelete(state.loggingInType, action.payload.loggingInType),
+        error         : action.payload.error,
       }
     }
 
@@ -66,9 +66,9 @@ export default function authReducer(state = initialState, action) {
 }
 
 // SELECTORS
-export const getUser          = (state) => state.auth.user
-export const getIsLoading     = (state) => state.auth.isLoading
-export const getLoggingInType = (state) => state.auth.loggingInType
+export const getUser           = (state) => state.auth.user
+export const getIsLoginPending = (state) => state.auth.isLoginPending
+export const getLoggingInType  = (state) => state.auth.loggingInType
 
 export const getLoggedInType = createSelector(
   getUser,
@@ -79,8 +79,8 @@ export const getIsLogin      = createSelector(
   (loggedInType) => loggedInType.size > 0,
 )
 export const getIsFBLoading  = createSelector(
-  getIsLoading, getLoggingInType,
-  (isLoading, loggingInType) => isLoading && loggingInType.has(AUTH_FACEBOOK),
+  getIsLoginPending, getLoggingInType,
+  (isLoginPending, loggingInType) => isLoginPending && loggingInType.has(AUTH_FACEBOOK),
 )
 
 const fakeLoginFb = () => {
@@ -100,7 +100,6 @@ const loginFB = () => {
 
     try {
       const response = await fakeLoginFb()
-
       dispatch({
         type   : types.LOGIN_SUCCESS,
         payload: {
@@ -122,7 +121,7 @@ const loginFB = () => {
         },
       })
 
-      return error
+      return Promise.reject(error)
     }
   }
 }

@@ -16,6 +16,7 @@ export const types = {
   FETCH_QUIZ_SUCCESS: 'QUIZ/FETCH_SUCCESS',
   FETCH_QUIZ_FAILURE: 'QUIZ/FETCH_FAILURE',
   RETRY_FETCH       : 'QUIZ/RETRY_FETCH',
+  QUIZ_INIT         : 'QUIZ/INIT',
   QUIZ_START        : 'QUIZ/START',
   QUIZ_SHOW_RESULT  : 'QUIZ/SHOW_RESULT',
 }
@@ -46,7 +47,6 @@ export default function quiz(state = initialState, action) {
     case types.FETCH_QUIZ_SUCCESS: {
       return {
         ...state,
-        quizState : QUIZ_STATE.INIT,
         isLoading : false,
         quizInfo  : action.data.quizInfo,
         quizData  : action.data.quizData,
@@ -72,6 +72,10 @@ export default function quiz(state = initialState, action) {
       }
     }
 
+    case types.QUIZ_INIT: {
+      return { ...state, quizState: QUIZ_STATE.INIT }
+    }
+
     case types.QUIZ_START: {
       return { ...state, quizState: QUIZ_STATE.PLAY }
     }
@@ -90,11 +94,11 @@ export default function quiz(state = initialState, action) {
 export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
 export const getQuestionList    = (state) => state.quiz.quizData.questionList
 
-export const getQuestionCount = createSelector(
+export const getQuestionCount    = createSelector(
   getQuestionList,
   (questionList) => questionList.length,
 )
-export const isSingleQuestion = createSelector(
+export const getIsSingleQuestion = createSelector(
   getQuestionPerPage,
   (questionPerPage) => (questionPerPage <= 1),
 )
@@ -111,13 +115,14 @@ const init = () => {
     const quizPromise  = dispatch(fetchQuiz())
     const loginPromise = dispatch(authActions.loginFB())
 
-    const [quizResponse] = await Promise.all([quizPromise, loginPromise])
+    try {
+      const [quizResponse] = await Promise.all([quizPromise, loginPromise])
+      dispatch({ type: types.QUIZ_INIT })
 
-    if (quizResponse.error) {
-      console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
-    }
-    else {
       return dispatch(initRoute(quizResponse.data.quizInfo))
+    }
+    catch (error) {
+      console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
     }
   }
 }
@@ -134,11 +139,12 @@ const fetchQuiz = () => {
       },
     }, 1500)
   }
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch({ type: types.FETCH_QUIZ })
 
     try {
       const response = await fakeFetch()
+      if(getState().quiz.retryCount < 1) throw Error('FETCH FAILED')
       dispatch({
         type: types.FETCH_QUIZ_SUCCESS,
         data: response.data,
@@ -151,9 +157,7 @@ const fetchQuiz = () => {
         error,
       })
 
-      return {
-        error,
-      }
+      return Promise.reject(error)
     }
   }
 }
