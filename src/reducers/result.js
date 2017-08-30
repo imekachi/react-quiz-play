@@ -55,51 +55,49 @@ export default function result(state = initialState, action) {
 // SELECTORS
 
 // ACTIONS
-const fetchResult = (quizFormData) => {
-  const fakeFetch = (data, testData) => {
-    // console.log(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
-    console.log('>> QuizFormData Submitting: ', data)
+const fakeFetch   = (data, testData) => {
+  // console.log(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
+  console.log('>> QuizFormData Submitting: ', data)
 
-    // TODO: remove this, this is a reject test
-    if (testData < 1) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          reject(new Error('test error'))
-        }, 3000)
-      })
-    }
-
-    return _fakeAsync({
-      data: {
-        image      : 'https://image.dek-d.com/27/0417/8523/124713378',
-        header     : 'เยี่ยมไปเลย! คุณตอบถูก 7/7 ข้อ ( 5,465 คะแนน )',
-        description: 'ทุกคนต้องเคยร้องแน่นอน',
-      },
-    }, 3000)
+  // TODO: remove this, this is a reject test
+  if (testData < 1) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(new Error('test error'))
+      }, 3000)
+    })
   }
-  return async (dispatch, getState) => {
-    const state = getState()
 
-    dispatch({ type: types.FETCH_RESULT })
+  return _fakeAsync({
+    data: {
+      image      : 'https://image.dek-d.com/27/0417/8523/124713378',
+      header     : 'เยี่ยมไปเลย! คุณตอบถูก 7/7 ข้อ ( 5,465 คะแนน )',
+      description: 'ทุกคนต้องเคยร้องแน่นอน',
+    },
+  }, 3000)
+}
+const fetchResult = (quizFormData) => async (dispatch, getState) => {
+  const state = getState()
 
-    try {
-      const response = await fakeFetch(quizFormData, state.result.retryCount)
-      dispatch({
-        type: types.FETCH_RESULT_SUCCESS,
-        data: response.data,
-      })
+  dispatch({ type: types.FETCH_RESULT })
 
-      return response
-    }
-    catch (error) {
-      dispatch({
-        type: types.FETCH_RESULT_FAILURE,
-        error,
-      })
+  try {
+    const response = await fakeFetch(quizFormData, state.result.retryCount)
+    dispatch({
+      type: types.FETCH_RESULT_SUCCESS,
+      data: response.data,
+    })
 
-      return {
-        error,
-      }
+    return response
+  }
+  catch (error) {
+    dispatch({
+      type: types.FETCH_RESULT_FAILURE,
+      error,
+    })
+
+    return {
+      error,
     }
   }
 }

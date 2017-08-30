@@ -94,50 +94,46 @@ const fakeLoginFb = () => {
 }
 
 // ACTIONS
-const loginFB = () => {
-  return async (dispatch) => {
-    dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
+const loginFB = () => async (dispatch) => {
+  dispatch({ type: types.LOGIN_REQUEST, payload: AUTH_FACEBOOK })
 
-    try {
-      const response = await fakeLoginFb()
-      dispatch({
-        type   : types.LOGIN_SUCCESS,
-        payload: {
-          loggingInType: AUTH_FACEBOOK,
-          user         : {
-            [AUTH_FACEBOOK]: response.data,
-          },
-        },
-      })
-
-      return response.data
-
-    } catch (error) {
-      dispatch({
-        type   : types.LOGIN_FAILURE,
-        payload: {
-          loggingInType: AUTH_FACEBOOK,
-          error,
-        },
-      })
-
-      return Promise.reject(error)
-    }
-  }
-}
-
-const loginDekD = (user) => {
-  return (dispatch) => {
+  try {
+    const response = await fakeLoginFb()
     dispatch({
       type   : types.LOGIN_SUCCESS,
       payload: {
-        loggingInType: AUTH_DEKD,
+        loggingInType: AUTH_FACEBOOK,
         user         : {
-          [AUTH_DEKD]: user,
+          [AUTH_FACEBOOK]: response.data,
         },
       },
     })
+
+    return response.data
+
+  } catch (error) {
+    dispatch({
+      type   : types.LOGIN_FAILURE,
+      payload: {
+        loggingInType: AUTH_FACEBOOK,
+        error,
+      },
+    })
+
+    return Promise.reject(error)
   }
+}
+
+const loginDekD = (user) => (dispatch) => {
+  dispatch({
+    type   : types.LOGIN_SUCCESS,
+    payload: {
+      loggingInType: AUTH_DEKD,
+      user         : {
+        [AUTH_DEKD]: user,
+      },
+    },
+  })
 }
 
 const logout = (logoutType) => ({

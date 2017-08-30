@@ -109,64 +109,57 @@ export const getIsSingleQuestion = createSelector(
  *
  * @return {function(dispatch)}
  */
-const init = () => {
-  return async (dispatch) => {
-    // concurrent requests
-    const quizPromise  = dispatch(fetchQuiz())
-    const loginPromise = dispatch(authActions.loginFB())
+const init = () => async (dispatch) => {
+  // concurrent requests
+  const quizPromise  = dispatch(fetchQuiz())
+  const loginPromise = dispatch(authActions.loginFB())
 
-    try {
-      const [quizResponse] = await Promise.all([quizPromise, loginPromise])
-      dispatch({ type: types.QUIZ_INIT })
+  try {
+    const [quizResponse] = await Promise.all([quizPromise, loginPromise])
+    dispatch({ type: types.QUIZ_INIT })
 
-      return dispatch(initRoute(quizResponse.data.quizInfo))
-    }
-    catch (error) {
-      console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
-    }
+    return dispatch(initRoute(quizResponse.data.quizInfo))
+  }
+  catch (error) {
+    console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
   }
 }
 
-const fetchQuiz = () => {
-  const fakeFetch = () => {
-    return _fakeAsync({
-      data: {
-        quizInfo  : fakeQuizInfo,
-        quizData  : fakeQuizData,
-        clientData: {
-          isMobile: false,
-        },
+const fakeFetch = () => {
+  return _fakeAsync({
+    data: {
+      quizInfo  : fakeQuizInfo,
+      quizData  : fakeQuizData,
+      clientData: {
+        isMobile: false,
       },
-    }, 1500)
-  }
-  return async (dispatch, getState) => {
-    dispatch({ type: types.FETCH_QUIZ })
+    },
+  }, 1500)
+}
+const fetchQuiz = () => async (dispatch) => {
+  dispatch({ type: types.FETCH_QUIZ })
 
-    try {
-      const response = await fakeFetch()
-      if(getState().quiz.retryCount < 1) throw Error('FETCH FAILED')
-      dispatch({
-        type: types.FETCH_QUIZ_SUCCESS,
-        data: response.data,
-      })
+  try {
+    const response = await fakeFetch()
+    dispatch({
+      type: types.FETCH_QUIZ_SUCCESS,
+      data: response.data,
+    })
 
-      return response
-    } catch (error) {
-      dispatch({
-        type: types.FETCH_QUIZ_FAILURE,
-        error,
-      })
+    return response
+  } catch (error) {
+    dispatch({
+      type: types.FETCH_QUIZ_FAILURE,
+      error,
+    })
 
-      return Promise.reject(error)
-    }
+    return Promise.reject(error)
   }
 }
 
-const retryFetch = () => {
-  return (dispatch) => {
-    dispatch({ type: types.RETRY_FETCH })
-    dispatch(init())
-  }
+const retryFetch = () => (dispatch) => {
+  dispatch({ type: types.RETRY_FETCH })
+  dispatch(init())
 }
 
 /**
@@ -175,19 +168,17 @@ const retryFetch = () => {
  *
  * @return {function(dispatch)}
  */
-const initRoute = (quizInfo) => {
-  return (dispatch) => {
-    // Check if it should go straight into the quiz ( auto-start ) or not
-    switch (true) {
-      case quizInfo.quizType === QUIZ_TYPE.FUNNY:
-      case quizInfo.quizType === QUIZ_TYPE.MAZE:
-      case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
-        return dispatch(start())
-      }
-
-      default:
-        return
+const initRoute = (quizInfo) => (dispatch) => {
+  // Check if it should go straight into the quiz ( auto-start ) or not
+  switch (true) {
+    case quizInfo.quizType === QUIZ_TYPE.FUNNY:
+    case quizInfo.quizType === QUIZ_TYPE.MAZE:
+    case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
+      return dispatch(start())
     }
+
+    default:
+      return
   }
 }
 
@@ -201,19 +192,17 @@ const start = () => ({ type: types.QUIZ_START })
 
 // this will be called by reduxForm handleSubmit
 // it receive promise
-const submit = (data) => {
-  return async (dispatch) => {
-    const result = await dispatch(resultActions.fetchResult(data))
-    console.log('>> result: ', result)
+const submit = (data) => async (dispatch) => {
+  const result = await dispatch(resultActions.fetchResult(data))
+  console.log('>> result: ', result)
 
-    if (result.error) {
-      // ใหเขากด submit ใหม่
-      alert(result.error)
-      throw result.error
-    }
-    else {
-      dispatch({ type: types.QUIZ_SHOW_RESULT })
-    }
+  if (result.error) {
+    // ใหเขากด submit ใหม่
+    alert(result.error)
+    throw result.error
+  }
+  else {
+    dispatch({ type: types.QUIZ_SHOW_RESULT })
   }
 }
 

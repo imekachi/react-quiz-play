@@ -73,39 +73,34 @@ export const getIsNextButtonDisabled = createSelector(
   },
 )
 
-const nextPage = () => {
-  return (dispatch, getState) => {
-    const state       = getState()
-    const allPage     = getAllPage(state)
-    const currentPage = getCurrentPage(state)
-    dispatch({
-      type   : types.PAGE_CHANGE,
-      payload: capMax(currentPage + 1, allPage),
-    })
-  }
+// ACTION
+const nextPage = () => (dispatch, getState) => {
+  const state       = getState()
+  const allPage     = getAllPage(state)
+  const currentPage = getCurrentPage(state)
+  dispatch({
+    type   : types.PAGE_CHANGE,
+    payload: capMax(currentPage + 1, allPage),
+  })
 }
 
-const prevPage = () => {
-  return (dispatch, getState) => {
-    const { currentPage } = getState()
-    dispatch({
-      type   : types.PAGE_CHANGE,
-      payload: capMin(currentPage - 1, 1),
-    })
-  }
+const prevPage = () => (dispatch, getState) => {
+  const { currentPage } = getState()
+  dispatch({
+    type   : types.PAGE_CHANGE,
+    payload: capMin(currentPage - 1, 1),
+  })
 }
 
-const questionAnswered = () => {
-  return (dispatch, getState) => {
-    const state = getState()
+const questionAnswered = () => (dispatch, getState) => {
+  const state = getState()
 
-    if (getIsSingleQuestion(state)) {
-      // Todo: conditional delay only when it's multiple answer
-      wait(DELAY.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
-    }
-    else {
-      // scroll
-    }
+  if (getIsSingleQuestion(state)) {
+    // Todo: conditional delay only when it's multiple answer
+    wait(DELAY.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
+  }
+  else {
+    // scroll
   }
 }
 
