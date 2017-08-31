@@ -12,7 +12,8 @@ const defaultConfig = {
 
   injectDekDButtonClass: true,
 
-  stateConfig: {
+  defaultState: 'ready',
+  stateConfig : {
     // Predefined states
     ready  : {
       icon       : null,
@@ -43,7 +44,7 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
       }
     }
 
-    return props.stateConfig.ready
+    return props.stateConfig[props.defaultState]
   }
 
   function injectBtnProps(props, currentStateConfig) {
@@ -102,8 +103,8 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
   }
 
   return (props) => {
-    props = { ...defaultConfig, ...config, ...props }
-    props.stateConfig = {...defaultConfig.stateConfig, ...config.stateConfig, ...props.stateConfig}
+    props             = { ...defaultConfig, ...config, ...props }
+    props.stateConfig = { ...defaultConfig.stateConfig, ...config.stateConfig, ...props.stateConfig }
 
     const currentStateConfig = getCurrentStateFromProp(props, props.stateConfig)
     const isHtmlMode         = !isValueEmpty(currentStateConfig.html)
