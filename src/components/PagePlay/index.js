@@ -14,7 +14,7 @@ const PagePlayComponent = (props) => {
         <TimerSticky/>
       )}
       {props.isSingleQuestion && (
-        <QuizProgress/>
+        <QuizProgress noSpaceBottom/>
       )}
 
       <QuestionStream/>

@@ -3,8 +3,8 @@ import { QUIZ_STATES, QUIZ_TYPES } from '../constants/quiz'
 import { actions as authActions } from './auth'
 import { actions as resultActions } from './result'
 // ----------------------------------------------- FAKE_DATA
-import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
-// import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './_fakeQuizData-supertest'
+// import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
+import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './_fakeQuizData-supertest'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-funny'
 import _fakeAsync from './_fakeAsync'
@@ -142,7 +142,7 @@ const fakeFetch = () => {
         isMobile: false,
       },
     },
-  }, 500)
+  }, 1000)
 }
 const fetchQuiz = () => async (dispatch) => {
   dispatch({ type: types.FETCH_QUIZ })
@@ -188,7 +188,7 @@ const init = () => async (dispatch) => {
     return dispatch(initRoute())
   }
   catch (error) {
-    console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
+    console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`, error)
   }
 }
 

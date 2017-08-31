@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 // UI
 import QuestionBox from './QuestionBox'
 
-const QuestionStreamComponent = ({ stream, isMobile, hideQuestionNumber, getFieldName }) => {
+const QuestionStreamComponent = ({ stream, isSingleQuestion, isMobile, hideQuestionNumber, getFieldName }) => {
 
   const listOfQuestions = stream.map((questionObj, index) => {
 
@@ -14,6 +14,7 @@ const QuestionStreamComponent = ({ stream, isMobile, hideQuestionNumber, getFiel
                     ...questionObj,
                     isMobile,
                     hideQuestionNumber,
+                    isSingleQuestion,
                   }}/>
   })
 

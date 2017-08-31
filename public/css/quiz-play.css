@@ -5800,24 +5800,6 @@ img._img-stretch-height {
   transition: width 200ms;
 }
 
-.quiz-body.-singlequestion .progress-bar {
-  border-radius: 3px 3px 0 0;
-}
-
-.quiz-body .question-box {
-  position: relative;
-  text-align: left;
-  margin: 30px auto;
-  border: 1px solid #E5E5E5;
-  border-radius: 3px;
-}
-
-.quiz-body.-singlequestion .question-box {
-  margin: 0 auto;
-  border-top: 0 none;
-  border-radius: 0 0 3px 3px;
-}
-
 .question-box > .question-title {
   padding: 20px 10px;
   border-bottom: 1px solid #E5E5E5;
