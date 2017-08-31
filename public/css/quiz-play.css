@@ -5465,11 +5465,6 @@ img._img-stretch-height {
   border-bottom-color: transparent;
 }
 
-.quiz-container > .quiz-body {
-  padding: 0 3.125%;
-  text-align: center;
-}
-
 .quiz-body .score-box {
   text-align: center;
   margin: 20px auto -10px;
@@ -5496,9 +5491,6 @@ img._img-stretch-height {
   .quiz-container > .header {
     font-size: 24px;
     padding: 20px 40px;
-  }
-  .quiz-container > .quiz-body {
-    padding: 0 40px;
   }
 }
 

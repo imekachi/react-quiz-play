@@ -2,10 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Footer from './Footer'
+import { unitPercentage } from '../util/unit'
+
+const variables = {
+  mainPadding: 10,
+  breakPoint : {
+    xs: 320,
+  },
+}
 
 const QuizBody = styled.div`
+  text-align: center;
+  padding: 0 ${unitPercentage(variables.mainPadding / variables.breakPoint.xs)};
+  
   @media (min-width: 640px) {
-    ${props => props.fullWidth && 'padding: 0 !important;'}
+    padding: ${props => props.fullWidth ? '0' : '0 40px'};
   }
 `
 
