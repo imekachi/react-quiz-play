@@ -24,10 +24,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onCommitAnswer: (event) => {
+    onCommitAnswer: async (event) => {
       event.preventDefault()
-      dispatch(change(FORM_NAMES.QUIZ_PLAY, ownProps.input.name, ownProps.value))
-      dispatch(runtimeActions.questionAnswered())
+      await dispatch(change(FORM_NAMES.QUIZ_PLAY, ownProps.input.name, ownProps.value))
+      await dispatch(runtimeActions.questionAnswered(ownProps, event))
     },
   }
 }

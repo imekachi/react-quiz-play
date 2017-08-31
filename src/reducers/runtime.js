@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { getFormSyncErrors, isPristine, isSubmitting } from 'redux-form'
+import { getFormSyncErrors, isPristine, isSubmitting, isValid, submit as reduxFormSubmit } from 'redux-form'
 import { capMax, capMin } from '../util/number'
 import { wait } from '../util/async'
 
@@ -59,7 +59,7 @@ export const getCurrentQuestionStream = createSelector(
 
 /**
  * Disable next button when-
- * - the form is untouched
+ * - there is no change to data in the forms
  * - the form is submitting
  * - if it's singleQuestion and there is any error in that question
  *
@@ -93,15 +93,26 @@ const prevPage = () => (dispatch, getState) => {
   })
 }
 
-const questionAnswered = () => (dispatch, getState) => {
-  const state = getState()
+const questionAnswered = (props) => (dispatch, getState) => {
+  const { questionNumber, isMultipleChoice } = props
 
+  const state            = getState()
+  const allQuestionCount = getQuestionCount(state)
+  const isFormValid      = isValid(FORM_NAMES.QUIZ_PLAY)(state)
+
+  const actionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
+
+  // AUTO SUBMIT ON LAST QUESTION
+  if (isFormValid && questionNumber >= allQuestionCount) {
+    return wait(actionDelay).then(() => dispatch(reduxFormSubmit(FORM_NAMES.QUIZ_PLAY)))
+  }
+
+  // AUTO NEXT QUESTION
   if (getIsSingleQuestion(state)) {
-    // Todo: conditional delay only when it's multiple answer
-    wait(DELAYS.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
+    wait(actionDelay).then(() => dispatch(nextPage()))
   }
   else {
-    // scroll
+    // TODO: make it auto scroll
   }
 }
 

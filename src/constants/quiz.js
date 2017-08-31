@@ -25,5 +25,5 @@ export const FORM_NAMES = {
 }
 
 export const DELAYS = {
-  BEFORE_NEXT_PAGE: 300,
+  BEFORE_NEXT_PAGE: 250,
 }
