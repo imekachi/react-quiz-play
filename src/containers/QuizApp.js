@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // DATA
-import { actions as quizActions } from '../reducers/quiz'
+import { actions as quizActions, getIsResultPage } from '../reducers/quiz'
 import { QUIZ_STATE } from '../constants/quiz'
 // UI
 import MainWrapper from '../components/MainWrapper'
@@ -41,7 +41,7 @@ class QuizApp extends React.Component {
 
   render() {
     return (
-      <MainWrapper>
+      <MainWrapper fullWidth={this.props.isResultPage}>
         {this.getComponentToRender()}
       </MainWrapper>
     )
@@ -50,7 +50,8 @@ class QuizApp extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    quizState: state.quiz.quizState,
+    quizState   : state.quiz.quizState,
+    isResultPage: getIsResultPage(state),
   }
 }
 
