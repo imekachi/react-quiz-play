@@ -1,9 +1,9 @@
 import React from 'react'
 import ImageBg from '../ImageBg'
 
-const ResultImage = (props) => (
+const ResultImage = ({ src }) => (
   <div className="result-img">
-    <ImageBg src={props.src}/>
+    <ImageBg src={src}/>
   </div>
 )
 

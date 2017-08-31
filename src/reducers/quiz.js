@@ -48,9 +48,9 @@ export default function quiz(state = initialState, action) {
       return {
         ...state,
         isLoading : false,
-        quizInfo  : action.data.quizInfo,
-        quizData  : action.data.quizData,
-        clientData: action.data.clientData,
+        quizInfo  : action.payload.quizInfo,
+        quizData  : action.payload.quizData,
+        clientData: action.payload.clientData,
         retryCount: 0,
         error     : null,
       }
@@ -61,7 +61,7 @@ export default function quiz(state = initialState, action) {
         ...state,
         quizState: QUIZ_STATE.FETCH_FAILED,
         isLoading: false,
-        error    : action.error,
+        error    : action.payload,
       }
     }
 
@@ -93,6 +93,7 @@ export default function quiz(state = initialState, action) {
 // SELECTORS
 export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
 export const getQuestionList    = (state) => state.quiz.quizData.questionList
+export const getQuizState       = (state) => state.quiz.quizState
 
 export const getQuestionCount    = createSelector(
   getQuestionList,
@@ -102,26 +103,33 @@ export const getIsSingleQuestion = createSelector(
   getQuestionPerPage,
   (questionPerPage) => (questionPerPage <= 1),
 )
+export const getIsResultPage     = createSelector(
+  getQuizState,
+  (quizState) => (quizState === QUIZ_STATE.END),
+)
 
 // ACTIONS
+const start = () => ({ type: types.QUIZ_START })
+
 /**
- * Fetch Quiz, AutoLogin, then route
+ * Routing after quiz initialized
  *
  * @return {function(dispatch)}
  */
-const init = () => async (dispatch) => {
-  // concurrent requests
-  const quizPromise  = dispatch(fetchQuiz())
-  const loginPromise = dispatch(authActions.loginFB())
+const initRoute = () => (dispatch, getState) => {
+  const state    = getState()
+  const quizInfo = state.quiz.quizInfo
 
-  try {
-    const [quizResponse] = await Promise.all([quizPromise, loginPromise])
-    dispatch({ type: types.QUIZ_INIT })
+  // Check if it should go straight into the quiz ( auto-start ) or not
+  switch (true) {
+    case quizInfo.quizType === QUIZ_TYPE.FUNNY:
+    case quizInfo.quizType === QUIZ_TYPE.MAZE:
+    case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
+      return dispatch(start())
+    }
 
-    return dispatch(initRoute(quizResponse.data.quizInfo))
-  }
-  catch (error) {
-    console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
+    default:
+      return
   }
 }
 
@@ -142,15 +150,16 @@ const fetchQuiz = () => async (dispatch) => {
   try {
     const response = await fakeFetch()
     dispatch({
-      type: types.FETCH_QUIZ_SUCCESS,
-      data: response.data,
+      type   : types.FETCH_QUIZ_SUCCESS,
+      payload: response.data,
     })
 
     return response
-  } catch (error) {
+  }
+  catch (error) {
     dispatch({
-      type: types.FETCH_QUIZ_FAILURE,
-      error,
+      type   : types.FETCH_QUIZ_FAILURE,
+      payload: error,
     })
 
     return Promise.reject(error)
@@ -163,46 +172,38 @@ const retryFetch = () => (dispatch) => {
 }
 
 /**
- * Routing after quiz initialized
- * @param   {Object} quizInfo
+ * Fetch Quiz, AutoLogin, then route
  *
  * @return {function(dispatch)}
  */
-const initRoute = (quizInfo) => (dispatch) => {
-  // Check if it should go straight into the quiz ( auto-start ) or not
-  switch (true) {
-    case quizInfo.quizType === QUIZ_TYPE.FUNNY:
-    case quizInfo.quizType === QUIZ_TYPE.MAZE:
-    case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
-      return dispatch(start())
-    }
+const init = () => async (dispatch) => {
+  // concurrent requests
+  const quizPromise  = dispatch(fetchQuiz())
+  const loginPromise = dispatch(authActions.loginFB())
 
-    default:
-      return
+  try {
+    await Promise.all([quizPromise, loginPromise])
+    dispatch({ type: types.QUIZ_INIT })
+
+    return dispatch(initRoute())
+  }
+  catch (error) {
+    console.error(`QuizApp: "${types.FETCH_QUIZ}" failed, please try again`)
   }
 }
-
-/**
- * Start Quiz, entering runtime
- *
- * @return {function(dispatch)}
- */
-const start = () => ({ type: types.QUIZ_START })
-
 
 // this will be called by reduxForm handleSubmit
 // it receive promise
 const submit = (data) => async (dispatch) => {
-  const result = await dispatch(resultActions.fetchResult(data))
-  console.log('>> result: ', result)
-
-  if (result.error) {
-    // ใหเขากด submit ใหม่
-    alert(result.error)
-    throw result.error
+  try {
+    const response = await dispatch(resultActions.fetchResult(data))
+    console.log('>> result: ', response)
+    return dispatch({ type: types.QUIZ_SHOW_RESULT })
   }
-  else {
-    dispatch({ type: types.QUIZ_SHOW_RESULT })
+  catch (error) {
+    // ใหเขากด submit ใหม่
+    alert(error)
+    return Promise.reject(error)
   }
 }
 
@@ -212,4 +213,3 @@ export const actions = {
   start,
   submit,
 }
-

@@ -1,4 +1,5 @@
 import React from 'react'
+import { QUIZ_TYPE } from '../../constants/quiz'
 
 import Icon from '../Icon'
 import { makeButtonWithStates } from '../ButtonWithStates'
@@ -10,7 +11,7 @@ const ButtonShowAnswer = makeButtonWithStates({
   stateConfig: {
     ready: {
       title: 'ดูเฉลยคำตอบ',
-      html: (
+      html : (
         <span>
           <Icon className="fa-check-square-o"/> ดูเฉลย<span className="_hidden-sm-down">คำตอบ</span>
         </span>
@@ -20,13 +21,14 @@ const ButtonShowAnswer = makeButtonWithStates({
 })
 
 const ActionBox = (props) => {
+  const { quizType } = props
   return (
     <div className="result-control">
       <a className="controlbutton -replay js-btn-replay" title="เล่นใหม่อีกครั้ง">
         <Icon className="fa-undo"/> เล่นใหม่<span className="_hidden-sm-down">อีกครั้ง</span>
       </a>
 
-      {props.quizType === 'supertest' && (
+      {quizType === QUIZ_TYPE.SUPERTEST && (
         <ButtonShowAnswer className="controlbutton -getanswer"/>
       )}
 

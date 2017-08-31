@@ -1,14 +1,21 @@
 import React from 'react'
-// Components
+import styled from 'styled-components'
+
 import Footer from './Footer'
 
-const MainWrapper = ({ children }) => (
+const QuizBody = styled.div`
+  @media (min-width: 640px) {
+    ${props => props.fullWidth && 'padding: 0 !important;'}
+  }
+`
+
+const MainWrapper = ({ fullWidth, children }) => (
   <div className="quiz-wrapper">
     <div className='quiz-container'>
-      <div className="quiz-body">
+      <QuizBody className="quiz-body" fullWidth={fullWidth}>
         {children}
-      </div>
-      <Footer/>
+      </QuizBody>
+      <Footer fullWidth={fullWidth}/>
     </div>
   </div>
 )

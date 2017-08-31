@@ -10,10 +10,11 @@ export const types = {
 }
 
 export const initialState = {
-  isLoading : false,
-  data      : {},
-  retryCount: 0,
-  error     : null,
+  isLoading     : false,
+  data          : {},
+  isResultShared: false,
+  retryCount    : 0,
+  error         : null,
 }
 
 // REDUCERS
@@ -30,13 +31,13 @@ export default function result(state = initialState, action) {
         ...state,
         isLoading : false,
         error     : null,
-        data      : action.data,
+        data      : action.payload,
         retryCount: 0,
       }
     }
 
     case types.FETCH_RESULT_FAILURE: {
-      return { ...state, isLoading: false, data: {}, error: action.error }
+      return { ...state, isLoading: false, data: {}, error: action.payload }
     }
 
     case types.RETRY_FETCH: {
@@ -55,50 +56,47 @@ export default function result(state = initialState, action) {
 // SELECTORS
 
 // ACTIONS
-const fakeFetch   = (data, testData) => {
+const fakeFetch   = (data) => {
   // console.log(`You submitted:\n\n${JSON.stringify(data, null, 2)}`)
   console.log('>> QuizFormData Submitting: ', data)
-
-  // TODO: remove this, this is a reject test
-  if (testData < 1) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error('test error'))
-      }, 3000)
-    })
-  }
-
   return _fakeAsync({
     data: {
       image      : 'https://image.dek-d.com/27/0417/8523/124713378',
       header     : 'เยี่ยมไปเลย! คุณตอบถูก 7/7 ข้อ ( 5,465 คะแนน )',
-      description: 'ทุกคนต้องเคยร้องแน่นอน',
+      description: {
+        isCentered: true,
+        textHtml  : 'ทุกคนต้องเคยร้องแน่นอน',
+      },
     },
   }, 3000)
 }
 const fetchResult = (quizFormData) => async (dispatch, getState) => {
-  const state = getState()
+  if (getState().result.error) {
+    dispatch({ type: types.RETRY_FETCH })
+  }
+  // code below has to call getState() to get newly updated state
+  // if you store state like; const state = getState()
+  // you will get the same un-updated state and it may causing unexpected bug
 
   dispatch({ type: types.FETCH_RESULT })
 
   try {
-    const response = await fakeFetch(quizFormData, state.result.retryCount)
+    const response = await fakeFetch(quizFormData)
+    // if (getState().result.retryCount < 1) throw new Error('RESULT_FAILED')
     dispatch({
-      type: types.FETCH_RESULT_SUCCESS,
-      data: response.data,
+      type   : types.FETCH_RESULT_SUCCESS,
+      payload: response.data,
     })
 
     return response
   }
   catch (error) {
     dispatch({
-      type: types.FETCH_RESULT_FAILURE,
-      error,
+      type   : types.FETCH_RESULT_FAILURE,
+      payload: error,
     })
 
-    return {
-      error,
-    }
+    return Promise.reject(error)
   }
 }
 

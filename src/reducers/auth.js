@@ -111,7 +111,8 @@ const loginFB = () => async (dispatch) => {
 
     return response.data
 
-  } catch (error) {
+  }
+  catch (error) {
     dispatch({
       type   : types.LOGIN_FAILURE,
       payload: {

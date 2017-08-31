@@ -7983,16 +7983,6 @@ body {
   border-top: 1px solid #E5E5E5;
 }
 
-@media (min-width: 640px) {
-  .quiz-container.-ended > .quiz-body {
-    padding: 0;
-  }
-  .quiz-container.-ended > .footer {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
 @media (min-width: 768px) {
   .quiz-content-box {
     border-width: 1px 1px 0;
