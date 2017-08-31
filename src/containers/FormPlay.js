@@ -4,7 +4,7 @@ import { makeArrayOf } from '../util/array'
 import { strPadding } from '../util/format'
 // UI
 import PagePlayComponent from '../components/PagePlay/index'
-import { FORM_NAME } from '../constants/quiz'
+import { FORM_NAMES } from '../constants/quiz'
 
 export const getFieldName = (questionNumber) => `question-${strPadding(questionNumber, 3, '0')}`
 
@@ -33,7 +33,7 @@ const validate = (formData, ownProps) => {
 }
 
 const FormPlay = reduxForm({
-  form: FORM_NAME.QUIZ_PLAY,
+  form: FORM_NAMES.QUIZ_PLAY,
   validate,
 })(PagePlayComponent)
 

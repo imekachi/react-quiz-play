@@ -3,7 +3,7 @@ import { getFormSyncErrors, isPristine, isSubmitting } from 'redux-form'
 import { capMax, capMin } from '../util/number'
 import { wait } from '../util/async'
 
-import { DELAY, FORM_NAME } from '../constants/quiz'
+import { DELAYS, FORM_NAMES } from '../constants/quiz'
 import { getIsSingleQuestion, getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
 import { getFieldName } from '../containers/FormPlay'
 
@@ -67,9 +67,10 @@ export const getCurrentQuestionStream = createSelector(
  * then auto-scroll to the error question for better experience
  */
 export const getIsNextButtonDisabled = createSelector(
-  getIsSingleQuestion, getCurrentPage, isPristine(FORM_NAME.QUIZ_PLAY), isSubmitting(FORM_NAME.QUIZ_PLAY), getFormSyncErrors(FORM_NAME.QUIZ_PLAY),
+  getIsSingleQuestion, getCurrentPage, isPristine(FORM_NAMES.QUIZ_PLAY), isSubmitting(FORM_NAMES.QUIZ_PLAY), getFormSyncErrors(FORM_NAMES.QUIZ_PLAY),
   (isSingleQuestion, currentPage, isPristine, isSubmitting, formSyncErrors = {}) => {
-    return isPristine || isSubmitting || !!(isSingleQuestion && Object.keys(formSyncErrors).includes(getFieldName(currentPage)))
+    // return isPristine || isSubmitting || !!(isSingleQuestion && Object.keys(formSyncErrors).includes(getFieldName(currentPage)))
+    return isSubmitting || !!(isSingleQuestion && Object.keys(formSyncErrors).includes(getFieldName(currentPage)))
   },
 )
 
@@ -97,7 +98,7 @@ const questionAnswered = () => (dispatch, getState) => {
 
   if (getIsSingleQuestion(state)) {
     // Todo: conditional delay only when it's multiple answer
-    wait(DELAY.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
+    wait(DELAYS.BEFORE_NEXT_PAGE).then(() => dispatch(nextPage()))
   }
   else {
     // scroll

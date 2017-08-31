@@ -9,16 +9,20 @@ import { makeStoriesOf } from './util'
 import ResultPage from '../components/PageResult/index'
 import ResultBox from '../components/PageResult/ResultBox'
 import ShareBox from '../components/PageResult/ShareBox'
+import { FACEBOOK_SHARE_STATUS } from '../constants/social'
 
 const resultData = {
   labelHeader    : '',
   image          : 'https://image.dek-d.com/27/0417/8523/124713378',
   header         : 'เยี่ยมไปเลย! คุณตอบถูก 7/7 ข้อ ( 5,465 คะแนน )',
-  description    : 'ทุกคนต้องเคยร้องแน่นอน',
+  description    : {
+    isCentered: true,
+    textHtml  : 'ทุกคนต้องเคยร้องแน่นอน',
+  },
   descriptionLink: null,
 }
 
-const fbAllStatus = ['ready', 'loading', 'success', 'permissionDenied']
+const fbAllStatus = Object.values(FACEBOOK_SHARE_STATUS)
 
 /**
  * RESULT BOX
@@ -33,11 +37,10 @@ makeStoriesOf('Result Page/Result Box')
   .addDecorator(generateWrapper({ appState: 'end' }))
   .add('no link', () => {
     const customProps = {
-      quizType             : 'funnyquiz',
-      isChallengeMode      : false,
-      isMobile             : false,
-      isDescriptionCentered: true,
-      isResultShared       : false,
+      quizType       : 'funnyquiz',
+      isChallengeMode: false,
+      isMobile       : false,
+      isResultShared : false,
     }
     return (
       <ResultBox {...getMockupData(customProps, resultData)}/>
@@ -45,12 +48,11 @@ makeStoriesOf('Result Page/Result Box')
   })
   .add('with link', () => {
     const customProps = {
-      quizType             : 'funnyquiz',
-      isChallengeMode      : false,
-      isMobile             : false,
-      isDescriptionCentered: true,
-      isResultShared       : false,
-      descriptionLink      : {
+      quizType       : 'funnyquiz',
+      isChallengeMode: false,
+      isMobile       : false,
+      isResultShared : false,
+      descriptionLink: {
         url     : '#',
         textHtml: 'link อิอิ',
         textAttr: 'link อิอิ',
@@ -62,12 +64,14 @@ makeStoriesOf('Result Page/Result Box')
   })
   .add('long description', () => {
     const customProps = {
-      quizType             : 'funnyquiz',
-      isChallengeMode      : false,
-      isMobile             : false,
-      isDescriptionCentered: false,
-      isResultShared       : false,
-      description          : 'สารขัณฑ์ลอจิสติกส์เฝอ ลีเมอร์แคมเปญ มอคคาโบ้ยเจได ซีเนียร์บูติกดยุกคอมเมนต์ป๊อป ดั๊มพ์ แอดมิสชันพฤหัสโปรเจกเตอร์ นอมินีเจไดแฟรี ซากุระเมเปิลครัวซอง อุปัทวเหตุ บอมบ์อาข่า บิ๊กแครกเกอร์อาว์ เมจิคเดชานุภาพยังไงอาร์พีจีพุทโธ แอปพริคอท สเตชั่นฮิบร',
+      quizType       : 'funnyquiz',
+      isChallengeMode: false,
+      isMobile       : false,
+      isResultShared : false,
+      description    : {
+        isCentered: false,
+        textHtml  : 'สารขัณฑ์ลอจิสติกส์เฝอ ลีเมอร์แคมเปญ มอคคาโบ้ยเจได ซีเนียร์บูติกดยุกคอมเมนต์ป๊อป ดั๊มพ์ แอดมิสชันพฤหัสโปรเจกเตอร์ นอมินีเจไดแฟรี ซากุระเมเปิลครัวซอง อุปัทวเหตุ บอมบ์อาข่า บิ๊กแครกเกอร์อาว์ เมจิคเดชานุภาพยังไงอาร์พีจีพุทโธ แอปพริคอท สเตชั่นฮิบร',
+      },
     }
     return (
       <ResultBox {...getMockupData(customProps, resultData)}/>
@@ -75,11 +79,10 @@ makeStoriesOf('Result Page/Result Box')
   })
   .add('result shared', () => {
     const customProps = {
-      quizType             : 'funnyquiz',
-      isChallengeMode      : false,
-      isMobile             : false,
-      isDescriptionCentered: true,
-      isResultShared       : true,
+      quizType       : 'funnyquiz',
+      isChallengeMode: false,
+      isMobile       : false,
+      isResultShared : true,
     }
     return (
       <ResultBox {...getMockupData(customProps, resultData)}/>
@@ -102,7 +105,7 @@ makeStoriesOf('Result Page/Share Box')
     const customProps = {
       isChallengeMode: false,
       isMobile       : false,
-      fbStatus       : select('FB status:', fbAllStatus, 'ready'),
+      fbStatus       : select('FB status:', fbAllStatus, FACEBOOK_SHARE_STATUS.READY),
     }
     return (
       <ShareBox {...getMockupData(customProps, resultData)}/>
@@ -112,7 +115,7 @@ makeStoriesOf('Result Page/Share Box')
     const customProps = {
       isChallengeMode: false,
       isMobile       : false,
-      fbStatus       : select('FB status:', fbAllStatus, 'loading'),
+      fbStatus       : select('FB status:', fbAllStatus, FACEBOOK_SHARE_STATUS.LOADING),
     }
     return (
       <ShareBox {...getMockupData(customProps, resultData)}/>
@@ -122,7 +125,7 @@ makeStoriesOf('Result Page/Share Box')
     const customProps = {
       isChallengeMode: false,
       isMobile       : false,
-      fbStatus       : select('FB status:', fbAllStatus, 'success'),
+      fbStatus       : select('FB status:', fbAllStatus, FACEBOOK_SHARE_STATUS.SUCCESS),
     }
     return (
       <ShareBox {...getMockupData(customProps, resultData)}/>
@@ -132,7 +135,7 @@ makeStoriesOf('Result Page/Share Box')
     const customProps = {
       isChallengeMode: false,
       isMobile       : false,
-      fbStatus       : select('FB status:', fbAllStatus, 'permissionDenied'),
+      fbStatus       : select('FB status:', fbAllStatus, FACEBOOK_SHARE_STATUS.PERMISSION_DENIED),
     }
     return (
       <ShareBox {...getMockupData(customProps, resultData)}/>
@@ -156,28 +159,28 @@ makeStoriesOf('Result Page/Supertest')
   .addDecorator(generateWrapper({ appState: 'end' }))
   .add('normal', () => {
     const customProps = {
-      quizType             : 'supertest',
-      isChallengeMode      : false,
-      isMobile             : false,
-      isDescriptionCentered: true,
-      isResultShared       : false,
-      fbStatus             : select('FB status:', fbAllStatus, 'ready'),
+      quizType       : 'supertest',
+      isChallengeMode: false,
+      isMobile       : false,
+      isResultShared : false,
+      fbStatus       : select('FB status:', fbAllStatus, 'ready'),
+      resultData,
     }
     return (
-      <ResultPage {...getMockupData(customProps, resultData)}/>
+      <ResultPage {...customProps}/>
     )
   })
   .add('challenge', () => {
     const customProps = {
       ...resultData,
-      quizType             : 'supertest',
-      isChallengeMode      : true,
-      isMobile             : false,
-      isDescriptionCentered: true,
-      isResultShared       : false,
-      fbStatus             : select('FB status:', fbAllStatus, 'ready'),
+      quizType       : 'supertest',
+      isChallengeMode: true,
+      isMobile       : false,
+      isResultShared : false,
+      fbStatus       : select('FB status:', fbAllStatus, 'ready'),
+      resultData,
     }
     return (
-      <ResultPage {...getMockupData(customProps, resultData)}/>
+      <ResultPage {...customProps}/>
     )
   })

@@ -29,9 +29,6 @@ makeStoriesOf('Init Page/Login')
   .addDecorator(generateWrapper())
   .add('Normal', () => (
     <InitPage {...getMockupData({
-      timerData: {
-        isTimeLimited: false,
-      },
       auth     : {
         isLogin: false,
       },

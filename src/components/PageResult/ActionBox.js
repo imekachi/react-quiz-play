@@ -1,5 +1,5 @@
 import React from 'react'
-import { QUIZ_TYPE } from '../../constants/quiz'
+import { QUIZ_TYPES } from '../../constants/quiz'
 
 import Icon from '../Icon'
 import { makeButtonWithStates } from '../ButtonWithStates'
@@ -28,7 +28,7 @@ const ActionBox = (props) => {
         <Icon className="fa-undo"/> เล่นใหม่<span className="_hidden-sm-down">อีกครั้ง</span>
       </a>
 
-      {quizType === QUIZ_TYPE.SUPERTEST && (
+      {quizType === QUIZ_TYPES.SUPERTEST && (
         <ButtonShowAnswer className="controlbutton -getanswer"/>
       )}
 

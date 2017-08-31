@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { QUIZ_STATE, QUIZ_TYPE } from '../constants/quiz'
+import { QUIZ_STATES, QUIZ_TYPES } from '../constants/quiz'
 import { actions as authActions } from './auth'
 import { actions as resultActions } from './result'
 // ----------------------------------------------- FAKE_DATA
@@ -22,7 +22,7 @@ export const types = {
 }
 
 export const initialState = {
-  quizState : QUIZ_STATE.LOADING,
+  quizState : QUIZ_STATES.LOADING,
   isLoading : true,
   quizInfo  : {},
   quizData  : {},
@@ -38,7 +38,7 @@ export default function quiz(state = initialState, action) {
     case types.FETCH_QUIZ: {
       return {
         ...state,
-        quizState: QUIZ_STATE.LOADING,
+        quizState: QUIZ_STATES.LOADING,
         isLoading: true,
         error    : null,
       }
@@ -59,7 +59,7 @@ export default function quiz(state = initialState, action) {
     case types.FETCH_QUIZ_FAILURE: {
       return {
         ...state,
-        quizState: QUIZ_STATE.FETCH_FAILED,
+        quizState: QUIZ_STATES.FETCH_FAILED,
         isLoading: false,
         error    : action.payload,
       }
@@ -73,15 +73,15 @@ export default function quiz(state = initialState, action) {
     }
 
     case types.QUIZ_INIT: {
-      return { ...state, quizState: QUIZ_STATE.INIT }
+      return { ...state, quizState: QUIZ_STATES.INIT }
     }
 
     case types.QUIZ_START: {
-      return { ...state, quizState: QUIZ_STATE.PLAY }
+      return { ...state, quizState: QUIZ_STATES.PLAY }
     }
 
     case types.QUIZ_SHOW_RESULT: {
-      return { ...state, quizState: QUIZ_STATE.END }
+      return { ...state, quizState: QUIZ_STATES.END }
     }
 
     default: {
@@ -105,7 +105,7 @@ export const getIsSingleQuestion = createSelector(
 )
 export const getIsResultPage     = createSelector(
   getQuizState,
-  (quizState) => (quizState === QUIZ_STATE.END),
+  (quizState) => (quizState === QUIZ_STATES.END),
 )
 
 // ACTIONS
@@ -122,9 +122,9 @@ const initRoute = () => (dispatch, getState) => {
 
   // Check if it should go straight into the quiz ( auto-start ) or not
   switch (true) {
-    case quizInfo.quizType === QUIZ_TYPE.FUNNY:
-    case quizInfo.quizType === QUIZ_TYPE.MAZE:
-    case quizInfo.quizType === QUIZ_TYPE.SUPERTEST && !quizInfo.timerData: {
+    case quizInfo.quizType === QUIZ_TYPES.FUNNY:
+    case quizInfo.quizType === QUIZ_TYPES.MAZE:
+    case quizInfo.quizType === QUIZ_TYPES.SUPERTEST && !quizInfo.timerData: {
       return dispatch(start())
     }
 
@@ -142,7 +142,7 @@ const fakeFetch = () => {
         isMobile: false,
       },
     },
-  }, 1500)
+  }, 500)
 }
 const fetchQuiz = () => async (dispatch) => {
   dispatch({ type: types.FETCH_QUIZ })

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // DATA
 import { actions as quizActions, getIsResultPage } from '../reducers/quiz'
-import { QUIZ_STATE } from '../constants/quiz'
+import { QUIZ_STATES } from '../constants/quiz'
 // UI
 import MainWrapper from '../components/MainWrapper'
 import Loader from '../components/Loader'
@@ -17,19 +17,19 @@ class QuizApp extends React.Component {
 
   getComponentToRender() {
     switch (this.props.quizState) {
-      case QUIZ_STATE.INIT: {
+      case QUIZ_STATES.INIT: {
         return <PageInit/>
       }
 
-      case QUIZ_STATE.PLAY: {
+      case QUIZ_STATES.PLAY: {
         return <PagePlay/>
       }
 
-      case QUIZ_STATE.END: {
+      case QUIZ_STATES.END: {
         return <ResultPage/>
       }
 
-      case QUIZ_STATE.LOADING: {
+      case QUIZ_STATES.LOADING: {
         return <Loader/>
       }
 

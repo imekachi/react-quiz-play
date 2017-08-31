@@ -1,7 +1,7 @@
 import React from 'react'
 import { isValueEmpty } from '../../../util/empty'
 import { makeArrayOf } from '../../../util/array'
-import { CHOICE_TYPE } from '../../../constants/quiz'
+import { CHOICE_TYPES } from '../../../constants/quiz'
 import { getChoiceId } from '../../../containers/FormPlay'
 // UI
 import ChoiceItem from '../../../containers/ChoiceItem'
@@ -47,13 +47,13 @@ const ChoiceBox = (props) => {
   let choiceBoxContent
   const { input } = props.fieldData
 
-  if (props.choiceLayout === CHOICE_TYPE.TYPE_ANSWER) {
+  if (props.choiceLayout === CHOICE_TYPES.TYPE_ANSWER) {
     const choiceId   = getChoiceId(props.questionNumber, 1)
     choiceBoxContent = <ChoiceItem component={TypeAnswerBox} choiceId={choiceId} input={input}/>
   }
   else {
     const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
-    const choicesPerRow     = (props.choiceLayout === CHOICE_TYPE.LIST) ? props.choiceListData.length : gridChoicesPerRow
+    const choicesPerRow     = (props.choiceLayout === CHOICE_TYPES.LIST) ? props.choiceListData.length : gridChoicesPerRow
     const choiceListUIData  = getChoiceListUIData(props.choiceListData, choicesPerRow, props.questionNumber)
 
     choiceBoxContent = choiceListUIData.map((rowData, rowIndex) => {
