@@ -1,32 +1,34 @@
 import React from 'react'
 // Data
-import { getMockupData } from './mockupData'
-import { generateWrapper } from './MockupWrapper'
+import { state } from './mockupData'
+import { getCurrentQuestionStream } from '../reducers/runtime'
+import { generateWrapper, PlayPageWrapper } from './MockupWrapper'
+import { getFieldName } from '../containers/FormPlay'
 // Util
 import { makeStoriesOf } from './util'
+import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
 // UI Components
-import PlayPage from '../components/PagePlay/index'
 
 
 /**
  * Choice Box
  */
 makeStoriesOf('ChoiceBox')
-  .addDecorator(generateWrapper({ appState: 'play' }))
-  .add('layout: list', () => (
-    <PlayPage {...getMockupData({
-      timerData: {
-        isTimeLimited: false,
-      },
-    })}/>
-  ))
-  .add('layout: grid', () => (
-    <PlayPage {...getMockupData({
-      timerData  : {
-        isTimeLimited: false,
-      },
-      uiPageStore: {
-        currentPage: 2,
-      },
-    })}/>
-  ))
+  .addDecorator(generateWrapper(PlayPageWrapper))
+  .addDecorator(generateWrapper())
+  .add('layout: list', () => {
+    const localState = {
+      ...state,
+    }
+    const props      = {
+      stream            : getCurrentQuestionStream(localState),
+      isMobile          : localState.quiz.clientData.isMobile,
+      hideQuestionNumber: false,
+      getFieldName,
+    }
+
+    console.log('>> props.stream: ', props.stream)
+    return (
+      <QuestionStreamComponent {...props}/>
+    )
+  })

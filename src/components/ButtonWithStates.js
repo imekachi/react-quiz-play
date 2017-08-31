@@ -31,7 +31,6 @@ const defaultConfig = {
     },
 
     // Add your own states
-
   },
 }
 

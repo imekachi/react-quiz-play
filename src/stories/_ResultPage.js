@@ -34,7 +34,7 @@ makeStoriesOf('Result Page/Result Box')
       </div>
     ),
   )
-  .addDecorator(generateWrapper({ appState: 'end' }))
+  .addDecorator(generateWrapper())
   .add('no link', () => {
     const customProps = {
       quizType       : 'funnyquiz',
@@ -99,7 +99,7 @@ makeStoriesOf('Result Page/Share Box')
       </div>
     ),
   )
-  .addDecorator(generateWrapper({ appState: 'end' }))
+  .addDecorator(generateWrapper())
   .addDecorator(withKnobs)
   .add('FB: ready', () => {
     const customProps = {
@@ -156,7 +156,7 @@ makeStoriesOf('Result Page/Share Box')
  * SUPERTEST CHALLENGE
  */
 makeStoriesOf('Result Page/Supertest')
-  .addDecorator(generateWrapper({ appState: 'end' }))
+  .addDecorator(generateWrapper())
   .add('normal', () => {
     const customProps = {
       quizType       : 'supertest',
