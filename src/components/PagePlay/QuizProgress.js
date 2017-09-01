@@ -3,31 +3,83 @@ import styled from 'styled-components'
 
 import { unitPercentage } from '../../util/unit'
 import { capBetween } from '../../util/number'
+import { scale } from '../../util/scaling'
 
 const ProgressBar = styled.div`
   ${props => props.noSpaceBottom && 'border-radius: 3px 3px 0 0 !important;'}
 `
 
-const QuizProgressComponent = (props) => {
-  const { currentPage, allPage, noSpaceBottom } = props
+export default class QuizProgressComponent extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      wrapper: {
+        width: 0,
+      },
+      bubble : {
+        width: 0,
+      },
+    }
+  }
 
-  const distance   = unitPercentage(capBetween(0, currentPage / allPage, 1))
-  const bubbleText = `${currentPage}/${allPage}`
+  updateComponentsDimension() {
+    this.setState({
+      wrapper: {
+        ...this.state.wrapper,
+        width: this.progressWrapper.getBoundingClientRect().width,
+      },
+      bubble : {
+        ...this.state.bubble,
+        width: this.progressBubble.getBoundingClientRect().width,
+      },
+    })
+  }
 
-  return (
-    <div className="quiz-progress-wrapper">
-      <div className="quiz-progress">
-        <div className="progressbubble"
-             style={{ left: distance }}
-             ref={bubbleElement => this.bubbleElement = bubbleElement}>
-          {bubbleText}
+  componentDidMount() {
+    this.updateComponentsDimension()
+  }
+
+  // componentWillReceiveProps() {
+  componentDidUpdate() {
+    // console.log('>> UPDATED')
+    // all changes caused by currentPage or allPage update by props
+    this.updateComponentsDimension()
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // console.group()
+    // console.log(`currentPage: ${this.props.currentPage} | ${nextProps.currentPage}`)
+    // console.log(`bubbleWidth: ${this.state.bubble.width} | ${nextState.bubble.width}`)
+    // console.groupEnd()
+    return (this.props.currentPage !== nextProps.currentPage)
+      || (this.props.allPage !== nextProps.allPage)
+      || (this.state.bubble.width !== nextState.bubble.width)
+      || (this.state.wrapper.width !== nextState.wrapper.width)
+  }
+
+  render() {
+    console.warn('>> RENDERED')
+    const { currentPage, allPage, noSpaceBottom } = this.props
+
+    const CAP_PERCENTAGE = 100
+    const progressValue  = capBetween(0, currentPage / allPage * 100, CAP_PERCENTAGE)
+    const bubbleText     = `${currentPage}/${allPage}`
+    const bubbleWidth    = scale(this.state.bubble.width, this.state.wrapper.width, 100)
+    const bubbleOffset   = bubbleWidth / 2
+    const bubblePosition = capBetween(0, progressValue - bubbleOffset, CAP_PERCENTAGE - bubbleWidth)
+
+    return (
+      <div className="quiz-progress-wrapper" ref={element => this.progressWrapper = element}>
+        <div className="quiz-progress">
+          <div className="progressbubble" ref={element => this.progressBubble = element}
+               style={{ left: unitPercentage(bubblePosition, false) }}>
+            {bubbleText}
+          </div>
+          <ProgressBar className="progress-bar" noSpaceBottom={noSpaceBottom}>
+            <div className="progress" style={{ width: unitPercentage(progressValue, false) }}/>
+          </ProgressBar>
         </div>
-        <ProgressBar className="progress-bar" noSpaceBottom={noSpaceBottom}>
-          <div className="progress" style={{ width: distance }}/>
-        </ProgressBar>
       </div>
-    </div>
-  )
+    )
+  }
 }
-
-export default QuizProgressComponent
