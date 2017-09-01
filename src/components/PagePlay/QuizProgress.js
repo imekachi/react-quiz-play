@@ -58,7 +58,7 @@ export default class QuizProgressComponent extends React.Component {
   }
 
   render() {
-    console.warn('>> RENDERED')
+    // console.warn('>> RENDERED')
     const { currentPage, allPage, noSpaceBottom } = this.props
 
     const CAP_PERCENTAGE = 100
