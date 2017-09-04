@@ -1,12 +1,10 @@
 import React from 'react'
-// Data
+
+import InitPage from '../components/PageInit/index'
+import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/auth'
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
-import { AUTH_DEKD, AUTH_FACEBOOK } from '../constants/auth'
-// Util
 import { makeStoriesOf } from './util'
-// UI Components
-import InitPage from '../components/PageInit/index'
 
 /**
  * Init Page
@@ -29,7 +27,7 @@ makeStoriesOf('Init Page/Login')
   .addDecorator(generateWrapper())
   .add('Normal', () => (
     <InitPage {...getMockupData({
-      auth     : {
+      auth: {
         isLogin: false,
       },
     })}/>

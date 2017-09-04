@@ -2,7 +2,6 @@ import React from 'react'
 
 import { numberFormat } from '../../../util/format'
 import { unitPercentage } from '../../../util/unit'
-
 import ImageBg from '../../ImageBg'
 
 const TimerChallenge = (props) => {
@@ -21,7 +20,8 @@ const TimerChallenge = (props) => {
           </div>
           <div className="info-wrapper table-cell">
             <div className="name _txt-ellipsis js-user-name" title="{{name}}">{userInfo.name}</div>
-            <div className="score _txt-ellipsis js-user-score" title="0 คะแนน" data-score="0">{numberFormat(userInfo.score)}</div>
+            <div className="score _txt-ellipsis js-user-score" title="0 คะแนน"
+                 data-score="0">{numberFormat(userInfo.score)}</div>
           </div>
         </div>
 
@@ -33,8 +33,8 @@ const TimerChallenge = (props) => {
           </div>
           <div className="timer-bar-wrapper table-cell">
             <div className="timer-bar">
-              <div className="thumb" style={{width: getTimerDistance()}}/>
-              <div className="timer-pointer" style={{left: getTimerDistance()}}>
+              <div className="thumb" style={{ width: getTimerDistance() }}/>
+              <div className="timer-pointer" style={{ left: getTimerDistance() }}>
                 <span className="pointer _animated -wobble -infinite"/>
               </div>
             </div>

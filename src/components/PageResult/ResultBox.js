@@ -1,11 +1,10 @@
 import React from 'react'
+
+import { iF } from '../../util/condition'
 import { isValueEmpty } from '../../util/empty'
 import { combineClassNames } from '../../util/string'
-import { iF } from '../../util/condition'
-
-import ResultImage from './ResultImage'
 import ActionBox from './ActionBox'
-
+import ResultImage from './ResultImage'
 
 const ResultBox = (props) => {
   const {

@@ -1,12 +1,11 @@
 import { reduxForm } from 'redux-form'
 import Validator from 'validatorjs'
-import { makeArrayOf } from '../util/array'
-import { strPadding } from '../util/format'
-// DATA
+
+import PagePlayComponent from '../components/PagePlay/index'
 import { FORM_NAMES } from '../constants/quiz'
 import { actions as quizActions } from '../reducers/quiz'
-// UI
-import PagePlayComponent from '../components/PagePlay/index'
+import { makeArrayOf } from '../util/array'
+import { strPadding } from '../util/format'
 
 export const getFieldName = (questionNumber) => `question-${strPadding(questionNumber, 3, '0')}`
 
@@ -39,7 +38,7 @@ const onFormSubmit = (data, dispatch) => {
 }
 
 const FormPlay = reduxForm({
-  form: FORM_NAMES.QUIZ_PLAY,
+  form    : FORM_NAMES.QUIZ_PLAY,
   onSubmit: onFormSubmit,
   validate,
 })(PagePlayComponent)

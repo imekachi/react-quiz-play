@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { makeButtonWithStates } from '../ButtonWithStates'
 import { iF } from '../../util/condition'
 import { combineClassNames } from '../../util/string'
+import { makeButtonWithStates } from '../ButtonWithStates'
 
 const PrevButton = makeButtonWithStates({
   stateConfig: {
@@ -51,7 +51,8 @@ const QuestionControlBox = ({ pagingData, disableNext, submitting, onClickNext, 
       {isVisiblePrev && <PrevButton className={`controlbutton -prev`} onclick={onClickPrev}/>}
       {isVisibleNext && <NextButton className={`controlbutton -next ${disableNextClass}`} onClick={onClickNext}/>}
       {isVisibleSubmit &&
-      <SubmitButton loading={submitting} className={`controlbutton -submit ${disableNextClass}`} onClick={onClickSubmit}/>}
+      <SubmitButton loading={submitting} className={`controlbutton -submit ${disableNextClass}`}
+                    onClick={onClickSubmit}/>}
     </div>
   )
 }

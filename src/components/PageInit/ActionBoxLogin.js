@@ -26,7 +26,6 @@ const LoginDekdBtn = makeButtonWithStates({
   },
 })
 
-
 const ActionBoxLogin = ({ isFBLoading }) => (
   <div className="action-button-box">
     <LoginFacebookBtn loading={isFBLoading} className="loginbutton -lg -social-facebook"

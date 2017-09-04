@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { makeButtonWithStates } from '../ButtonWithStates'
 import { AUTH_DEKD } from '../../constants/auth'
-
 import AutoShareBox from '../AutoShareBox'
+import { makeButtonWithStates } from '../ButtonWithStates'
 
 const PlayBtn = makeButtonWithStates({
   stateConfig: {

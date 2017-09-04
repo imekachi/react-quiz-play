@@ -1,13 +1,13 @@
 import React from 'react'
 
-import QuizProgress from '../../containers/QuizProgress'
-import TimerSticky from './TimerSticky'
 import QuestionStream from '../../containers/QuestionStream'
-import QuestionControl from './QuestionControl'
+import QuizProgress from '../../containers/QuizProgress'
 import AutoShareBox from '../AutoShareBox'
+import QuestionControl from './QuestionControl'
+import TimerSticky from './TimerSticky'
 
 const PagePlayComponent = (props) => {
-  const { onClickPrev, onClickNext, onClickSubmit, handleSubmit} = props
+  const { onClickPrev, onClickNext, onClickSubmit, handleSubmit } = props
   return (
     <form className="play-state" onSubmit={handleSubmit}>
       {false && (props.enableTimer) && (

@@ -1,15 +1,16 @@
 import React from 'react'
+
+import { iF } from '../../../util/condition'
 import { isValueEmpty } from '../../../util/empty'
 import { combineClassNames } from '../../../util/string'
-import { iF } from '../../../util/condition'
-// UI
 import ImgZoomable from '../ImgZoomable'
 
 const ChoiceItemComponent = (props) => {
   const { titleAttr, titleHtml, img, value, input, choiceId, isActive, renderAsFiller, onCommitAnswer } = props
 
-  if (renderAsFiller)
+  if (renderAsFiller) {
     return <div className="choice-item -grid-filler"/>
+  }
 
   return (
     <div className={combineClassNames('choice-item', iF(isActive, '-active'))}

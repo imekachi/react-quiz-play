@@ -15,7 +15,8 @@ const FBLikeBox = ({ width = 280, height = 155 }) => {
       <div className="fb-like-txt _margin-bototm-xs">
         กด <span className="_txt-bold">"Like"</span> เพื่อติดตามควิซเด็ดน่าเล่น
       </div>
-      <iframe title="Facebook FanPage LikeBox" {...iframeProps} scrolling="no" frameBorder="0" allowTransparency="true"/>
+      <iframe title="Facebook FanPage LikeBox" {...iframeProps} scrolling="no" frameBorder="0"
+              allowTransparency="true"/>
     </div>
   )
 }

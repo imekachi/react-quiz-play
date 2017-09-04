@@ -1,15 +1,13 @@
-import React from 'react'
 import { select, withKnobs } from '@storybook/addon-knobs'
-// Data
-import { getMockupData } from './mockupData'
-import { generateWrapper } from './MockupWrapper'
-// Util
-import { makeStoriesOf } from './util'
-// UI Components
+import React from 'react'
+
 import ResultPage from '../components/PageResult/index'
 import ResultBox from '../components/PageResult/ResultBox'
 import ShareBox from '../components/PageResult/ShareBox'
 import { FACEBOOK_SHARE_STATUS } from '../constants/social'
+import { getMockupData } from './mockupData'
+import { generateWrapper } from './MockupWrapper'
+import { makeStoriesOf } from './util'
 
 const resultData = {
   labelHeader    : '',
@@ -150,7 +148,6 @@ makeStoriesOf('Result Page/Share Box')
       <ShareBox {...getMockupData(customProps, resultData)}/>
     )
   })
-
 
 /**
  * SUPERTEST CHALLENGE

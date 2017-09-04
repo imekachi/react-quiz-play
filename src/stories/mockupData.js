@@ -18,7 +18,7 @@ export const quizStore = {
   },
   quizData  : {
     questionPerPage: 100,
-    questionList  : [
+    questionList   : [
       {
         questionData: {
           number     : 1,

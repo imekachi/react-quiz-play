@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { combineClassNames } from '../../util/string'
-// UI
-import Title from './question-box/Title'
-import ChoiceBox from './question-box/ChoiceBox'
+
 import { iF } from '../../util/condition'
+import { combineClassNames } from '../../util/string'
+import ChoiceBox from './question-box/ChoiceBox'
+import Title from './question-box/Title'
 
 const Wrapper = styled.div`
   position: relative;
@@ -24,7 +24,8 @@ const QuestionBox = (field) => {
   // Data to render
   const { questionData, choiceData, isMobile, hideQuestionNumber, isSingleQuestion } = payload
   return (
-    <Wrapper className={combineClassNames('question-box', iF(hasError, '-error-noanswer'))} isSingleQuestion={isSingleQuestion} >
+    <Wrapper className={combineClassNames('question-box', iF(hasError, '-error-noanswer'))}
+             isSingleQuestion={isSingleQuestion}>
       <Title {...questionData} hideQuestionNumber={hideQuestionNumber}/>
       {/* AnswerMsg : <i class="fa fa-clock-o"></i> คุณไม่ได้ตอบคำถามในเวลาที่กำหนด */}
       <ChoiceBox {...choiceData} questionNumber={questionData.number} isMobile={isMobile} fieldData={{ input, meta }}/>

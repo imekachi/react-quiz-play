@@ -1,3 +1,3 @@
 import { storiesOf } from '@storybook/react'
 
-export const makeStoriesOf   = (storyname) => storiesOf(storyname, module)
+export const makeStoriesOf = (storyname) => storiesOf(storyname, module)

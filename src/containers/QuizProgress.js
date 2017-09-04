@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+
 import QuizProgressComponent from '../components/PagePlay/QuizProgress'
 import { getAllPage, getCurrentPage } from '../reducers/runtime'
 

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Icon from '../../Icon'
-import { extractTimeFragments } from '../../../util/time'
-import { strPadding } from '../../../util/format'
 import { iF } from '../../../util/condition'
+import { strPadding } from '../../../util/format'
+import { extractTimeFragments } from '../../../util/time'
+import Icon from '../../Icon'
 
 const TimerNormal = (props) => {
 

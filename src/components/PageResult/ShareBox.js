@@ -68,11 +68,11 @@ const ShareBox = (props) => {
               <Icon baseClass="dekdfont" className="buttonicon -line-messenger"/>
             </button>
           ) : (
-            <button className="sharebutton dekdbutton -social-email quiz-share-email"
-                    title="แชร์ผ่าน Email">
-              <Icon className="buttonicon fa-envelope"/>
-            </button>
-          )}
+             <button className="sharebutton dekdbutton -social-email quiz-share-email"
+                     title="แชร์ผ่าน Email">
+               <Icon className="buttonicon fa-envelope"/>
+             </button>
+           )}
         </div>
       </div>
     </div>

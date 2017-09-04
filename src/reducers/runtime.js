@@ -1,11 +1,11 @@
-import { createSelector } from 'reselect'
 import { getFormSyncErrors, isPristine, isSubmitting, isValid, submit as reduxFormSubmit } from 'redux-form'
-import { capMax, capMin } from '../util/number'
-import { wait } from '../util/async'
+import { createSelector } from 'reselect'
 
 import { DELAYS, FORM_NAMES } from '../constants/quiz'
-import { getIsSingleQuestion, getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
 import { getFieldName } from '../containers/FormPlay'
+import { wait } from '../util/async'
+import { capMax, capMin } from '../util/number'
+import { getIsSingleQuestion, getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
 
 export const types = {
   PAGE_CHANGE: 'RUNTIME/PAGE_CHANGE',

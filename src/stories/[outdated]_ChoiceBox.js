@@ -1,14 +1,11 @@
 import React from 'react'
-// Data
-import { state } from './mockupData'
-import { getCurrentQuestionStream } from '../reducers/runtime'
-import { generateWrapper, PlayPageWrapper } from './MockupWrapper'
-import { getFieldName } from '../containers/FormPlay'
-// Util
-import { makeStoriesOf } from './util'
-import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
-// UI Components
 
+import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
+import { getFieldName } from '../containers/FormPlay'
+import { getCurrentQuestionStream } from '../reducers/runtime'
+import { state } from './mockupData'
+import { generateWrapper, PlayPageWrapper } from './MockupWrapper'
+import { makeStoriesOf } from './util'
 
 /**
  * Choice Box

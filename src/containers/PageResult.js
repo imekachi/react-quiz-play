@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { actions as resultActions } from '../reducers/result'
 import PageResultComponent from '../components/PageResult'
+import { actions as resultActions } from '../reducers/result'
 
 const mapStateToProps = (state) => {
   return {

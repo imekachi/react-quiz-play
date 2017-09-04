@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-// DATA
-import { actions as quizActions } from '../reducers/quiz'
-import { getIsFBLoading, getIsLogin, getLoggedInType } from '../reducers/auth'
-// UI
+
 import PageInitComponent from '../components/PageInit'
+import { getIsFBLoading, getIsLogin, getLoggedInType } from '../reducers/auth'
+import { actions as quizActions } from '../reducers/quiz'
 
 const mapStateToProps = (state) => {
   const { quizCover, timerData, isNotFound, isAccessible, description } = state.quiz.quizInfo

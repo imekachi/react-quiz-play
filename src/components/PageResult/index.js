@@ -1,8 +1,8 @@
 import React from 'react'
 
+import VoteBox from '../VoteBox'
 import ResultBox from './ResultBox'
 import ShareBox from './ShareBox'
-import VoteBox from '../VoteBox'
 
 const ResultPageComponent = (props) => {
   const { resultData, isResultShared, isChallengeMode, isMobile, quizType } = props

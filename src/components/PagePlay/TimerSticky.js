@@ -1,7 +1,7 @@
 import React from 'react'
 
-import TimerNormal from './timer-box/TimerNormal'
 import TimerChallenge from './timer-box/TimerChallenge'
+import TimerNormal from './timer-box/TimerNormal'
 
 const TimerSticky = (props) => {
 
@@ -12,7 +12,7 @@ const TimerSticky = (props) => {
     <div className="timer-box-preserveheight">
       <div className="timer-box-sticky">
         {props.isChallengeMode ? <TimerChallenge {...props.timerData} userInfo={props.userInfo}/> :
-          <TimerNormal {...props.timerData}/>}
+         <TimerNormal {...props.timerData}/>}
       </div>
     </div>
   )

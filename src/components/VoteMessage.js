@@ -1,10 +1,11 @@
 import React from 'react'
-import Icon from './Icon'
-import { makeButtonWithStates } from './ButtonWithStates'
 
-const VoteMessage = (props) => {
+import { makeButtonWithStates } from './ButtonWithStates'
+import Icon from './Icon'
+
+const VoteMessage = () => {
   const SubmitBtn = makeButtonWithStates({
-    tagName: 'a',
+    tagName    : 'a',
     stateConfig: {
       ready  : {
         text: 'ส่งข้อความ',

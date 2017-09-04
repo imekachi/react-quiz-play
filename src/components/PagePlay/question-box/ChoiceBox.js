@@ -1,12 +1,12 @@
 import React from 'react'
-import { isValueEmpty } from '../../../util/empty'
-import { makeArrayOf } from '../../../util/array'
+
 import { CHOICE_TYPES } from '../../../constants/quiz'
-import { getChoiceId } from '../../../containers/FormPlay'
-// UI
 import ChoiceItem from '../../../containers/ChoiceItem'
-import TypeAnswerBox from './TypeAnswerBox'
+import { getChoiceId } from '../../../containers/FormPlay'
+import { makeArrayOf } from '../../../util/array'
+import { isValueEmpty } from '../../../util/empty'
 import ChoiceItemComponent from './ChoiceItem'
+import TypeAnswerBox from './TypeAnswerBox'
 
 const config = {
   grid: {
@@ -17,11 +17,11 @@ const config = {
 
 /**
  * Prepare data for rendering as how it is going to be rendered
- * @param   {Array} choiceListData
- * @param   {Number} choicesPerRow
- * @param   {Number} questionNumber
  *
- * @return  {Array}
+ * @param   {array} choiceListData
+ * @param   {number} choicesPerRow
+ * @param   {number} questionNumber
+ * @return  {array}
  */
 const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
   const totalRow = Math.ceil(choiceListData.length / choicesPerRow)
@@ -35,8 +35,9 @@ const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
     return makeArrayOf(choicesPerRow).map((_, choiceIndex) => {
       const choiceItem = choicesInThisRow[choiceIndex]
 
-      if (!isValueEmpty(choiceItem))
+      if (!isValueEmpty(choiceItem)) {
         choiceItem.choiceId = getChoiceId(questionNumber, choiceItem.value)
+      }
 
       return choiceItem
     })
@@ -49,19 +50,23 @@ const ChoiceBox = (props) => {
 
   if (props.choiceLayout === CHOICE_TYPES.TYPE_ANSWER) {
     const choiceId   = getChoiceId(props.questionNumber, 1)
-    choiceBoxContent = <ChoiceItem component={TypeAnswerBox} choiceId={choiceId} input={input} questionNumber={props.questionNumber}/>
+    choiceBoxContent =
+      <ChoiceItem component={TypeAnswerBox} choiceId={choiceId} input={input} questionNumber={props.questionNumber}/>
   }
   else {
     const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
-    const choicesPerRow     = (props.choiceLayout === CHOICE_TYPES.LIST) ? props.choiceListData.length : gridChoicesPerRow
+    const choicesPerRow     = (props.choiceLayout === CHOICE_TYPES.LIST)
+      ? props.choiceListData.length
+      : gridChoicesPerRow
     const choiceListUIData  = getChoiceListUIData(props.choiceListData, choicesPerRow, props.questionNumber)
 
     choiceBoxContent = choiceListUIData.map((rowData, rowIndex) => {
         // Get choices for this row
         const choicesInThisRow = rowData.map((choiceItemData, choiceItemIndex) => {
           // If there is no data, so this is just the filler for grid layout
-          if (isValueEmpty(choiceItemData))
+          if (isValueEmpty(choiceItemData)) {
             return <ChoiceItem renderAsFiller key={choiceItemIndex} component={ChoiceItemComponent}/>
+          }
 
           return <ChoiceItem {...choiceItemData}
                              isMultipleChoice={true}

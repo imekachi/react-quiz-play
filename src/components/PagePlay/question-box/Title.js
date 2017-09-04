@@ -1,8 +1,8 @@
 import React from 'react'
-// UI
+
 import ImgZoomable from '../ImgZoomable'
 
-const Title = ({number, titleAttr, titleHtml, questionImg, hideQuestionNumber}) => {
+const Title = ({ number, titleAttr, titleHtml, questionImg, hideQuestionNumber }) => {
   number = hideQuestionNumber ? '?' : number
   return (
     <div className="question-title">

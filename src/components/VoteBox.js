@@ -1,7 +1,8 @@
 import React from 'react'
+
+import { isValueEmpty } from '../util/empty'
 import Icon from './Icon'
 import VoteMessage from './VoteMessage'
-import { isValueEmpty } from '../util/empty'
 
 export default class VoteBox extends React.Component {
   constructor() {

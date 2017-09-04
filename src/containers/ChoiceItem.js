@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { change } from 'redux-form'
-import { actions as runtimeActions } from '../reducers/runtime'
 
 import { FORM_NAMES } from '../constants/quiz'
+import { actions as runtimeActions } from '../reducers/runtime'
 import { getFieldName } from './FormPlay'
 
 class ChoiceItem extends React.Component {

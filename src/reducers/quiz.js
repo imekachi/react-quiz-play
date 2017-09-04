@@ -1,14 +1,15 @@
 import { createSelector } from 'reselect'
+
 import { QUIZ_STATES, QUIZ_TYPES } from '../constants/quiz'
-import { actions as authActions } from './auth'
-import { actions as resultActions } from './result'
 // ----------------------------------------------- FAKE_DATA
-// import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
-import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './_fakeQuizData-supertest'
+import _fakeAsync from './_fakeAsync'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-funny'
-import _fakeAsync from './_fakeAsync'
+// import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-supertest'
+import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './_fakeQuizData-supertest'
 // ----------------------------------------------- FAKE_DATA
+import { actions as authActions } from './auth'
+import { actions as resultActions } from './result'
 
 // Global Quiz States
 export const types = {

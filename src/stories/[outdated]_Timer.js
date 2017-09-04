@@ -1,11 +1,9 @@
 import React from 'react'
-// Data
+
+import PlayPage from '../components/PagePlay/index'
 import { getMockupData } from './mockupData'
 import { generateWrapper } from './MockupWrapper'
-// Util
 import { makeStoriesOf } from './util'
-// UI Components
-import PlayPage from '../components/PagePlay/index'
 
 /**
  * Timer

@@ -30,11 +30,10 @@ export const RetryBox = ({ onClick, buttonText = 'กรุุณาลองใ
 export const Loader = ({ retry, ...loader }) => (
   <div className="animation-loading-page -show-fb-like _txt-center">
     <div className="animation-loading-box">
-      {retry ? (
-        <RetryBox {...retry}/>
-      ) : (
-        <AnimationLoading {...loader}/>
-      )}
+      {retry
+        ? <RetryBox {...retry}/>
+        : <AnimationLoading {...loader}/>
+      }
     </div>
   </div>
 )

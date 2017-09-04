@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// DATA
-import { actions as quizActions, getIsResultPage } from '../reducers/quiz'
-import { QUIZ_STATES } from '../constants/quiz'
-// UI
-import MainWrapper from '../components/MainWrapper'
+
 import Loader from '../components/Loader'
-import ResultPage from './PageResult'
+import MainWrapper from '../components/MainWrapper'
+import { QUIZ_STATES } from '../constants/quiz'
+import { actions as quizActions, getIsResultPage } from '../reducers/quiz'
 import PageInit from './PageInit'
 import PagePlay from './PagePlay'
+import ResultPage from './PageResult'
 
 class QuizApp extends React.Component {
   componentDidMount() {

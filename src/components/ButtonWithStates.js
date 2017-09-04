@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { isValueEmpty } from '../util/empty'
 import { WHITE_SPACE } from '../constants/unicode'
 import { iF } from '../util/condition'
+import { isValueEmpty } from '../util/empty'
 import { combineClassNames } from '../util/string'
 import Icon from './Icon'
 
@@ -74,8 +74,9 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
       )
     }
 
-    if (isTextNotEmpty)
+    if (isTextNotEmpty) {
       buttonText = currentStateConfig.text
+    }
 
     // tag name variable has to be capital, otherwise React will render it as <tagName>
     const TagName = props.tagName

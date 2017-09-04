@@ -1,23 +1,20 @@
 /**
  * isObject
  * check if input data is an object
- * @param {*}   data    input data
  *
- * @return {Boolean}
+ * @param   {*} data  input data
+ * @return  {boolean}
  */
-export function isObject(data) {
-  return (data && typeof data === 'object' && !Array.isArray(data))
-}
+export const isObject = (data) => (!!data && typeof data === 'object' && !Array.isArray(data))
 
 /**
  * Deep merge objects
  *
- * @param   {Object} target
- * @param   {Object} [sources]
- *
- * @return {Object}
+ * @param   {object} target
+ * @param   {object} [sources]
+ * @return  {object}
  */
-export function mergeDeep(target, ...sources) {
+export const mergeDeep = (target, ...sources) => {
   // check if there is still any source
   if (!sources.length) return target
 
@@ -27,8 +24,9 @@ export function mergeDeep(target, ...sources) {
   if (isObject(target) && isObject(source)) {
     for (let key in source) {
       if (source.hasOwnProperty(key) && isObject(source[key])) {
-        if (!target[key])
+        if (!target[key]) {
           Object.assign(target, { [key]: {} })
+        }
         mergeDeep(target[key], source[key])
       } else {
         Object.assign(target, { [key]: source[key] })

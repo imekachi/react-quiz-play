@@ -1,11 +1,10 @@
 import { connect } from 'react-redux'
-import { getFieldName } from './FormPlay'
-// DATA
-import { getCurrentQuestionStream } from '../reducers/runtime'
-import { QUIZ_TYPES } from '../constants/quiz'
-// UI
+
 import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
+import { QUIZ_TYPES } from '../constants/quiz'
 import { getIsSingleQuestion } from '../reducers/quiz'
+import { getCurrentQuestionStream } from '../reducers/runtime'
+import { getFieldName } from './FormPlay'
 
 const mapStateToProps = (state) => {
   return {

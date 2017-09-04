@@ -1,15 +1,13 @@
 import React from 'react'
 
 import { DEFAULT_QUIZ_COVER, QUIZ_CENTER } from '../../constants/url'
-
+import Description from '../Description'
+import Icon from '../Icon'
+import MessageBox from '../MessageBox'
+import ActionBoxLogin from './ActionBoxLogin'
+import ActionBoxPlay from './ActionBoxPlay'
 import CoverImg from './CoverImg'
 import TimerInfo from './TimerInfo'
-import Description from '../Description'
-import MessageBox from '../MessageBox'
-import Icon from '../Icon'
-import ActionBoxPlay from './ActionBoxPlay'
-import ActionBoxLogin from './ActionBoxLogin'
-
 
 const MessageBoxWrapper = ({ children }) => (
   <div className="message-box-wrapper">
@@ -49,14 +47,14 @@ const PageInitComponent = (props) => {
       {props.timerData ? (
         <TimerInfo {...props.timerData}/>
       ) : (
-        <Description centered value={props.description}/>
-      )}
+         <Description centered value={props.description}/>
+       )}
 
       {props.auth.isLogin ? (
         <ActionBoxPlay loggedInType={props.auth.loggedInType} playClickHandler={props.playClickHandler}/>
       ) : (
-        <ActionBoxLogin isFBLoading={props.auth.isFBLoading}/>
-      )}
+         <ActionBoxLogin isFBLoading={props.auth.isFBLoading}/>
+       )}
     </div>
   )
 }

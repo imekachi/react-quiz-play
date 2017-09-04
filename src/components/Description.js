@@ -1,7 +1,7 @@
 import React from 'react'
-import { combineClassNames } from '../util/string'
-import { iF } from '../util/condition'
 
+import { iF } from '../util/condition'
+import { combineClassNames } from '../util/string'
 import Icon from './Icon'
 
 const Description = (props) => (

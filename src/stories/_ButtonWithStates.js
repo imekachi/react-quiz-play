@@ -1,13 +1,10 @@
-import React from 'react'
 import { text, withKnobs } from '@storybook/addon-knobs'
-// Data
-import { generateWrapper } from './MockupWrapper'
-// Util
-import { makeStoriesOf } from './util'
-// UI Components
-import Icon from '../components/Icon'
-import { makeButtonWithStates } from '../components/ButtonWithStates'
+import React from 'react'
 
+import { makeButtonWithStates } from '../components/ButtonWithStates'
+import Icon from '../components/Icon'
+import { generateWrapper } from './MockupWrapper'
+import { makeStoriesOf } from './util'
 
 /**
  * Button With States
@@ -27,8 +24,8 @@ makeStoriesOf('ButtonWithStates')
         ready: {
           icon: 'fa-arrow-left',
           text: 'ปุ่มแบบปกติ',
-        }
-      }
+        },
+      },
     })
     return <Button/>
   })
@@ -37,9 +34,9 @@ makeStoriesOf('ButtonWithStates')
       stateConfig: {
         ready: {
           title: 'ปุ่มแบบปกติ',
-          html: (<span>ปุ่มแบบ <Icon className="fa-user"/> ปกติ</span>)
-        }
-      }
+          html : (<span>ปุ่มแบบ <Icon className="fa-user"/> ปกติ</span>),
+        },
+      },
     })
     return <Button/>
   })

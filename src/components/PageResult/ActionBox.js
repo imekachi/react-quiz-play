@@ -1,8 +1,8 @@
 import React from 'react'
-import { QUIZ_TYPES } from '../../constants/quiz'
 
-import Icon from '../Icon'
+import { QUIZ_TYPES } from '../../constants/quiz'
 import { makeButtonWithStates } from '../ButtonWithStates'
+import Icon from '../Icon'
 
 const ButtonShowAnswer = makeButtonWithStates({
   injectDekDButtonClass: false,

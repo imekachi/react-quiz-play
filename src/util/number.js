@@ -1,13 +1,10 @@
 /**
  * isNumber
  * check if input data is a valid number
- * @param { * }   data    input data
- *
- * @return { Boolean }
+ * @param   {*} data  input data
+ * @return  {boolean}
  */
-export function isNumber(data) {
-  return (!isNaN(parseFloat(data))) && isFinite(data)
-}
+export const isNumber = (data) => (!isNaN(parseFloat(data))) && isFinite(data)
 
 /**
  * getNumber
@@ -18,47 +15,41 @@ export function isNumber(data) {
  * getNumber('-12.54')              // -13
  * getNumber('1,234.445', false)    // 1234.445
  *
- * @param   { String | Number }   data                input string or number
- * @param   { Boolean }           [isRound = false]   option if you want the number rounded or raw float
- *
- * @return  { Number }
+ * @param   {string|number} data        input string or number
+ * @param   {boolean} [isRound = false] option if you want the number rounded or raw float
+ * @return  {Number}
  */
-export function getNumber(data, isRound = false) {
+export const getNumber = (data, isRound = false) => {
   let number = parseFloat(String(data).replace(/(?!^-)[^(\d|.)]/g, ''))
   number     = isNaN(number) ? 0 : number
+
   return isRound ? Math.round(number) : number
 }
 
 /**
  * Cap number, make sure it won't go below given minimum
- * @param   { Number }  inputNumber
- * @param   { Number }  min
  *
- * @return { Number } cappedValue
+ * @param   {number} inputNumber
+ * @param   {number} min
+ * @return  {number} cappedValue
  */
-export function capMin(inputNumber, min) {
-  return Math.max(inputNumber, min)
-}
+export const capMin = (inputNumber, min) => Math.max(inputNumber, min)
 
 /**
  * Cap number, make sure it won't go above given maximum
- * @param   { Number }  inputNumber
- * @param   { Number }  max
  *
- * @return { Number } cappedValue
+ * @param   {number} inputNumber
+ * @param   {number} max
+ * @return  {number} cappedValue
  */
-export function capMax(inputNumber, max) {
-  return Math.min(inputNumber, max)
-}
+export const capMax = (inputNumber, max) => Math.min(inputNumber, max)
 
 /**
  * Cap number, make sure it won't go above and below given cap
- * @param   { Number }  inputNumber
- * @param   { Number }  min
- * @param   { Number }  max
  *
- * @return { Number } cappedValue
+ * @param   {number}  inputNumber
+ * @param   {number}  min
+ * @param   {number}  max
+ * @return  {number} cappedValue
  */
-export function capBetween(min, inputNumber, max) {
-  return capMax(capMin(inputNumber, min), max)
-}
+export const capBetween = (min, inputNumber, max) => capMax(capMin(inputNumber, min), max)

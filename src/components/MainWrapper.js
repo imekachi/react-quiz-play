@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Footer from './Footer'
 import { unitPercentage } from '../util/unit'
+import Footer from './Footer'
 
 const variables = {
   mainPadding: 10,

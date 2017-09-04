@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { unitPercentage } from '../../util/unit'
 import { capBetween } from '../../util/number'
 import { scale } from '../../util/scaling'
+import { unitPercentage } from '../../util/unit'
 
 const ProgressBar = styled.div`
   ${props => props.noSpaceBottom && 'border-radius: 3px 3px 0 0 !important;'}
