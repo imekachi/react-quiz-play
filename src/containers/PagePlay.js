@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 // DATA
-import { actions as runtimeActions, getAllPage, getStartQuestion, getIsNextButtonDisabled } from '../reducers/runtime'
-import { actions as quizActions, getQuestionCount, getIsSingleQuestion } from '../reducers/quiz'
+import { actions as runtimeActions, getAllPage, getIsNextButtonDisabled, getStartQuestion } from '../reducers/runtime'
+import { getIsSingleQuestion, getQuestionCount } from '../reducers/quiz'
 import FormPlay from './FormPlay'
 
 const mapStateToProps = (state) => {
@@ -29,9 +29,6 @@ const mapDispatchToProps = (dispatch) => {
     onClickNext : (event) => {
       event.preventDefault()
       dispatch(runtimeActions.nextPage())
-    },
-    onFormSubmit: (data) => {
-      return dispatch(quizActions.submit(data))
     },
   }
 }

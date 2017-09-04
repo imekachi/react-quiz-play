@@ -90,7 +90,7 @@ const fakeLoginFb = () => {
       name     : 'Saran Weerakun',
       firstName: 'Saran',
     },
-  }, 4000)
+  }, 1000)
 }
 
 // ACTIONS

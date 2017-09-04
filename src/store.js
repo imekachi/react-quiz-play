@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 
 const debug   = true
-const logging = true
+const logging = false
 
 const middlewareWithLog = applyMiddleware(
   thunk,

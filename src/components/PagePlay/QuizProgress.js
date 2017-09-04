@@ -61,6 +61,7 @@ export default class QuizProgressComponent extends React.Component {
     // console.warn('>> RENDERED')
     const { currentPage, allPage, noSpaceBottom } = this.props
 
+    // calculate values in percentage
     const CAP_PERCENTAGE = 100
     const progressValue  = capBetween(0, currentPage / allPage * 100, CAP_PERCENTAGE)
     const bubbleText     = `${currentPage}/${allPage}`
