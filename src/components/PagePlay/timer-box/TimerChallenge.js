@@ -8,7 +8,7 @@ const TimerChallenge = (props) => {
   let { userInfo } = props
 
   const getTimerDistance = () => {
-    return unitPercentage(props.limitTime / props.timeLeft)
+    return unitPercentage(props.timeLimit / props.timeLeft)
   }
 
   return (
@@ -28,7 +28,7 @@ const TimerChallenge = (props) => {
       </section>
       <section className="section-timer table-cell">
         <div className="timer-wrapper table-cell-wrapper -vertical-middle">
-          <div className="timer-label table-cell" title={`จำกัดเวลา ${props.limitTime} วินาที`}>
+          <div className="timer-label table-cell" title={`จำกัดเวลา ${props.timeLimit} วินาที`}>
             <i className="fa fa-clock-o" aria-hidden={true}/>
           </div>
           <div className="timer-bar-wrapper table-cell">

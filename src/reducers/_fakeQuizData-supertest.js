@@ -167,8 +167,22 @@ export const fakeQuizData = {
   ],
 }
 
+export const fakeQuizInfo2 = {
+  id             : 58518,
+  quizType       : 'supertest',
+  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
+  description    : 'ทุกคนต้องเคยร้องแน่นอน',
+  isNotFound     : false,
+  isAccessible   : true,
+  isChallengeMode: true,
+  timerData      : {
+    type     : 'all',
+    timeLimit: 11000,
+  },
+}
+
 export const fakeQuizData2 = {
-  questionPerPage: 1,
+  questionPerPage: 100,
   questionList   : [
     {
       questionData: {
@@ -417,20 +431,6 @@ export const fakeQuizData2 = {
       },
     },
   ],
-}
-
-export const fakeQuizInfo2 = {
-  id             : 58518,
-  quizType       : 'supertest',
-  quizCover      : 'https://image.dek-d.com/27/0417/8523/124713378',
-  description    : 'ทุกคนต้องเคยร้องแน่นอน',
-  isNotFound     : false,
-  isAccessible   : true,
-  isChallengeMode: true,
-  timerData      : {
-    type     : 'each',
-    limitTime: 15,
-  },
 }
 
 export const fakeQuizResult = {}
