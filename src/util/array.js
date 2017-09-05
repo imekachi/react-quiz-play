@@ -5,6 +5,4 @@
  * @param   {number} numberOfMember
  * @return  {array}
  */
-export const makeArrayOf = (numberOfMember) => {
-  return Array.apply(null, new Array(numberOfMember))
-}
+export const makeArrayOf = numberOfMember => Array.apply(null, new Array(numberOfMember))

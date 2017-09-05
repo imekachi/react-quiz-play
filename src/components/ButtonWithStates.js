@@ -3,7 +3,7 @@ import React from 'react'
 import { WHITE_SPACE } from '../constants/unicode'
 import { iF } from '../util/condition'
 import { isValueEmpty } from '../util/empty'
-import { combineClassNames } from '../util/string'
+import { classNames } from '../util/string'
 import Icon from './Icon'
 
 const defaultConfig = {
@@ -51,7 +51,7 @@ export function makeButtonWithStates(config = { ...defaultConfig }) {
 
     // return only allowed props
     return {
-      className: combineClassNames(
+      className: classNames(
         iF(props.injectDekDButtonClass, 'dekdbutton'),
         (props.className || ''),
       ),

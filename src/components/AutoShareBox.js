@@ -1,8 +1,8 @@
 import React from 'react'
-import { combineClassNames } from '../util/string'
+import { classNames } from '../util/string'
 
 const AutoShareBox = (props) => (
-  <div id={props.id} className={combineClassNames('remark-box', props.className || '')}>
+  <div id={props.id} className={classNames('remark-box', props.className || '')}>
 
     {props.forceUnchecked ? (
       '*ยังไม่แชร์ผลลัพธ์ไปยัง Facebook'

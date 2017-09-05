@@ -5,7 +5,7 @@
  * @param   {*} data  input data
  * @return  {boolean}
  */
-export const isObject = (data) => (!!data && typeof data === 'object' && !Array.isArray(data))
+export const isObject = (data) => !!data && typeof data === 'object' && !Array.isArray(data)
 
 /**
  * Deep merge objects

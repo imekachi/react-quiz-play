@@ -52,8 +52,7 @@ const ChoiceBox = (props) => {
     const choiceId   = getChoiceId(props.questionNumber, 1)
     choiceBoxContent =
       <ChoiceItem component={TypeAnswerBox} choiceId={choiceId} input={input} questionNumber={props.questionNumber}/>
-  }
-  else {
+  } else {
     const gridChoicesPerRow = props.isMobile ? config.grid.choicePerRowMobile : config.grid.choicePerRowDesktop
     const choicesPerRow     = (props.choiceLayout === CHOICE_TYPES.LIST)
       ? props.choiceListData.length

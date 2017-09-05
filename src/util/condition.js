@@ -1,3 +1,1 @@
-export const iF = (condition, then, ifNotThen = '') => {
-  return condition ? then : ifNotThen
-}
+export const iF = (condition, then, ifNotThen = '') => (condition ? then : ifNotThen)

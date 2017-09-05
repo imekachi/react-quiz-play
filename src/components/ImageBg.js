@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { combineClassNames } from '../util/string'
+import { classNames } from '../util/string'
 
 const ImageBg = (props) => (
-  <div className={combineClassNames('image', props.className)} title={props.title}
+  <div className={classNames('image', props.className)} title={props.title}
        style={{ ...props.style, backgroundImage: `url(${props.src})` }}/>
 )
 

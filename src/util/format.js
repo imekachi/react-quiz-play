@@ -26,7 +26,7 @@ export const numberFormat = (number, precision = 0) => {
  * @param   {string} str camelCase string
  * @return  {string}
  */
-export const camelToSnake = (str) => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+export const camelToSnake = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 
 /**
  * strPadding

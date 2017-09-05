@@ -2,7 +2,7 @@ export const combineStrWith = (combineWith = ' ', filterFn = () => true, ...stri
   return strings.filter(filterFn).join(combineWith)
 }
 
-export const combineClassNames = (...classNames) => {
+export const classNames = (...classNames) => {
   return combineStrWith(
     ' ', // combine with space
     item => !!item, // remove all falsy values

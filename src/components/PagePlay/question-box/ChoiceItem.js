@@ -2,7 +2,7 @@ import React from 'react'
 
 import { iF } from '../../../util/condition'
 import { isValueEmpty } from '../../../util/empty'
-import { combineClassNames } from '../../../util/string'
+import { classNames } from '../../../util/string'
 import ImgZoomable from '../ImgZoomable'
 
 const ChoiceItemComponent = (props) => {
@@ -13,7 +13,7 @@ const ChoiceItemComponent = (props) => {
   }
 
   return (
-    <div className={combineClassNames('choice-item', iF(isActive, '-active'))}
+    <div className={classNames('choice-item', iF(isActive, '-active'))}
          title={titleAttr} onClick={onCommitAnswer} data-choice-id={choiceId}>
 
       <ImgZoomable renderAsBg className="img-box" src={img}/>

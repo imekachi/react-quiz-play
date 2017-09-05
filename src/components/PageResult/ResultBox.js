@@ -2,7 +2,7 @@ import React from 'react'
 
 import { iF } from '../../util/condition'
 import { isValueEmpty } from '../../util/empty'
-import { combineClassNames } from '../../util/string'
+import { classNames } from '../../util/string'
 import ActionBox from './ActionBox'
 import ResultImage from './ResultImage'
 
@@ -25,7 +25,7 @@ const ResultBox = (props) => {
         <ResultImage src={image}/>
 
         <span className="result _double-quote">{header}</span>
-        <div className={combineClassNames('result-description', iF(description.isCentered, '_txt-center'))}>
+        <div className={classNames('result-description', iF(description.isCentered, '_txt-center'))}>
           <span className="detail">{description.textHtml}</span>
           {!isValueEmpty(descriptionLink) && (
             <a className="ownerlink" href={descriptionLink.url} title={descriptionLink.textAttr}>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { combineClassNames } from '../util/string'
+import { classNames } from '../util/string'
 
 /**
  * FontAwesome Icon component
@@ -8,11 +8,10 @@ import { combineClassNames } from '../util/string'
 const Icon = (props) => {
   const baseClass  = props.baseClass || 'fa'
   const TagName    = props.tagName || 'i'
-  const classNames = props.className || ''
   const ariaHidden = props['aria-hidden'] !== false
 
   const allowedProps = {
-    className    : combineClassNames(baseClass, classNames),
+    className    : classNames(baseClass, props.className),
     title        : props.title,
     style        : props.style,
     'aria-hidden': ariaHidden,

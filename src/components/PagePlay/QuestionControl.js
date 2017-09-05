@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { iF } from '../../util/condition'
-import { combineClassNames } from '../../util/string'
+import { classNames } from '../../util/string'
 import { makeButtonWithStates } from '../ButtonWithStates'
 
 const PrevButton = makeButtonWithStates({
@@ -47,7 +47,7 @@ const QuestionControlBox = ({ pagingData, disableNext, submitting, onClickNext, 
   const disableNextClass = iF(disableNext, '-disabled')
 
   return (
-    <div className={combineClassNames('question-control', iF(isVisibleSubmit, '-submit'))}>
+    <div className={classNames('question-control', iF(isVisibleSubmit, '-submit'))}>
       {isVisiblePrev && <PrevButton className={`controlbutton -prev`} onclick={onClickPrev}/>}
       {isVisibleNext && <NextButton className={`controlbutton -next ${disableNextClass}`} onClick={onClickNext}/>}
       {isVisibleSubmit &&

@@ -6,4 +6,4 @@
  * @param   {function} fn
  * @return  {boolean}
  */
-export const isFunction = (fn) => !!(fn && fn.constructor && fn.call && fn.apply)
+export const isFunction = fn => !!(fn && fn.constructor && fn.call && fn.apply)

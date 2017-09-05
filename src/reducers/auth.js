@@ -66,17 +66,17 @@ export default function authReducer(state = initialState, action) {
 }
 
 // SELECTORS
-export const getUser           = (state) => state.auth.user
-export const getIsLoginPending = (state) => state.auth.isLoginPending
-export const getLoggingInType  = (state) => state.auth.loggingInType
+export const getUser           = state => state.auth.user
+export const getIsLoginPending = state => state.auth.isLoginPending
+export const getLoggingInType  = state => state.auth.loggingInType
 
 export const getLoggedInType = createSelector(
   getUser,
-  (user) => new Set(Object.keys(user)),
+  user => new Set(Object.keys(user)),
 )
 export const getIsLogin      = createSelector(
   getLoggedInType,
-  (loggedInType) => loggedInType.size > 0,
+  loggedInType => loggedInType.size > 0,
 )
 export const getIsFBLoading  = createSelector(
   getIsLoginPending, getLoggingInType,

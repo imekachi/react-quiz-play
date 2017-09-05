@@ -18,4 +18,4 @@ export const unitPercentage = (number, scaleToHundred = true) => {
  * @param   {number} number
  * @return  {string}
  */
-export const unitPixelate = (number) => strSuffix(getNumber(number, false), 'px')
+export const unitPixelate = number => strSuffix(getNumber(number, false), 'px')

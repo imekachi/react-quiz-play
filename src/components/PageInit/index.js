@@ -23,18 +23,26 @@ const MessageBoxWrapper = ({ children }) => (
 )
 
 const PageInitComponent = (props) => {
+  const {
+          isNotFound,
+          isAccessible,
+          timerData,
+          description,
+          auth,
+          playClickHandler,
+          quizCover = DEFAULT_QUIZ_COVER,
+        } = props
 
-  if (props.isNotFound) {
+  if (isNotFound) {
     return (
       <div className="start-quiz-box">
         <MessageBoxWrapper>ไม่พบข้อมูลควิซหรือควิซนี้อาจถูกลบ</MessageBoxWrapper>
       </div>
     )
-  }
-  else if (!props.isAccessible) {
+  } else if (!isAccessible) {
     return (
       <div className="start-quiz-box">
-        <CoverImg src={props.quizCover || DEFAULT_QUIZ_COVER}/>
+        <CoverImg src={quizCover}/>
         <MessageBoxWrapper>ควิซนี้ยังไม่เปิดใช้งาน</MessageBoxWrapper>
       </div>
     )
@@ -42,19 +50,16 @@ const PageInitComponent = (props) => {
 
   return (
     <div className="start-quiz-box">
-      <CoverImg src={props.quizCover || DEFAULT_QUIZ_COVER}/>
+      <CoverImg src={quizCover}/>
 
-      {props.timerData ? (
-        <TimerInfo {...props.timerData}/>
-      ) : (
-         <Description centered value={props.description}/>
-       )}
+      {timerData
+        ? <TimerInfo {...timerData}/>
+        : <Description centered value={description}/>}
 
-      {props.auth.isLogin ? (
-        <ActionBoxPlay loggedInType={props.auth.loggedInType} playClickHandler={props.playClickHandler}/>
-      ) : (
-         <ActionBoxLogin isFBLoading={props.auth.isFBLoading}/>
-       )}
+      {auth.isLogin
+        ? <ActionBoxPlay loggedInType={auth.loggedInType} playClickHandler={playClickHandler}/>
+        : <ActionBoxLogin isFBLoading={auth.isFBLoading}/>
+      }
     </div>
   )
 }

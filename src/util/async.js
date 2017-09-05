@@ -4,4 +4,4 @@
  * @param   {number} timeToWait
  * @return  {promise}
  */
-export const wait = (timeToWait) => new Promise(resolve => setTimeout(resolve, timeToWait))
+export const wait = timeToWait => new Promise(resolve => setTimeout(resolve, timeToWait))

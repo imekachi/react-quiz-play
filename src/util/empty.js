@@ -4,9 +4,7 @@
  * @param   {object} obj  input object
  * @return  {boolean}
  */
-export const isObjEmpty = (obj) => {
-  return obj.constructor === Object && Object.keys(obj).length === 0
-}
+export const isObjEmpty = obj => obj.constructor === Object && Object.keys(obj).length === 0
 
 /**
  * Array empty check
@@ -14,9 +12,7 @@ export const isObjEmpty = (obj) => {
  * @param   {array} arr   input array
  * @return  {boolean}
  */
-export const isArrayEmpty = (arr) => {
-  return arr.constructor === Array && arr.length === 0
-}
+export const isArrayEmpty = arr => arr.constructor === Array && arr.length === 0
 
 /**
  * Value check if it is empty
@@ -25,7 +21,7 @@ export const isArrayEmpty = (arr) => {
  * @return  {boolean}
  */
 export const isValueEmpty = (value) => {
-  return (!value && value !== false) // using falsy value ability expect false itself
+  return (!value && value !== false) // check falsy value but exclude false itself
     || isObjEmpty(value)
     || isArrayEmpty(value)
 }

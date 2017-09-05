@@ -4,7 +4,7 @@
  * @param   {*} data  input data
  * @return  {boolean}
  */
-export const isNumber = (data) => (!isNaN(parseFloat(data))) && isFinite(data)
+export const isNumber = data => (!isNaN(parseFloat(data))) && isFinite(data)
 
 /**
  * getNumber

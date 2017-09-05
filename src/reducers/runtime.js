@@ -33,7 +33,7 @@ export default function runtime(state = initialState, action) {
 }
 
 // SELECTORS
-export const getCurrentPage = (state) => state.runtime.currentPage
+export const getCurrentPage = state => state.runtime.currentPage
 
 export const getAllPage = createSelector(
   getQuestionCount, getQuestionPerPage,
@@ -110,8 +110,7 @@ const questionAnswered = (props) => (dispatch, getState) => {
   // AUTO NEXT QUESTION
   if (getIsSingleQuestion(state)) {
     wait(actionDelay).then(() => dispatch(nextPage()))
-  }
-  else {
+  } else {
     // TODO: make it auto scroll
   }
 }

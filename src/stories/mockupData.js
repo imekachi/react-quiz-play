@@ -13,7 +13,7 @@ export const quizStore = {
     isChallengeMode: false,
     timerData      : {
       type     : 'each',
-      limitTime: 15,
+      timeLimit: 15,
     },
   },
   quizData  : {
