@@ -25,7 +25,7 @@ export const FORM_NAMES = {
 }
 
 export const DELAYS = {
-  BEFORE_NEXT_PAGE: 250,
+  BEFORE_NEXT_PAGE: 200,
 }
 
 export const TIMER_TYPES = {

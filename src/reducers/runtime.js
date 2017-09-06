@@ -9,6 +9,7 @@ import {
   getAllPage,
   getIsSingleQuestion,
   getIsTimerEachQuestion,
+  getQuestionCount,
   getQuestionList,
   getQuestionPerPage,
   getTimerData,
@@ -97,21 +98,18 @@ const prevPage = () => (dispatch, getState) => {
 }
 
 const questionAnswered = (props) => (dispatch, getState) => {
-  const { isMultipleChoice } = props
+  const { questionNumber, isMultipleChoice } = props
 
   const state           = getState()
   const isFormValid     = isValid(FORM_NAMES.QUIZ_PLAY)(state)
+  const isLastQuestion  = questionNumber >= getQuestionCount(state)
   const timerData       = getTimerData(state)
   const nextActionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
 
-  // backup condition with last question:
-  // const { questionNumber, isMultipleChoice } = props
-  // const allQuestionCount = getQuestionCount(state)
-  // if (isFormValid && questionNumber >= allQuestionCount)
-
   // AUTO SUBMIT when form is valid, no error
-  if (isFormValid) {
+  if (isFormValid && isLastQuestion) {
     console.log('>> AUTO-SUBMIT ')
+    // TODO: possible bug, should be in the submit function
     if (timerData && !getIsTimerEachQuestion(state)) {
       dispatch(timerActions.stopTimer(FORM_NAMES.QUIZ_PLAY))
     }
