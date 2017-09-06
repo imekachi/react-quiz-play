@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 
 import QuizProgressComponent from '../components/PagePlay/QuizProgress'
-import { getAllPage, getCurrentPage } from '../reducers/runtime'
+import { getAllPage } from '../reducers/quiz'
+import { getCurrentPage } from '../reducers/runtime'
 
 const mapStateToProps = (state) => {
   return {

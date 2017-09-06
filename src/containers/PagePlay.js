@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { getIsSingleQuestion, getQuestionCount } from '../reducers/quiz'
-import { actions as runtimeActions, getAllPage, getIsNextButtonDisabled, getStartQuestion } from '../reducers/runtime'
+import { getAllPage, getIsSingleQuestion, getQuestionCount } from '../reducers/quiz'
+import { actions as runtimeActions, getIsNextButtonDisabled, getStartQuestion } from '../reducers/runtime'
 import FormPlay from './FormPlay'
 
 const mapStateToProps = (state) => {

@@ -1,3 +1,5 @@
+import { TIMER_TYPES } from '../constants/quiz'
+
 export const fakeQuizInfo = {
   id          : 58518,
   quizType    : 'supertest',
@@ -176,7 +178,7 @@ export const fakeQuizInfo2 = {
   isAccessible   : true,
   isChallengeMode: true,
   timerData      : {
-    type     : 'all',
+    type     : TIMER_TYPES.ALL,
     timeLimit: 11000,
   },
 }

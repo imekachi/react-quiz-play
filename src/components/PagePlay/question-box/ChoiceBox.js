@@ -18,10 +18,10 @@ const config = {
 /**
  * Prepare data for rendering as how it is going to be rendered
  *
- * @param   {array} choiceListData
+ * @param   {Array} choiceListData
  * @param   {number} choicesPerRow
  * @param   {number} questionNumber
- * @return  {array}
+ * @return  {Array}
  */
 const getChoiceListUIData = (choiceListData, choicesPerRow, questionNumber) => {
   const totalRow = Math.ceil(choiceListData.length / choicesPerRow)

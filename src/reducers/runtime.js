@@ -5,7 +5,15 @@ import { DELAYS, FORM_NAMES } from '../constants/quiz'
 import { getFieldName } from '../containers/FormPlay'
 import { wait } from '../util/async'
 import { capMax, capMin } from '../util/number'
-import { getIsSingleQuestion, getQuestionCount, getQuestionList, getQuestionPerPage } from './quiz'
+import {
+  getAllPage,
+  getIsSingleQuestion,
+  getIsTimerEachQuestion,
+  getQuestionList,
+  getQuestionPerPage,
+  getTimerData,
+} from './quiz'
+import { actions as timerActions } from './timer'
 
 export const types = {
   PAGE_CHANGE: 'RUNTIME/PAGE_CHANGE',
@@ -34,11 +42,6 @@ export default function runtime(state = initialState, action) {
 
 // SELECTORS
 export const getCurrentPage = state => state.runtime.currentPage
-
-export const getAllPage = createSelector(
-  getQuestionCount, getQuestionPerPage,
-  (questionCount, questionPerPage) => Math.ceil(questionCount / questionPerPage),
-)
 
 export const getStartQuestion = createSelector(
   getCurrentPage, getQuestionPerPage,
@@ -94,22 +97,30 @@ const prevPage = () => (dispatch, getState) => {
 }
 
 const questionAnswered = (props) => (dispatch, getState) => {
-  const { questionNumber, isMultipleChoice } = props
+  const { isMultipleChoice } = props
 
-  const state            = getState()
-  const allQuestionCount = getQuestionCount(state)
-  const isFormValid      = isValid(FORM_NAMES.QUIZ_PLAY)(state)
+  const state           = getState()
+  const isFormValid     = isValid(FORM_NAMES.QUIZ_PLAY)(state)
+  const timerData       = getTimerData(state)
+  const nextActionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
 
-  const actionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
+  // backup condition with last question:
+  // const { questionNumber, isMultipleChoice } = props
+  // const allQuestionCount = getQuestionCount(state)
+  // if (isFormValid && questionNumber >= allQuestionCount)
 
-  // AUTO SUBMIT ON LAST QUESTION
-  if (isFormValid && questionNumber >= allQuestionCount) {
-    return wait(actionDelay).then(() => dispatch(reduxFormSubmit(FORM_NAMES.QUIZ_PLAY)))
+  // AUTO SUBMIT when form is valid, no error
+  if (isFormValid) {
+    console.log('>> AUTO-SUBMIT ')
+    if (timerData && !getIsTimerEachQuestion(state)) {
+      dispatch(timerActions.stopTimer(FORM_NAMES.QUIZ_PLAY))
+    }
+    return wait(nextActionDelay).then(() => dispatch(reduxFormSubmit(FORM_NAMES.QUIZ_PLAY)))
   }
 
   // AUTO NEXT QUESTION
   if (getIsSingleQuestion(state)) {
-    wait(actionDelay).then(() => dispatch(nextPage()))
+    wait(nextActionDelay).then(() => dispatch(nextPage()))
   } else {
     // TODO: make it auto scroll
   }

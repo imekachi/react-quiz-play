@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { QUIZ_STATES, QUIZ_TYPES } from '../constants/quiz'
+import { FORM_NAMES, QUIZ_STATES, QUIZ_TYPES, TIMER_TYPES } from '../constants/quiz'
 // ----------------------------------------------- FAKE_DATA
 import _fakeAsync from './_fakeAsync'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
@@ -10,6 +10,7 @@ import { fakeQuizData2 as fakeQuizData, fakeQuizInfo2 as fakeQuizInfo } from './
 // ----------------------------------------------- FAKE_DATA
 import { actions as authActions } from './auth'
 import { actions as resultActions } from './result'
+import { actions as timerActions } from './timer'
 
 // Global Quiz States
 export const types = {
@@ -92,25 +93,42 @@ export default function quiz(state = initialState, action) {
 }
 
 // SELECTORS
-export const getQuestionPerPage = (state) => state.quiz.quizData.questionPerPage
-export const getQuestionList    = (state) => state.quiz.quizData.questionList
-export const getQuizState       = (state) => state.quiz.quizState
+export const getQuestionPerPage = state => state.quiz.quizData.questionPerPage
+export const getQuestionList    = state => state.quiz.quizData.questionList
+export const getQuizState       = state => state.quiz.quizState
+export const getTimerData       = state => state.quiz.quizInfo.timerData
 
-export const getQuestionCount    = createSelector(
+export const getQuestionCount       = createSelector(
   getQuestionList,
-  (questionList) => questionList.length,
+  questionList => questionList.length,
 )
-export const getIsSingleQuestion = createSelector(
+export const getIsSingleQuestion    = createSelector(
   getQuestionPerPage,
-  (questionPerPage) => (questionPerPage <= 1),
+  questionPerPage => (questionPerPage <= 1),
 )
-export const getIsResultPage     = createSelector(
+export const getIsResultPage        = createSelector(
   getQuizState,
-  (quizState) => (quizState === QUIZ_STATES.END),
+  quizState => (quizState === QUIZ_STATES.END),
+)
+export const getAllPage             = createSelector(
+  getQuestionCount, getQuestionPerPage,
+  (questionCount, questionPerPage) => Math.ceil(questionCount / questionPerPage),
+)
+export const getIsTimerEachQuestion = createSelector(
+  getTimerData,
+  timerData => !!timerData && timerData.type === TIMER_TYPES.EACH,
 )
 
 // ACTIONS
-const start = () => ({ type: types.QUIZ_START })
+const start = () => (dispatch, getState) => {
+  dispatch({ type: types.QUIZ_START })
+
+  const state     = getState()
+  const timerData = getTimerData(state)
+  if (timerData && !getIsTimerEachQuestion(state)) {
+    dispatch(timerActions.startTimer(FORM_NAMES.QUIZ_PLAY, timerData.timeLimit))
+  }
+}
 
 /**
  * Routing after quiz initialized
@@ -193,8 +211,11 @@ const init = () => async (dispatch) => {
   }
 }
 
-// this will be called by reduxForm handleSubmit
-// it receive promise
+/**
+ * this will be called by reduxForm handleSubmit after validate and no error occur
+ * @param data
+ * @return {Promise}
+ */
 const submit = (data) => async (dispatch) => {
   try {
     const response = await dispatch(resultActions.fetchResult(data))

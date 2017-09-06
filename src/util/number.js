@@ -17,7 +17,7 @@ export const isNumber = data => (!isNaN(parseFloat(data))) && isFinite(data)
  *
  * @param   {string|number} data        input string or number
  * @param   {boolean} [isRound = false] option if you want the number rounded or raw float
- * @return  {Number}
+ * @return  {number}
  */
 export const getNumber = (data, isRound = false) => {
   let number = parseFloat(String(data).replace(/(?!^-)[^(\d|.)]/g, ''))

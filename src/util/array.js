@@ -3,6 +3,6 @@
  * good for map, reduce
  *
  * @param   {number} numberOfMember
- * @return  {array}
+ * @return  {Array}
  */
 export const makeArrayOf = numberOfMember => Array.apply(null, new Array(numberOfMember))

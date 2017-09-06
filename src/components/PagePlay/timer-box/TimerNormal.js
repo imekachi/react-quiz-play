@@ -13,7 +13,7 @@ const TimerNormal = ({ timeLimit, withIcon, timeWarning = true }) => {
 
   if (timeWarning && timeLimit > 0) {
     switch (true) {
-      case timeLimit < 5000: {
+      case timeLimit < 6000: {
         timeWarningClassName = '-danger'
         break
       }

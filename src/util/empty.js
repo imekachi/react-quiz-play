@@ -9,7 +9,7 @@ export const isObjEmpty = obj => obj.constructor === Object && Object.keys(obj).
 /**
  * Array empty check
  *
- * @param   {array} arr   input array
+ * @param   {Array} arr   input array
  * @return  {boolean}
  */
 export const isArrayEmpty = arr => arr.constructor === Array && arr.length === 0
