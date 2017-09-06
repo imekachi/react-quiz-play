@@ -21,7 +21,8 @@ const TimerNormal = ({ timeLimit, withIcon, timeWarning = true }) => {
         timeWarningClassName = '-warning'
         break
       }
-      default: break
+      default:
+        break
     }
   }
 

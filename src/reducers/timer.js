@@ -17,11 +17,11 @@ export const types = {
  * }
  */
 export const initialState = {
-  timeLeft   : 0,
-  timers     : {},
+  timeLeft: 0,
+  timers  : {},
 }
 
-export const TIMER_FPS = 1
+export const TIMER_FPS  = 1
 export const TIMER_STEP = 1000 / TIMER_FPS
 
 // REDUCERS
@@ -62,11 +62,11 @@ export default function timer(state = initialState, action) {
       return {
         ...state,
         timeLeft: capMin(state.timeLeft - action.payload.step, 0),
-        timers: {
+        timers  : {
           ...state.timers,
           [action.payload.name]: {
             ...state.timers[action.payload.name],
-            intervalId  : action.payload.intervalId || state.timers[action.payload.name].intervalId,
+            intervalId: action.payload.intervalId || state.timers[action.payload.name].intervalId,
           },
         },
       }

@@ -1,3 +1,4 @@
+import { scroller } from 'react-scroll'
 import { getFormSyncErrors, isPristine, isSubmitting, isValid, submit as reduxFormSubmit } from 'redux-form'
 import { createSelector } from 'reselect'
 
@@ -7,6 +8,7 @@ import { wait } from '../util/async'
 import { capMax, capMin } from '../util/number'
 import {
   getAllPage,
+  getIsMobile,
   getIsSingleQuestion,
   getIsTimerEachQuestion,
   getQuestionCount,
@@ -97,12 +99,25 @@ const prevPage = () => (dispatch, getState) => {
   })
 }
 
+export const scrollToComponent = (componentName, options = {}) => {
+  const offsetDesktop = -150
+  const offsetMobile  = -200
+
+  scroller.scrollTo(componentName, {
+    duration: 300,
+    smooth  : true,
+    offset  : options.isMobile ? offsetMobile : offsetDesktop,
+    ...options
+  })
+}
+
 const questionAnswered = (props) => (dispatch, getState) => {
   const { questionNumber, isMultipleChoice } = props
 
   const state           = getState()
   const isFormValid     = isValid(FORM_NAMES.QUIZ_PLAY)(state)
   const isLastQuestion  = questionNumber >= getQuestionCount(state)
+  const isMobile        = getIsMobile(state)
   const timerData       = getTimerData(state)
   const nextActionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
 
@@ -119,8 +134,9 @@ const questionAnswered = (props) => (dispatch, getState) => {
   // AUTO NEXT QUESTION
   if (getIsSingleQuestion(state)) {
     wait(nextActionDelay).then(() => dispatch(nextPage()))
-  } else {
+  } else if (!isLastQuestion) {
     // TODO: make it auto scroll
+    scrollToComponent(getFieldName(questionNumber + 1), { isMobile })
   }
 }
 

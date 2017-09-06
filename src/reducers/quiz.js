@@ -97,6 +97,7 @@ export const getQuestionPerPage = state => state.quiz.quizData.questionPerPage
 export const getQuestionList    = state => state.quiz.quizData.questionList
 export const getQuizState       = state => state.quiz.quizState
 export const getTimerData       = state => state.quiz.quizInfo.timerData
+export const getIsMobile        = state => state.quiz.clientData.isMobile
 
 export const getQuestionCount       = createSelector(
   getQuestionList,
@@ -193,7 +194,7 @@ const retryFetch = () => (dispatch) => {
 /**
  * Fetch Quiz, AutoLogin, then route
  *
- * @return {function(dispatch)}
+ * @return  {object} action
  */
 const init = () => async (dispatch) => {
   // concurrent requests
@@ -213,8 +214,8 @@ const init = () => async (dispatch) => {
 
 /**
  * this will be called by reduxForm handleSubmit after validate and no error occur
- * @param data
- * @return {Promise}
+ * @param   {object} data
+ * @return  {Promise}
  */
 const submit = (data) => async (dispatch) => {
   try {

@@ -5,7 +5,7 @@ import TimerBoxComponent from '../components/PagePlay/TimerBox'
 const mapStateToProps = (state) => {
   return {
     isChallengeMode: state.quiz.quizInfo.isChallengeMode,
-    timeLeft      : state.timer.timeLeft,
+    timeLeft       : state.timer.timeLeft,
   }
 }
 

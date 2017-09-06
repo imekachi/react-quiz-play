@@ -179,7 +179,7 @@ export const fakeQuizInfo2 = {
   isChallengeMode: true,
   timerData      : {
     type     : TIMER_TYPES.ALL,
-    timeLimit: 11000,
+    timeLimit: 15000,
   },
 }
 

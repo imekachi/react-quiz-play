@@ -1,21 +1,25 @@
 import React from 'react'
+import { Element as ScrollElement } from 'react-scroll'
 import { Field } from 'redux-form'
-// UI
+
 import QuestionBox from './QuestionBox'
 
 const QuestionStreamComponent = ({ stream, isSingleQuestion, isMobile, hideQuestionNumber, getFieldName }) => {
 
   const listOfQuestions = stream.map((questionObj, index) => {
-
-    return <Field key={index}
-                  name={getFieldName(questionObj.questionData.number)}
-                  component={QuestionBox}
-                  payload={{
-                    ...questionObj,
-                    isMobile,
-                    hideQuestionNumber,
-                    isSingleQuestion,
-                  }}/>
+    const questionName = getFieldName(questionObj.questionData.number)
+    return (
+      <ScrollElement name={questionName} key={index}>
+        <Field name={questionName}
+               component={QuestionBox}
+               payload={{
+                 ...questionObj,
+                 isMobile,
+                 hideQuestionNumber,
+                 isSingleQuestion,
+               }}/>
+      </ScrollElement>
+    )
   })
 
   return (

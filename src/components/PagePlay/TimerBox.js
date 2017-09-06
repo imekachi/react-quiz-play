@@ -3,7 +3,7 @@ import React from 'react'
 import TimerChallenge from './timer-box/TimerChallenge'
 import TimerNormal from './timer-box/TimerNormal'
 
-const TimerBoxComponent = ({timeLeft, isChallengeMode, userInfo}) => {
+const TimerBoxComponent = ({ timeLeft, isChallengeMode, userInfo }) => {
   return (
     <div className="timer-box-preserveheight">
       <div className="timer-box-sticky">
