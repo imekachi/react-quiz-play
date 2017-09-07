@@ -16,6 +16,30 @@ import React from 'react'
  * @return  {function} that receive React.Component and returns React.Component
  * @return  {React.Component}
  */
+
+export const DOM_POSITION       = {
+  ABOVE : 'ABOVE',
+  INSIDE: 'INSIDE',
+  BELOW : 'BELOW',
+}
+export const getCurrentPosition = (domRect, viewport) => {
+  switch (true) {
+    case domRect.top < 0: {
+      return DOM_POSITION.ABOVE
+    }
+    case domRect.top > viewport.height: {
+      return DOM_POSITION.BELOW
+    }
+
+    case domRect.top >= 0 && domRect.top <= viewport.height: {
+      return DOM_POSITION.INSIDE
+    }
+    default: {
+      return null
+    }
+  }
+}
+
 export const positionAware = (mapPositionToProps) => (WrappedComponent) => {
   const defaultProps = {
     debug                : false,
@@ -26,6 +50,7 @@ export const positionAware = (mapPositionToProps) => (WrappedComponent) => {
     constructor() {
       super()
       this.state = {
+        position: null,
         ...defaultProps,
         ...mapPositionToProps({}, {}, {}),
       }
@@ -35,21 +60,38 @@ export const positionAware = (mapPositionToProps) => (WrappedComponent) => {
     }
 
     onScroll() {
-      const domRect   = this.DOMElement.getBoundingClientRect()
-      const mappedObj = {
-        ...defaultProps,
-        ...mapPositionToProps(domRect, this.props, this.state)
+      const viewport = {
+        height: document.documentElement.clientHeight,
+        width : document.documentElement.clientWidth,
       }
 
-      if (mappedObj.debug) {
+      const domRect               = this.DOMElement.getBoundingClientRect()
+      const currentPosition       = this.getCurrentPosition(domRect, viewport)
+      const shouldComponentUpdate = this.state.position !== currentPosition
+
+      const positionData = {
+        domRect,
+        currentPosition,
+        viewport,
+        shouldComponentUpdate,
+      }
+
+      const nextState = {
+        ...defaultProps,
+        position: currentPosition,
+        shouldComponentUpdate,
+        ...mapPositionToProps(positionData, this.props, this.state)
+      }
+
+      if (nextState.debug) {
         console.group('PositionAware')
-        console.log('>> domRect: ', domRect)
-        console.log('>> data: ', mappedObj)
+        console.log('>> positionData: ', positionData)
+        console.log('>> nextState: ', nextState)
         console.groupEnd()
       }
 
-      if (mappedObj.shouldComponentUpdate) {
-        this.setState(mappedObj)
+      if (nextState.shouldComponentUpdate) {
+        this.setState(nextState)
       }
     }
 

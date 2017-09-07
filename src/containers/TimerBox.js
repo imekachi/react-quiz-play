@@ -2,19 +2,11 @@ import { connect } from 'react-redux'
 
 import TimerBoxComponent from '../components/PagePlay/TimerBox'
 import { getIsMobile } from '../reducers/quiz'
-import positionAware from './positionAware'
+import positionAware, { DOM_POSITION } from './positionAware'
 
-const DOM_POSITION = {
-  INSIDE: 'INSIDE',
-  ABOVE : 'ABOVE',
-}
-
-const TimerBoxSticky = positionAware((domRect, ownProps, ownState) => {
-  const currentPosition = domRect.top < 0 ? DOM_POSITION.ABOVE : DOM_POSITION.INSIDE
+const TimerBoxSticky = positionAware(positionData => {
   return {
-    position             : currentPosition,
-    sticky               : currentPosition === DOM_POSITION.ABOVE,
-    shouldComponentUpdate: ownState.position !== currentPosition,
+    sticky: positionData.currentPosition === DOM_POSITION.ABOVE,
   }
 })(TimerBoxComponent)
 
