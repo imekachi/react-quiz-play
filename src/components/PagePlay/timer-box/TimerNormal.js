@@ -6,7 +6,7 @@ import { classNames } from '../../../util/string'
 import { extractTimeFragments } from '../../../util/time'
 import Icon from '../../Icon'
 
-const TimerNormal = ({ timeLimit, withIcon, timeWarning = true }) => {
+const TimerNormal = ({ timeLimit, withIcon, timeWarning = true, modeMini }) => {
   const timeFragments      = extractTimeFragments(timeLimit)
   const timeFragmentsText  = { ...timeFragments }
   let timeWarningClassName = ''
@@ -31,7 +31,7 @@ const TimerNormal = ({ timeLimit, withIcon, timeWarning = true }) => {
   }
 
   return (
-    <div className="timer-box-wrapper _hidden-mode-challenge">
+    <div className={classNames('timer-box-wrapper _hidden-mode-challenge', modeMini && '-mini')}>
       {withIcon && (
         <div className="label-box">
           <div className="text -label">เหลือเวลา</div>

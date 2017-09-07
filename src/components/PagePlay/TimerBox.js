@@ -1,15 +1,17 @@
 import React from 'react'
 
+import { classNames } from '../../util/string'
 import TimerChallenge from './timer-box/TimerChallenge'
 import TimerNormal from './timer-box/TimerNormal'
 
-const TimerBoxComponent = ({ timeLeft, isChallengeMode, userInfo }) => {
+const TimerBoxComponent = (props) => {
+  const { timeLeft, sticky, isChallengeMode, userInfo, connectRefDOM, isMobile } = props
   return (
-    <div className="timer-box-preserveheight">
-      <div className="timer-box-sticky">
+    <div className="timer-box-preserveheight" ref={connectRefDOM}>
+      <div className={classNames('timer-box-sticky', sticky && '-stick')}>
         {false && isChallengeMode
           ? <TimerChallenge timeLimit={timeLeft} userInfo={userInfo}/>
-          : <TimerNormal withIcon timeLimit={timeLeft}/>}
+          : <TimerNormal withIcon timeLimit={timeLeft} modeMini={isMobile}/>}
       </div>
     </div>
   )
