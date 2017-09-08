@@ -66,7 +66,7 @@ export const positionAware = (mapPositionToProps) => (WrappedComponent) => {
       }
 
       const domRect               = this.DOMElement.getBoundingClientRect()
-      const currentPosition       = this.getCurrentPosition(domRect, viewport)
+      const currentPosition       = getCurrentPosition(domRect, viewport)
       const shouldComponentUpdate = this.state.position !== currentPosition
 
       const positionData = {
