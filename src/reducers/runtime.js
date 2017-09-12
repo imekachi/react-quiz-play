@@ -1,10 +1,19 @@
 import { scroller } from 'react-scroll'
-import { getFormSyncErrors, isPristine, isSubmitting, isValid, submit as reduxFormSubmit } from 'redux-form'
+import {
+  change,
+  getFormSyncErrors,
+  hasSubmitSucceeded,
+  isPristine,
+  isSubmitting,
+  submit as reduxFormSubmit,
+} from 'redux-form'
 import { createSelector } from 'reselect'
 
 import { DELAYS, FORM_NAMES } from '../constants/quiz'
-import { getFieldName } from '../containers/FormPlay'
+import { getTimerName, TIMER_TYPES } from '../constants/timer'
+import { getFieldName } from '../form'
 import { wait } from '../util/async'
+import { isValueEmpty } from '../util/empty'
 import { capMax, capMin } from '../util/number'
 import {
   getAllPage,
@@ -111,32 +120,68 @@ export const scrollToComponent = (componentName, options = {}) => {
   })
 }
 
-const questionAnswered = (props) => (dispatch, getState) => {
+const autoNextQuestion = ({ questionNumber, timerData, isTimerEachQuestion, nextQuestionDelay }, dispatch, state) => {
+  const isMobile           = getIsMobile(state)
+  const isSingleQuestion   = getIsSingleQuestion(state)
+  const isLastQuestion     = questionNumber >= getQuestionCount(state)
+  const nextQuestionNumber = questionNumber + 1
+
+  if (isSingleQuestion) {
+    wait(nextQuestionDelay).then(() => dispatch(nextPage()))
+    isTimerEachQuestion && dispatch(timerActions.startTimer(getTimerName(nextQuestionNumber), timerData.timeLimit))
+  } else if (!isLastQuestion) {
+    scrollToComponent(getFieldName(nextQuestionNumber), { isMobile })
+  }
+}
+
+const autoSubmit = async ({ isTimerEachQuestion, submitDelay }, dispatch) => {
+  if (!isTimerEachQuestion) {
+    await dispatch(timerActions.stopTimer(getTimerName()))
+  }
+  return wait(submitDelay).then(() => dispatch(reduxFormSubmit(FORM_NAMES.QUIZ_PLAY)))
+}
+
+const shouldAnswerUpdate = (state) => {
+  const isFormSubmitting = isSubmitting(FORM_NAMES.QUIZ_PLAY)(state)
+  const isFormSubmitted  = hasSubmitSucceeded(FORM_NAMES.QUIZ_PLAY)(state)
+
+  return !(isFormSubmitting || isFormSubmitted)
+}
+
+const questionAnswered = (props) => async (dispatch, getState) => {
+  let state         = getState()
+  const updateState = () => state = getState()
+
+  if (await !shouldAnswerUpdate(state)) return
+
+  await dispatch(change(FORM_NAMES.QUIZ_PLAY, props.input.name, props.value))
+  await updateState()
+
   const { questionNumber, isMultipleChoice } = props
 
-  const state           = getState()
-  const isFormValid     = isValid(FORM_NAMES.QUIZ_PLAY)(state)
-  const isLastQuestion  = questionNumber >= getQuestionCount(state)
-  const isMobile        = getIsMobile(state)
-  const timerData       = getTimerData(state)
-  const nextActionDelay = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
+  const isFormValid         = isValueEmpty(getFormSyncErrors(FORM_NAMES.QUIZ_PLAY)(state))
+  const timerData           = getTimerData(state)
+  const isTimerEachQuestion = !isValueEmpty(timerData) && getIsTimerEachQuestion(state)
+  const nextActionDelay     = isMultipleChoice ? DELAYS.BEFORE_NEXT_PAGE : 0
 
-  // AUTO SUBMIT when form is valid, no error
-  if (isFormValid && isLastQuestion) {
-    console.log('>> AUTO-SUBMIT ')
-    // TODO: possible bug, should be in the submit function
-    if (timerData && !getIsTimerEachQuestion(state)) {
-      dispatch(timerActions.stopTimer(FORM_NAMES.QUIZ_PLAY))
-    }
-    return wait(nextActionDelay).then(() => dispatch(reduxFormSubmit(FORM_NAMES.QUIZ_PLAY)))
+  // STOP TIMER EACH QUESTION
+  if (isTimerEachQuestion) {
+    dispatch(timerActions.stopTimer(getTimerName(questionNumber)))
   }
+  // console.warn(`>> ANSWERED(${questionNumber}): ${props.value}`)
 
-  // AUTO NEXT QUESTION
-  if (getIsSingleQuestion(state)) {
-    wait(nextActionDelay).then(() => dispatch(nextPage()))
-  } else if (!isLastQuestion) {
-    // TODO: make it auto scroll
-    scrollToComponent(getFieldName(questionNumber + 1), { isMobile })
+  if (isFormValid) {
+    return autoSubmit({
+      isTimerEachQuestion,
+      submitDelay: nextActionDelay,
+    }, dispatch)
+  } else {
+    return autoNextQuestion({
+      questionNumber,
+      timerData,
+      isTimerEachQuestion,
+      nextQuestionDelay: nextActionDelay,
+    }, dispatch, state)
   }
 }
 

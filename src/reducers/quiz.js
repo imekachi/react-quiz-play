@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect'
 
-import { FORM_NAMES, QUIZ_STATES, QUIZ_TYPES, TIMER_TYPES } from '../constants/quiz'
+import { QUIZ_STATES, QUIZ_TYPES } from '../constants/quiz'
+import { getTimerName, TIMER_TYPES } from '../constants/timer'
+import { getQuestionNumberFromFieldName } from '../form'
+import { isValueEmpty } from '../util/empty'
 // ----------------------------------------------- FAKE_DATA
 import _fakeAsync from './_fakeAsync'
 // import { fakeQuizData, fakeQuizInfo } from './_fakeQuizData-maze'
@@ -117,17 +120,20 @@ export const getAllPage             = createSelector(
 )
 export const getIsTimerEachQuestion = createSelector(
   getTimerData,
-  timerData => !!timerData && timerData.type === TIMER_TYPES.EACH,
+  timerData => timerData.type === TIMER_TYPES.EACH,
 )
 
 // ACTIONS
 const start = () => (dispatch, getState) => {
   dispatch({ type: types.QUIZ_START })
 
-  const state     = getState()
-  const timerData = getTimerData(state)
-  if (timerData && !getIsTimerEachQuestion(state)) {
-    dispatch(timerActions.startTimer(FORM_NAMES.QUIZ_PLAY, timerData.timeLimit))
+  const state               = getState()
+  const timerData           = getTimerData(state)
+  const isTimerEachQuestion = getIsTimerEachQuestion(state)
+
+  // START TIMER of 1st Question || Global timer
+  if (!isValueEmpty(timerData)) {
+    dispatch(timerActions.startTimer(getTimerName(isTimerEachQuestion && 1), timerData.timeLimit))
   }
 }
 
@@ -213,13 +219,49 @@ const init = () => async (dispatch) => {
 }
 
 /**
+ * Prepare data to submit
+ * @param   {object} data
+ * @param   {object} state
+ * @return  {object} dataToSubmit
+ */
+const prepDataToSubmit = (data, state) => {
+  const questionTimeData    = state.timer.timers
+  const timerData           = getTimerData(state)
+  const isTimerEachQuestion = getIsTimerEachQuestion(state)
+
+  if (isValueEmpty(timerData)) return data
+
+  // Inject timer data
+  if (isTimerEachQuestion) {
+    return Object.keys(data).reduce((buffer, fieldName) => {
+      const questionNumber = getQuestionNumberFromFieldName(fieldName)
+
+      buffer[fieldName] = {
+        value: data[fieldName],
+        ...questionTimeData[getTimerName(questionNumber)],
+      }
+
+      return buffer
+    }, {})
+  } else {
+    return {
+      ...data,
+      timer: { ...questionTimeData[getTimerName()] },
+    }
+  }
+}
+
+/**
  * this will be called by reduxForm handleSubmit after validate and no error occur
  * @param   {object} data
  * @return  {Promise}
  */
-const submit = (data) => async (dispatch) => {
+const submit = (data) => async (dispatch, getState) => {
+  const state        = getState()
+  const dataToSubmit = prepDataToSubmit(data, state)
+
   try {
-    const response = await dispatch(resultActions.fetchResult(data))
+    const response = await dispatch(resultActions.fetchResult(await dataToSubmit))
     console.log('>> result: ', response)
     return dispatch({ type: types.QUIZ_SHOW_RESULT })
   }

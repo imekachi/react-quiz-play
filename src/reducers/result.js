@@ -68,7 +68,7 @@ const fakeFetch   = (data) => {
         textHtml  : 'ทุกคนต้องเคยร้องแน่นอน',
       },
     },
-  }, 500)
+  }, 2500)
 }
 const fetchResult = (quizFormData) => async (dispatch, getState) => {
   if (getState().result.error) {

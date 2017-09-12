@@ -45,14 +45,15 @@ export default function timer(state = initialState, action) {
     }
 
     case types.TIMER_STOP: {
+      // extract intervalId to remove it, it will not be in the next state
+      const { intervalId, ...restTimerData } = state.timers[action.payload.name]
       return {
         ...state,
         timers: {
           ...state.timers,
           [action.payload.name]: {
-            ...state.timers[action.payload.name],
+            ...restTimerData,
             endTimestamp: action.payload.time,
-            intervalId  : null,
           },
         },
       }
@@ -78,29 +79,35 @@ export default function timer(state = initialState, action) {
   }
 }
 
+const isTimerExist = (state, name) => state.timer.timers.hasOwnProperty(name)
+
 // ACTIONS
-const startTimer = (name, timeLimit) => (dispatch) => {
-  const action = {
+const startTimer = (name, timeLimit) => (dispatch, getState) => {
+  const state = getState()
+  if (isTimerExist(state, name)) return
+
+  dispatch({
     type   : types.TIMER_START,
     payload: {
       name,
       time: Date.now(),
       timeLimit,
     },
-  }
-  dispatch(action)
-  console.log('>> START: ', action)
+  })
 }
 
-const stopTimer = (name) => async (dispatch, getState) => {
-  await dispatch({
+const stopTimer = (name) => (dispatch, getState) => {
+  const state = getState()
+  const timer = state.timer.timers[name]
+  if (!isTimerExist(state, name) || !timer.intervalId) return
+
+  dispatch({
     type   : types.TIMER_STOP,
     payload: {
       name,
       time: Date.now(),
     },
   })
-  console.log('>> STOP: ', getState().timer.timers[name])
 }
 
 const tickTimer = (name, step, intervalId) => (dispatch) => {
