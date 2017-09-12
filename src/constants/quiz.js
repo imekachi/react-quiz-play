@@ -25,10 +25,5 @@ export const FORM_NAMES = {
 }
 
 export const DELAYS = {
-  BEFORE_NEXT_PAGE: 200,
-}
-
-export const TIMER_TYPES = {
-  ALL : 'TIMER_ALL',
-  EACH: 'TIMER_EACH_QUESTION',
+  BEFORE_NEXT_PAGE: 150,
 }

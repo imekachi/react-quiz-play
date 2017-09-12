@@ -17,11 +17,12 @@ import React from 'react'
  * @return  {React.Component}
  */
 
-export const DOM_POSITION       = {
+export const DOM_POSITION = {
   ABOVE : 'ABOVE',
   INSIDE: 'INSIDE',
   BELOW : 'BELOW',
 }
+
 export const getCurrentPosition = (domRect, viewport) => {
   switch (true) {
     case domRect.top < 0: {

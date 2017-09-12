@@ -4,7 +4,7 @@ import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
 import { QUIZ_TYPES } from '../constants/quiz'
 import { getIsSingleQuestion } from '../reducers/quiz'
 import { getCurrentQuestionStream } from '../reducers/runtime'
-import { getFieldName } from './FormPlay'
+import { getFieldName } from '../form'
 
 const mapStateToProps = (state) => {
   return {

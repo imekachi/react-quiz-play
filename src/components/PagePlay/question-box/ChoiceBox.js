@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CHOICE_TYPES } from '../../../constants/quiz'
 import ChoiceItem from '../../../containers/ChoiceItem'
-import { getChoiceId } from '../../../containers/FormPlay'
+import { getChoiceId } from '../../../form'
 import { makeArrayOf } from '../../../util/array'
 import { isValueEmpty } from '../../../util/empty'
 import ChoiceItemComponent from './ChoiceItem'

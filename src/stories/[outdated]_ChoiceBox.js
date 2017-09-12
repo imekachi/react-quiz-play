@@ -1,7 +1,7 @@
 import React from 'react'
 
 import QuestionStreamComponent from '../components/PagePlay/QuestionStream'
-import { getFieldName } from '../containers/FormPlay'
+import { getFieldName } from '../form'
 import { getCurrentQuestionStream } from '../reducers/runtime'
 import { state } from './mockupData'
 import { generateWrapper, PlayPageWrapper } from './MockupWrapper'
