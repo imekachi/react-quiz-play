@@ -10,7 +10,7 @@ import {
 import { createSelector } from 'reselect'
 
 import { DELAYS, FORM_NAMES } from '../constants/quiz'
-import { getTimerName, TIMER_TYPES } from '../constants/timer'
+import { getTimerName } from '../constants/timer'
 import { getFieldName } from '../form'
 import { wait } from '../util/async'
 import { isValueEmpty } from '../util/empty'
