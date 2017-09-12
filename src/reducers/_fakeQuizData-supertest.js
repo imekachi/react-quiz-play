@@ -1,4 +1,4 @@
-import { TIMER_TYPES } from '../constants/quiz'
+import { TIMER_TYPES } from '../constants/timer'
 
 export const fakeQuizInfo = {
   id          : 58518,
@@ -178,13 +178,13 @@ export const fakeQuizInfo2 = {
   isAccessible   : true,
   isChallengeMode: true,
   timerData      : {
-    type     : TIMER_TYPES.ALL,
-    timeLimit: 15000,
+    type     : TIMER_TYPES.EACH,
+    timeLimit: 7000,
   },
 }
 
 export const fakeQuizData2 = {
-  questionPerPage: 100,
+  questionPerPage: 1,
   questionList   : [
     {
       questionData: {
