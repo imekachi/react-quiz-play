@@ -5955,8 +5955,8 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     strip-json-comments "~2.0.1"
 
 react-app-rewired@^1.2.5:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-1.2.7.tgz#2d9da9b99b0b79da82382c1d43b4ebcf0f416b5e"
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-1.2.9.tgz#5da3d15ac05af6cebea9e82f758b9243bce53e7c"
   dependencies:
     cross-spawn "^5.1.0"
     dotenv "^4.0.0"
